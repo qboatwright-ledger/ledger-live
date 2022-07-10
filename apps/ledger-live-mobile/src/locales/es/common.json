@@ -4045,9 +4045,11 @@
   },
   "exchange" : {
     "buy" : {
+      "screenTitle" : "COMPRAR CRIPTO",
       "tabTitle" : "Comprar",
       "selectCurrency" : "Selecciona una divisa",
       "selectAccount" : "Selecciona una cuenta",
+      "wantToBuy" : "Quiero comprar",
       "connectDevice" : "Conecta tu dispositivo",
       "title" : "Compra cripto a través de nuestro socio",
       "coinifyTitle" : "Compra cripto a través de nuestro socio",
@@ -4071,9 +4073,11 @@
       }
     },
     "sell" : {
+      "screenTitle" : "VENDER CRIPTO",
       "tabTitle" : "Vender",
       "selectCurrency" : "Selecciona una divisa",
       "selectAccount" : "Selecciona una cuenta",
+      "wantToSell" : "Quiero vender",
       "connectDevice" : "Conecta tu dispositivo",
       "title" : "Vende criptos a través de nuestro socio",
       "description" : "Vende activos cripto directamente desde la cuenta de Ledger mediante Coinify y recibe dinero fiduciario en tu cuenta bancaria.",
@@ -4086,6 +4090,9 @@
     },
     "history" : {
       "tabTitle" : "Historial"
+    },
+    "providerList" : {
+      "title" : "Elegir un proveedor"
     }
   },
   "banner" : {

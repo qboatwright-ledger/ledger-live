@@ -4045,9 +4045,11 @@
   },
   "exchange" : {
     "buy" : {
+      "screenTitle" : "买入加密货币",
       "tabTitle" : "买入",
       "selectCurrency" : "选择一种货币",
       "selectAccount" : "选择账户",
+      "wantToBuy" : "我想买入",
       "connectDevice" : "连接您的设备",
       "title" : "通过我们的合作伙伴买入加密货币",
       "coinifyTitle" : "通过我们的合作伙伴买入加密货币",
@@ -4071,9 +4073,11 @@
       }
     },
     "sell" : {
+      "screenTitle" : "卖出加密货币",
       "tabTitle" : "卖出",
       "selectCurrency" : "选择一种货币",
       "selectAccount" : "选择账户",
+      "wantToSell" : "我想卖出",
       "connectDevice" : "连接您的设备",
       "title" : "通过我们的合作伙伴卖出加密资产",
       "description" : "直接从您的 Ledger 账户通过 Coinify 卖出加密资产，并在您的银行账户中接收 FIAT 法币。",
@@ -4086,6 +4090,9 @@
     },
     "history" : {
       "tabTitle" : "历史记录"
+    },
+    "providerList" : {
+      "title" : "选择提供商"
     }
   },
   "banner" : {

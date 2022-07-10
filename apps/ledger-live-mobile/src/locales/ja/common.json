@@ -4045,9 +4045,11 @@
   },
   "exchange" : {
     "buy" : {
+      "screenTitle" : "暗号資産を購入",
       "tabTitle" : "購入",
       "selectCurrency" : "通貨を選択",
       "selectAccount" : "アカウントを選択",
+      "wantToBuy" : "購入する",
       "connectDevice" : "デバイスを接続",
       "title" : "パートナーから暗号資産を購入する",
       "coinifyTitle" : "パートナーから暗号資産を購入する",
@@ -4071,9 +4073,11 @@
       }
     },
     "sell" : {
+      "screenTitle" : "暗号資産を売却",
       "tabTitle" : "売却",
       "selectCurrency" : "通貨を選択",
       "selectAccount" : "アカウントを選択",
+      "wantToSell" : "売却する",
       "connectDevice" : "デバイスを接続",
       "title" : "パートナーで暗号資産を売却する",
       "description" : "Ledgerアカウントから、Coinifyで暗号資産を直接売却し、銀行口座で法定通貨を受け取ることができます。",
@@ -4086,6 +4090,9 @@
     },
     "history" : {
       "tabTitle" : "履歴"
+    },
+    "providerList" : {
+      "title" : "プロバイダーを選択"
     }
   },
   "banner" : {

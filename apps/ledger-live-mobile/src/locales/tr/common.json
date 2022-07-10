@@ -879,7 +879,7 @@
     "stepWelcome" : {
       "title" : "En güvenli kripto para ve NFT cüzdanı",
       "subtitle" : "Kriptolarınızı ve NFT'lerinizi Ledger Live'da güvenle yönetin, satın alın ve artırın.",
-      "start" : "Başlangıç",
+      "start" : "Hemen başla",
       "noDevice" : "Cihazınız yok mu?",
       "buy" : "{{fullDeviceName}} satın al",
       "terms" : "“Hemen Başla” butonuna dokunarak bunlara izin vermiş ve kabul etmiş olursunuz:",
@@ -1493,7 +1493,7 @@
       },
       "addAccounts" : {
         "addAccounts" : "Varlık ekle",
-        "title" : "Başlangıç",
+        "title" : "Hemen başla",
         "description" : "Ortaklarımızdan kripto satın alabilir veya cüzdanınızı kurabilirsiniz"
       }
     },
@@ -4045,9 +4045,11 @@
   },
   "exchange" : {
     "buy" : {
+      "screenTitle" : "KRİPTO SATIN AL",
       "tabTitle" : "Satın Al",
       "selectCurrency" : "Bir para birimi seçin",
       "selectAccount" : "Bir hesap seçin",
+      "wantToBuy" : "Satın almak istiyorum",
       "connectDevice" : "Cihazınızı bağlayın",
       "title" : "Ortağımız üzerinden kripto satın alın",
       "coinifyTitle" : "Ortağımız üzerinden kripto satın alın",
@@ -4071,9 +4073,11 @@
       }
     },
     "sell" : {
+      "screenTitle" : "KRİPTO SATIN",
       "tabTitle" : "Sat",
       "selectCurrency" : "Bir para birimi seçin",
       "selectAccount" : "Bir hesap seçin",
+      "wantToSell" : "Satmak istiyorum",
       "connectDevice" : "Cihazınızı bağlayın",
       "title" : "Ortağımız üzerinden kripto satın",
       "description" : "Ledger hesabınızdaki kripto varlıklarını Coinify üzerinden doğrudan satın ve itibari para birimlerini banka hesabınıza alın.",
@@ -4086,6 +4090,9 @@
     },
     "history" : {
       "tabTitle" : "Geçmiş"
+    },
+    "providerList" : {
+      "title" : "Bir sağlayıcı seçin"
     }
   },
   "banner" : {

@@ -1,19 +1,16 @@
-// @flow
 // renders children if BLE is available
 // otherwise render an error
 
-import React, { Component } from "react";
+import React, { Component, PropsWithChildren } from "react";
 import { Observable } from "rxjs";
 import TransportBLE from "../../react-native-hw-transport-ble";
-import RequiresLocationOnAndroid from "./RequiresLocationOnAndroid";
 import BluetoothDisabled from "./BluetoothDisabled";
+import RequiresBLEPermissions from "./RequiresBLEPermissions";
 
-type Props = {
-  children: *,
-};
+type Props = PropsWithChildren<{}>;
 
 type State = {
-  type: *,
+  type: any;
 };
 
 class RequiresBLE extends Component<Props, State> {
@@ -21,7 +18,7 @@ class RequiresBLE extends Component<Props, State> {
     type: "Unknown",
   };
 
-  sub: *;
+  sub: any;
 
   componentDidMount() {
     this.sub = Observable.create(TransportBLE.observeState).subscribe({
@@ -44,10 +41,10 @@ class RequiresBLE extends Component<Props, State> {
   }
 }
 
-export default function RequiresBLEWrapped({ children }: *) {
+export default function RequiresBLEWrapped({ children }: any) {
   return (
-    <RequiresLocationOnAndroid>
+    <RequiresBLEPermissions>
       <RequiresBLE>{children}</RequiresBLE>
-    </RequiresLocationOnAndroid>
+    </RequiresBLEPermissions>
   );
 }

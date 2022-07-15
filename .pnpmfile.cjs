@@ -116,6 +116,14 @@ function readPackage(pkg, context) {
       }),
       addPeerDependencies("@react-native-community/cli", {
         "metro-resolver": "*",
+        "find-up": "*",
+        "chalk": "*",
+      }),
+      addPeerDependencies("@react-native-community/cli-tools", {
+        "find-up": "*",
+      }),
+      addPeerDependencies("@react-native-community/cli-config", {
+        "chalk": "*",
       }),
       addPeerDependencies("metro-config", {
         "metro-transform-worker": "*",

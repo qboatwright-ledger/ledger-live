@@ -744,6 +744,7 @@ SPEC REPOS:
     - Sentry
     - SocketRocket
     - Storyly
+    - TOCropViewController
     - YogaKit
     - ZXingObjC
 

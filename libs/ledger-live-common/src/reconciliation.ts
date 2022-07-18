@@ -25,6 +25,7 @@ import {
   fromElrondResourcesRaw,
   fromCryptoOrgResourcesRaw,
   fromSolanaResourcesRaw,
+  fromCeloResourcesRaw,
   fromNFTRaw,
   fromCardanoResourceRaw,
   toCryptoOrgResourcesRaw,
@@ -442,6 +443,14 @@ export function patchAccount(
       }
       break;
     }
+  }
+
+  if (
+    updatedRaw.celoResources &&
+    !isEqual(account.celoResources, updatedRaw.celoResources)
+  ) {
+    next.celoResources = fromCeloResourcesRaw(updatedRaw.celoResources);
+    changed = true;
   }
 
   const nfts = updatedRaw?.nfts?.map(fromNFTRaw);

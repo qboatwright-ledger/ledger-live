@@ -29,6 +29,13 @@ export type OperationType =
   | "SLASH"
   | "NOMINATE"
   | "CHILL"
+  // CELO
+  | "LOCK"
+  | "UNLOCK"
+  | "WITHDRAW"
+  | "REVOKE"
+  | "ACTIVATE"
+  | "REGISTER"
   // COMPOUND TYPE OPERATIONS
   | "SUPPLY"
   | "REDEEM"

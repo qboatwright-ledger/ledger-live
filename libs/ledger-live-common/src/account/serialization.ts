@@ -40,6 +40,10 @@ import {
 } from "../families/solana/serialization";
 
 import {
+  toCeloResourcesRaw,
+  fromCeloResourcesRaw,
+} from "../families/celo/serialization";
+import {
   getCryptoCurrencyById,
   getTokenById,
   findTokenById,
@@ -102,6 +106,7 @@ export { toElrondResourcesRaw, fromElrondResourcesRaw };
 export { toCryptoOrgResourcesRaw, fromCryptoOrgResourcesRaw };
 export { toCardanoResourceRaw, fromCardanoResourceRaw };
 export { toSolanaResourcesRaw, fromSolanaResourcesRaw };
+export { toCeloResourcesRaw, fromCeloResourcesRaw };
 
 export function toBalanceHistoryRaw(b: BalanceHistory): BalanceHistoryRaw {
   return b.map(({ date, value }) => [date.toISOString(), value.toString()]);
@@ -827,6 +832,12 @@ export function fromAccountRaw(rawAccount: AccountRaw): Account {
         (rawAccount as CryptoOrgAccountRaw).cryptoOrgResources
       );
       break;
+
+    case "celo":
+      (res as CeloAccount).celoResources = fromCeloResourcesRaw(
+        (rawAccount as CeloAccountRaw).celoResources
+      );
+      break;
   }
 
   if (swapHistory) {
@@ -958,6 +969,11 @@ export function toAccountRaw(account: Account): AccountRaw {
         (account as CryptoOrgAccount).cryptoOrgResources
       );
       break;
+    case "celo":
+        (res as CeloAccountRaw).celoResources = toCeloResourcesRaw(
+          (account as CeloAccount).celoResources
+        );
+        break;
   }
 
   if (swapHistory) {

@@ -36,6 +36,7 @@ const appVersionsRequired = {
   Ethereum: ">= 1.9.17",
   Solana: ">= 1.2.0",
   "Cardano ADA": ">= 4.1.0",
+  Celo: ">= 1.1.8",
 };
 export function mustUpgrade(
   deviceModel: DeviceModelId,

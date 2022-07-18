@@ -80,6 +80,7 @@ import PostBuyDeviceScreen from "../../screens/PostBuyDeviceScreen";
 import Learn from "../../screens/Learn";
 import { useNoNanoBuyNanoWallScreenOptions } from "../../context/NoNanoBuyNanoWall";
 import PostBuyDeviceSetupNanoWallScreen from "../../screens/PostBuyDeviceSetupNanoWallScreen";
+import ImagePicker from "../../screens/ImagePicker";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
@@ -582,6 +583,11 @@ export default function BaseNavigator() {
         name={NavigatorName.Accounts}
         component={AccountsNavigator}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={ScreenName.ImagePicker}
+        component={ImagePicker}
+        options={{ title: "Image picker" }}
       />
       {Object.keys(families).map(name => {
         const { component, options } = families[name];

@@ -363,6 +363,9 @@ export const ScreenName = {
 
   // cardano
   CardanoEditMemo: "CardanoEditMemo",
+
+  // Image picker
+  ImagePicker: "ImagePicker",
 };
 
 export const NavigatorName = {

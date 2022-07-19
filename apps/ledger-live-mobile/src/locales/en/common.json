@@ -19,6 +19,7 @@
     "device": "Device",
     "cryptoAsset": "Crypto asset",
     "skip": "Skip",
+    "next": "Next",
     "noCryptoFound": "No crypto assets found",
     "needHelp": "Do you need help?",
     "edit": "Edit",
@@ -4402,8 +4403,8 @@
       "tokenId": "Token ID",
       "tokenIdCopied": "Token ID copied !",
       "quantity": "Quantity",
-      "attributes" : {
-        "floorPrice" : "Floor Price"
+      "attributes": {
+        "floorPrice": "Floor Price"
       }
     },
     "viewerModal": {
@@ -4420,6 +4421,11 @@
     },
     "operations": {
       "title": "Transaction history"
+    }
+  },
+  "customImage": {
+    "modal": {
+      "uploadFromPhone": "Upload from my phone"
     }
   }
 }

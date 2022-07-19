@@ -5,8 +5,6 @@ export type ImageDimensions = {
   width: number;
 };
 
-export type ImageDimensionsMaybe = Partial<ImageDimensions>;
-
 export type ImageBase64Data = {
   /**
    * Image data contained in a base 64 data URI scheme like that:
@@ -24,7 +22,7 @@ export type ImageFileUri = {
   imageFileUri: string;
 };
 
-export type ImageWithURL = {
+export type ImageURL = {
   /**
    * Image URL locating an image on the internet.
    * e.g: "https://example.com/an_image.png"

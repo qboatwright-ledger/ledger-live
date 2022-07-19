@@ -44,6 +44,8 @@ import CheckTermOfUseUpdate from "../../components/CheckTermOfUseUpdate";
 import TabBarSafeAreaView, {
   TAB_BAR_SAFE_HEIGHT,
 } from "../../components/TabBar/TabBarSafeAreaView";
+import CustomImageBottomModal from "../../components/CustomImage/CustomImageBottomModal";
+import Button from "../../components/Button";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -148,6 +150,16 @@ function PortfolioScreen({ navigation }: Props) {
   const closeAddModal = useCallback(() => setAddModalOpened(false), [
     setAddModalOpened,
   ]);
+  const [customImageModalOpened, setCustomImageModalOpened] = useState(false);
+  const openCustomImageModal = useCallback(
+    () => setCustomImageModalOpened(true),
+    [setCustomImageModalOpened],
+  );
+  const closeCustomImageModal = useCallback(
+    () => setCustomImageModalOpened(false),
+    [setCustomImageModalOpened],
+  );
+
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
 
@@ -177,6 +189,15 @@ function PortfolioScreen({ navigation }: Props) {
           <AddAssetsCard />
         </Box>
       ),
+      <Flex p={3}>
+        <Button type="main" outline={false} onPress={openCustomImageModal}>
+          Custom image
+        </Button>
+        <CustomImageBottomModal
+          isOpened={customImageModalOpened}
+          onClose={closeCustomImageModal}
+        />
+      </Flex>,
       <Box mx={6} mt={3} onLayout={onPortfolioCardLayout}>
         <GraphCardContainer
           counterValueCurrency={counterValueCurrency}

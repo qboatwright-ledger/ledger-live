@@ -3,53 +3,23 @@ import { Button, Flex } from "@ledgerhq/native-ui";
 import { launchImageLibrary } from "react-native-image-picker";
 import { Alert, Image } from "react-native";
 import { ImageDimensions, ImageDimensionsMaybe, ImageFileUri } from "./types";
+import { importImageFromPhoneGallery } from "./imageUtils";
 
 type Props = {
-  onResult: (res: ImageDimensionsMaybe & ImageFileUri) => void;
-};
-
-type Res = {
-  base64: string;
-  uri?: string;
-  width?: number;
-  height?: number;
-  type?: string;
-  filename?: string;
+  onResult: (res: Partial<ImageDimensions> & ImageFileUri) => void;
 };
 
 const GalleryPicker: React.FC<Props> = props => {
-  const [res, setRes] = useState<Res | null>(null);
+  const [res, setRes] = useState<
+    (Partial<ImageDimensions> & ImageFileUri) | null
+  >(null);
   const { onResult } = props;
 
   const handlePressGallery = useCallback(async () => {
-    const {
-      assets,
-      didCancel,
-      errorCode,
-      errorMessage,
-    } = await launchImageLibrary({
-      mediaType: "photo",
-      quality: 1,
-      includeBase64: true,
-    });
-    if (didCancel) {
-      Alert.alert("did cancel");
-    } else if (errorCode) {
-      console.error("error", errorCode, errorMessage);
-    } else {
-      const asset = assets && assets[0];
-      if (!asset) {
-        console.error("asset undefined");
-        return;
-      }
-      const { base64, uri, width, height, type, fileName } = asset;
-      const fullBase64 = `data:${type};base64, ${base64}`;
-      setRes({ base64: fullBase64, uri, width, height, fileName, type });
-      if (uri) {
-        onResult({ width, height, imageFileUri: uri });
-      } else {
-        console.error("no uri returned from GalleryPicker");
-      }
+    const res = await importImageFromPhoneGallery();
+    if (res) {
+      setRes(res);
+      onResult(res);
     }
   }, [setRes, onResult]);
 
@@ -58,9 +28,9 @@ const GalleryPicker: React.FC<Props> = props => {
       <Button flex={1} onPress={handlePressGallery} type="main">
         Pick from gallery
       </Button>
-      {res?.uri ? (
+      {res?.imageFileUri ? (
         <Image
-          source={{ uri: res?.uri }}
+          source={{ uri: res?.imageFileUri }}
           style={{
             marginLeft: 10,
             height: 30,

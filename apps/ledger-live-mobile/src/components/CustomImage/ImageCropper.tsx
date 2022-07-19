@@ -5,7 +5,7 @@ import { Platform, StyleProp, View } from "react-native";
 import { loadImageBase64FromURI } from "./imageUtils";
 import { ImageBase64Data, ImageDimensions, ImageFileUri } from "./types";
 
-export type CropResult = ImageDimensions & ImageBase64Data & ImageFileUri;
+export type CropResult = ImageDimensions & ImageFileUri;
 
 export type Props = ImageFileUri & {
   /**
@@ -16,10 +16,17 @@ export type Props = ImageFileUri & {
   aspectRatio: { width: number; height: number };
   onResult: (res: CropResult) => void;
   style?: StyleProp<View>;
+  withButton?: boolean;
 };
 
-const ImageCropper: React.FC<Props> = props => {
-  const { style, imageFileUri, aspectRatio, onResult } = props;
+const ImageCropper: React.FC<Props> = React.forwardRef((props: Props, ref) => {
+  const {
+    style,
+    imageFileUri,
+    aspectRatio,
+    onResult,
+    withButton = false,
+  } = props;
 
   const cropViewRef = useRef<CropView>(null);
 
@@ -27,13 +34,13 @@ const ImageCropper: React.FC<Props> = props => {
     async res => {
       const { height, width, uri: fileUri } = res;
       try {
-        const base64 = await loadImageBase64FromURI(
-          Platform.OS === "android" ? `file://${fileUri}` : fileUri,
-        );
+        // const base64 = await loadImageBase64FromURI(
+        //   Platform.OS === "android" ? `file://${fileUri}` : fileUri,
+        // );
         onResult({
           width,
           height,
-          imageBase64DataUri: base64,
+          // imageBase64DataUri: base64,
           imageFileUri: fileUri,
         });
       } catch (e) {
@@ -53,16 +60,18 @@ const ImageCropper: React.FC<Props> = props => {
         key={imageFileUri}
         sourceUrl={imageFileUri}
         style={style}
-        ref={cropViewRef}
+        ref={withButton ? cropViewRef : ref}
         onImageCrop={handleImageCrop}
         keepAspectRatio
         aspectRatio={aspectRatio}
       />
-      <Button type="main" onPress={handleSave}>
-        Crop
-      </Button>
+      {withButton && (
+        <Button type="main" onPress={handleSave}>
+          Crop
+        </Button>
+      )}
     </Flex>
   );
-};
+});
 
 export default ImageCropper;

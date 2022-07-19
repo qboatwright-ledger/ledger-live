@@ -32,11 +32,11 @@ import {
   ImageDimensions,
   ImageDimensionsMaybe,
   ImageFileUri,
+  ImageURL,
 } from "../../components/CustomImage/types";
+import { boxToFitDimensions, cropAspectRatio } from "./shared";
 
-type RouteParams = {
-  imageUrl?: string;
-};
+type RouteParams = Partial<ImageURL>;
 
 const PreviewImage = styled(Image).attrs({
   resizeMode: "contain",
@@ -45,20 +45,10 @@ const PreviewImage = styled(Image).attrs({
   height: 200px;
 `;
 
-type ImageToCrop = ImageDimensionsMaybe & ImageFileUri;
+type ImageToCrop = Partial<ImageDimensions> & ImageFileUri;
 
 type ProcessorRawResult = ImageDimensions & {
   hexData: string;
-};
-
-const boxToFitDimensions = {
-  width: Dimensions.get("screen").width - 20,
-  height: Dimensions.get("screen").height,
-};
-
-const cropAspectRatio = {
-  width: 1080,
-  height: 1400,
 };
 
 export default function CustomImageDebugScreen() {
@@ -196,6 +186,7 @@ export default function CustomImageDebugScreen() {
               imageFileUri={imageToCrop.imageFileUri}
               aspectRatio={cropAspectRatio}
               style={{ alignSelf: "center", ...sourceDimensions }}
+              withButton
               onResult={handleCropResult}
             />
           </Flex>

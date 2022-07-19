@@ -1,15 +1,49 @@
-import { Image } from "react-native";
+import { Alert, Image } from "react-native";
 import {
   cacheDirectory,
-  createDownloadResumable,
-  documentDirectory,
   EncodingType,
   readAsStringAsync,
   StorageAccessFramework,
-  writeAsStringAsync,
 } from "expo-file-system";
 import { uniqueId } from "lodash";
-import { ImageDimensions } from "./types";
+import { launchImageLibrary } from "react-native-image-picker";
+import { ImageBase64Data, ImageDimensions, ImageFileUri } from "./types";
+
+export async function importImageFromPhoneGallery(): Promise<
+  (ImageFileUri & ImageBase64Data & Partial<ImageDimensions>) | undefined
+> {
+  const {
+    assets,
+    didCancel,
+    errorCode,
+    errorMessage,
+  } = await launchImageLibrary({
+    mediaType: "photo",
+    quality: 1,
+    includeBase64: true,
+  });
+  if (didCancel) return;
+  if (errorCode) {
+    throw new Error(
+      `Import from gallery error: ${[errorCode]}: ${errorMessage}`,
+    );
+  } else {
+    const asset = assets && assets[0];
+    if (!asset) {
+      throw new Error(`Import from gallery error: asset undefined`);
+    }
+    const { base64, uri, width, height, type } = asset;
+    const fullBase64 = `data:${type};base64, ${base64}`;
+    if (uri) {
+      return {
+        width,
+        height,
+        imageFileUri: uri,
+        imageBase64DataUri: fullBase64,
+      };
+    }
+  }
+}
 
 export async function fetchImageBase64(imageUrl: string) {
   return fetch(imageUrl)

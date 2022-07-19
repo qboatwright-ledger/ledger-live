@@ -1,11 +1,14 @@
 #!/usr/bin/env zx
 import "zx/globals";
+import rimraf from "rimraf";
 
 const basePath = path.join(__dirname, "..", "src");
 const generatedPath = path.join(basePath, "generated");
 
-await fs.promises.rm(generatedPath, { recursive: true, force: true });
-await fs.promises.mkdir(generatedPath);
+await rimraf(generatedPath, async e => {
+  if (!!e) return echo(chalk.red(e));
+  await fs.promises.mkdir(generatedPath);
+});
 
 const dirContent = await fs.promises.readdir(path.join(basePath, "families"), {
   withFileTypes: true,
@@ -38,7 +41,9 @@ async function genTarget(target) {
   for (const family of families) {
     const f = path.join(basePath, "families", family);
     const filesEnt = await fs.promises.readdir(f, { withFileTypes: true });
-    const files = filesEnt.filter(ent => !ent.isDirectory()).map(ent => ent.name);
+    const files = filesEnt
+      .filter(ent => !ent.isDirectory())
+      .map(ent => ent.name);
     const file = files.find(f => f.startsWith(target));
     if (file) {
       imports += `

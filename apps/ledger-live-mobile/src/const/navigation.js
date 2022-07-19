@@ -366,6 +366,11 @@ export const ScreenName = {
 
   // Image picker
   ImagePicker: "ImagePicker",
+
+  CustomImageCroppingScreen: "CustomImageCroppingScreen",
+  CustomImagePreviewScreen: "CustomImagePreviewScreen",
+  CustomImageErrorScreen: "CustomImageErrorScreen",
+  CustomImageTransferScreen: "CustomImageTransferScreen",
 };
 
 export const NavigatorName = {
@@ -441,4 +446,7 @@ export const NavigatorName = {
   // Root
   RootNavigator: "RootNavigator",
   Discover: "Discover",
+
+  // Custom Image
+  CustomImage: "CustomImage",
 };

@@ -5,20 +5,34 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Dimensions, Image, Platform, ScrollView, View } from "react-native";
+import { Dimensions, Image, ScrollView } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { Button, Flex, Text } from "@ledgerhq/native-ui";
 import styled from "styled-components/native";
-import ImageProcessor from "./ImageProcessor";
-import GalleryPicker from "./GalleryPicker";
-import ImageCropper from "./ImageCropper";
+import GalleryPicker from "../../components/CustomImage/GalleryPicker";
+import ImageCropper, {
+  CropResult,
+  Props as ImageCropperProps,
+} from "../../components/CustomImage/ImageCropper";
+import ImageResizer, {
+  Props as ImageResizeProps,
+  ResizeResult,
+} from "../../components/CustomImage/ImageResizer";
+import ImageProcessor, {
+  ProcessorPreviewResult,
+  ProcessorRawResult,
+  Props as ImageProcessorProps,
+} from "../../components/CustomImage/ImageProcessor";
 import {
   downloadImageToFile,
   fitImageContain,
-  ImageDimensions,
   loadImageSizeAsync,
-} from "./imageUtils";
-import ImageResizer from "./ImageResizer";
+} from "../../components/CustomImage/imageUtils";
+import {
+  ImageDimensions,
+  ImageDimensionsMaybe,
+  ImageFileUri,
+} from "../../components/CustomImage/types";
 
 type RouteParams = {
   imageUrl?: string;
@@ -31,24 +45,9 @@ const PreviewImage = styled(Image).attrs({
   height: 200px;
 `;
 
-type SrcImage = ImageDimensions & {
-  uri: string;
-};
+type ImageToCrop = ImageDimensionsMaybe & ImageFileUri;
 
-type CroppedImage = ImageDimensions & {
-  base64URI: string;
-  fileURI: string;
-};
-
-type CroppedAndResizedImage = ImageDimensions & {
-  base64URI: string;
-};
-
-type ResultImage = ImageDimensions & {
-  base64Data: string;
-};
-
-type RawResult = ImageDimensions & {
+type ProcessorRawResult = ImageDimensions & {
   hexData: string;
 };
 
@@ -62,16 +61,19 @@ const cropAspectRatio = {
   height: 1400,
 };
 
-export default function ImagePicker() {
+export default function CustomImageDebugScreen() {
   const imageProcessorRef = useRef<ImageProcessor>(null);
-  const [srcImage, setSrcImage] = useState<SrcImage | null>(null);
-  const [croppedImage, setCroppedImage] = useState<CroppedImage | null>(null);
+  const [imageToCrop, setImageToCrop] = useState<ImageToCrop | null>(null);
+  const [croppedImage, setCroppedImage] = useState<CropResult | null>(null);
+  const [resizedImage, setResizedImage] = useState<ResizeResult | null>(null);
   const [
-    croppedAndResizedImage,
-    setCroppedAndResizedImage,
-  ] = useState<CroppedAndResizedImage | null>(null);
-  const [resultImage, setResultImage] = useState<ResultImage | null>(null);
-  const [rawResult, setRawResult] = useState<RawResult | null>(null);
+    processorPreviewImage,
+    setProcessorPreviewImage,
+  ] = useState<ProcessorPreviewResult | null>(null);
+  const [
+    processorRawResult,
+    setProcessorRawResult,
+  ] = useState<ProcessorRawResult | null>(null);
 
   const { params = {} }: { params?: RouteParams } = useRoute();
 
@@ -84,61 +86,60 @@ export default function ImagePicker() {
       const loadImage = async () => {
         const [dims, uri] = await Promise.all([
           loadImageSizeAsync(paramsImageURL),
-          Platform.OS === "android"
-            ? downloadImageToFile(paramsImageURL)
-            : paramsImageURL,
+          downloadImageToFile(paramsImageURL),
+          // true || Platform.OS === "android"
+          //   ? downloadImageToFile(paramsImageURL)
+          //   : paramsImageURL,
         ]);
-        setSrcImage({ width: dims.width, height: dims.height, uri });
+        setImageToCrop({
+          width: dims.width,
+          height: dims.height,
+          imageFileUri: uri,
+        });
       };
       loadImage();
     }
   }, [paramsImageURL]);
 
   const handleGalleryPickerResult = useCallback(
-    ({ width, height, imageURI }) => {
-      setSrcImage({ width, height, uri: imageURI });
+    ({ width, height, imageFileUri }) => {
+      setImageToCrop({ width, height, imageFileUri });
     },
-    [setSrcImage],
+    [setImageToCrop],
   );
 
   /** CROP IMAGE HANDLING */
 
-  const handleCropResult = useCallback(
-    ({ width, height, base64Image, fileUri }) => {
-      setCroppedImage({
-        width,
-        height,
-        base64URI: base64Image,
-        fileURI: fileUri,
-      });
+  const handleCropResult: ImageCropperProps["onResult"] = useCallback(
+    (res: CropResult) => {
+      setCroppedImage(res);
     },
     [setCroppedImage],
   );
 
   /** RESIZED IMAGE HANDLING */
 
-  const handleResizeResult = useCallback(
-    ({ width, height, base64Image }) => {
-      console.log({ height, width, base64Image: base64Image.slice(0, 100) });
-      setCroppedAndResizedImage({ width, height, base64URI: base64Image });
+  const handleResizeResult: ImageResizeProps["onResult"] = useCallback(
+    (res: ResizeResult) => {
+      setResizedImage(res);
     },
-    [setCroppedAndResizedImage],
+    [setResizedImage],
   );
 
   /** RESULT IMAGE HANDLING */
 
-  const handlePreviewResult = useCallback(
+  const handlePreviewResult: ImageProcessorProps["onPreviewResult"] = useCallback(
     data => {
-      setResultImage(data);
+      setProcessorPreviewImage(data);
     },
-    [setResultImage],
+    [setProcessorPreviewImage],
   );
 
-  const handleRawResult = useCallback(
+  const handleRawResult: ImageProcessorProps["onRawResult"] = useCallback(
     data => {
-      setRawResult(data);
+      setProcessorRawResult(data);
     },
-    [setRawResult],
+    [setProcessorRawResult],
   );
 
   const requestRawResult = useCallback(() => {
@@ -150,22 +151,25 @@ export default function ImagePicker() {
   const sourceDimensions = useMemo(
     () =>
       fitImageContain(
-        { height: srcImage?.height ?? 200, width: srcImage?.width ?? 200 },
+        {
+          height: imageToCrop?.height ?? 200,
+          width: imageToCrop?.width ?? 200,
+        },
         boxToFitDimensions,
       ),
-    [srcImage?.height, srcImage?.width],
+    [imageToCrop?.height, imageToCrop?.width],
   );
 
   const previewDimensions = useMemo(
     () =>
       fitImageContain(
         {
-          width: resultImage?.width ?? 200,
-          height: resultImage?.height ?? 200,
+          width: processorPreviewImage?.width ?? 200,
+          height: processorPreviewImage?.height ?? 200,
         },
         boxToFitDimensions,
       ),
-    [resultImage?.height, resultImage?.width],
+    [processorPreviewImage?.height, processorPreviewImage?.width],
   );
 
   return (
@@ -174,13 +178,13 @@ export default function ImagePicker() {
         {!paramsImageURL && (
           <GalleryPicker onResult={handleGalleryPickerResult} />
         )}
-        {srcImage?.uri ? (
+        {imageToCrop?.imageFileUri ? (
           <Flex mt={5}>
             <Text mt={5} variant="h3">
               Source image:
             </Text>
             <PreviewImage
-              source={{ uri: srcImage?.uri }}
+              source={{ uri: imageToCrop.imageFileUri }}
               style={{ ...sourceDimensions }}
             />
             <Flex height={5} />
@@ -189,7 +193,7 @@ export default function ImagePicker() {
               {cropAspectRatio.width})
             </Text>
             <ImageCropper
-              sourceUri={srcImage.uri}
+              imageFileUri={imageToCrop.imageFileUri}
               aspectRatio={cropAspectRatio}
               style={{ alignSelf: "center", ...sourceDimensions }}
               onResult={handleCropResult}
@@ -199,19 +203,18 @@ export default function ImagePicker() {
         {croppedImage && (
           <ImageResizer
             targetDimensions={cropAspectRatio}
-            sourceBase64Data={croppedImage?.base64URI}
-            sourceFileURI={croppedImage?.fileURI}
+            imageFileUri={croppedImage?.imageFileUri}
             onResult={handleResizeResult}
           />
         )}
-        {croppedAndResizedImage?.base64URI && (
+        {resizedImage?.imageBase64DataUri && (
           <>
             <Text mt={5} variant="h3">
               Image processing:
             </Text>
             <ImageProcessor
               ref={imageProcessorRef}
-              srcImageBase64={croppedAndResizedImage?.base64URI}
+              imageBase64DataUri={resizedImage?.imageBase64DataUri}
               onPreviewResult={handlePreviewResult}
               onRawResult={handleRawResult}
               contrast={contrast}
@@ -229,15 +232,15 @@ export default function ImagePicker() {
             </Flex>
           </>
         )}
-        {resultImage?.base64Data && (
+        {processorPreviewImage?.imageBase64DataUri && (
           <Flex>
             <Text mt={5} variant="h3">
               result:
             </Text>
-            <Text>width: {resultImage?.width}</Text>
-            <Text>height: {resultImage?.height}</Text>
+            <Text>width: {processorPreviewImage?.width}</Text>
+            <Text>height: {processorPreviewImage?.height}</Text>
             <PreviewImage
-              source={{ uri: resultImage.base64Data }}
+              source={{ uri: processorPreviewImage.imageBase64DataUri }}
               style={{
                 height: previewDimensions?.height,
                 width: previewDimensions?.width,
@@ -246,12 +249,12 @@ export default function ImagePicker() {
             <Button type="main" onPress={requestRawResult}>
               Request & display (shortened) hex data
             </Button>
-            {rawResult?.hexData && (
+            {processorRawResult?.hexData && (
               <>
                 <Text>Raw result:</Text>
-                <Text>width: {rawResult?.width}</Text>
-                <Text>height: {rawResult?.height}</Text>
-                <Text>{rawResult?.hexData.slice(0, 2000)}</Text>
+                <Text>width: {processorRawResult?.width}</Text>
+                <Text>height: {processorRawResult?.height}</Text>
+                <Text>{processorRawResult?.hexData.slice(0, 2000)}</Text>
               </>
             )}
           </Flex>

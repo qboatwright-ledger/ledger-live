@@ -9,6 +9,7 @@ import {
   writeAsStringAsync,
 } from "expo-file-system";
 import { uniqueId } from "lodash";
+import { ImageDimensions } from "./types";
 
 export async function fetchImageBase64(imageUrl: string) {
   return fetch(imageUrl)
@@ -75,7 +76,9 @@ export async function downloadImageToFile(imageUrl: string) {
   return resultUri;
 }
 
-export async function loadImageSizeAsync(url: string) {
+export async function loadImageSizeAsync(
+  url: string,
+): Promise<ImageDimensions> {
   return new Promise((resolve, reject) => {
     Image.getSize(
       url,
@@ -88,11 +91,6 @@ export async function loadImageSizeAsync(url: string) {
     );
   });
 }
-
-export type ImageDimensions = {
-  height: number;
-  width: number;
-};
 
 export function fitImageContain(
   imageDimensions: ImageDimensions,

@@ -1,23 +1,25 @@
 import React, { useCallback, useRef } from "react";
 import { Button, Flex } from "@ledgerhq/native-ui";
 import { CropView } from "react-native-image-crop-tools";
-import { Platform } from "react-native";
+import { Platform, StyleProp, View } from "react-native";
 import { loadImageBase64FromURI } from "./imageUtils";
+import { ImageBase64Data, ImageDimensions, ImageFileUri } from "./types";
 
-type Props = {
-  sourceUri: string;
+export type CropResult = ImageDimensions & ImageBase64Data & ImageFileUri;
+
+export type Props = ImageFileUri & {
+  /**
+   * - on Android, this must be a fileURI
+   * - on iOS, this can be a URL directly
+   */
+  // NB, on
   aspectRatio: { width: number; height: number };
-  onResult: (res: {
-    width: number;
-    height: number;
-    base64Image: string;
-    fileUri: string;
-  }) => void;
+  onResult: (res: CropResult) => void;
   style?: StyleProp<View>;
 };
 
 const ImageCropper: React.FC<Props> = props => {
-  const { style, sourceUri, aspectRatio, onResult } = props;
+  const { style, imageFileUri, aspectRatio, onResult } = props;
 
   const cropViewRef = useRef<CropView>(null);
 
@@ -28,7 +30,12 @@ const ImageCropper: React.FC<Props> = props => {
         const base64 = await loadImageBase64FromURI(
           Platform.OS === "android" ? `file://${fileUri}` : fileUri,
         );
-        onResult({ width, height, base64Image: base64, fileUri });
+        onResult({
+          width,
+          height,
+          imageBase64DataUri: base64,
+          imageFileUri: fileUri,
+        });
       } catch (e) {
         console.error(e);
       }
@@ -43,8 +50,8 @@ const ImageCropper: React.FC<Props> = props => {
   return (
     <Flex>
       <CropView
-        key={sourceUri}
-        sourceUrl={sourceUri}
+        key={imageFileUri}
+        sourceUrl={imageFileUri}
         style={style}
         ref={cropViewRef}
         onImageCrop={handleImageCrop}

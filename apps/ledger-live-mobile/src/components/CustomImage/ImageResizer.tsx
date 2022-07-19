@@ -1,23 +1,20 @@
 import { useEffect } from "react";
 import { manipulateAsync, SaveFormat } from "expo-image-manipulator";
+import { ImageBase64Data, ImageDimensions, ImageFileUri } from "./types";
 
-type Props = {
-  sourceBase64Data: string;
-  sourceFileURI: string;
+export type ResizeResult = ImageBase64Data & ImageDimensions;
+
+export type Props = ImageFileUri & {
   targetDimensions: { width: number; height: number };
-  onResult: (res: {
-    width: number;
-    height: number;
-    base64Image: string;
-  }) => void;
+  onResult: (res: ResizeResult) => void;
 };
 
 const ImageResizer: React.FC<Props> = props => {
-  const { sourceBase64Data, sourceFileURI, targetDimensions, onResult } = props;
+  const { imageFileUri, targetDimensions, onResult } = props;
 
   useEffect(() => {
     manipulateAsync(
-      sourceFileURI,
+      imageFileUri, // TODO: handle undefined imageFileUri
       [
         {
           resize: {
@@ -29,11 +26,10 @@ const ImageResizer: React.FC<Props> = props => {
       { base64: true, compress: 1, format: SaveFormat.PNG },
     ).then(({ base64, height, width }) => {
       const fullBase64 = `data:image/png;base64, ${base64}`;
-      onResult({ base64Image: fullBase64, height, width });
+      onResult({ imageBase64DataUri: fullBase64, height, width });
     });
   }, [
-    sourceBase64Data,
-    sourceFileURI,
+    imageFileUri,
     targetDimensions?.height,
     targetDimensions?.width,
     onResult,

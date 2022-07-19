@@ -2,9 +2,10 @@ import React, { useCallback, useState } from "react";
 import { Button, Flex } from "@ledgerhq/native-ui";
 import { launchImageLibrary } from "react-native-image-picker";
 import { Alert, Image } from "react-native";
+import { ImageDimensions, ImageDimensionsMaybe, ImageFileUri } from "./types";
 
 type Props = {
-  onResult: (res: { width: number; height: number; imageURI: string }) => void;
+  onResult: (res: ImageDimensionsMaybe & ImageFileUri) => void;
 };
 
 type Res = {
@@ -34,17 +35,21 @@ const GalleryPicker: React.FC<Props> = props => {
     if (didCancel) {
       Alert.alert("did cancel");
     } else if (errorCode) {
-      console.log("error", errorCode, errorMessage);
+      console.error("error", errorCode, errorMessage);
     } else {
       const asset = assets && assets[0];
       if (!asset) {
-        console.log("asset undefined");
+        console.error("asset undefined");
         return;
       }
-      const { base64, uri, width, height, type, fileName, mediaType } = asset;
+      const { base64, uri, width, height, type, fileName } = asset;
       const fullBase64 = `data:${type};base64, ${base64}`;
       setRes({ base64: fullBase64, uri, width, height, fileName, type });
-      onResult({ width, height, imageURI: uri });
+      if (uri) {
+        onResult({ width, height, imageFileUri: uri });
+      } else {
+        console.error("no uri returned from GalleryPicker");
+      }
     }
   }, [setRes, onResult]);
 

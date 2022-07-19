@@ -2,19 +2,15 @@ import React from "react";
 import { WebView } from "react-native-webview";
 import { injectedCode } from "./injectedCode";
 import { InjectedCodeDebugger } from "./InjectedCodeDebugger";
+import { ImageBase64Data, ImageDimensions } from "./types";
 
-type Props = {
-  srcImageBase64: string;
-  onPreviewResult: (arg: {
-    base64Data: string;
-    width: number;
-    height: number;
-  }) => void;
-  onRawResult: (arg: {
-    hexData: string;
-    width: number;
-    height: number;
-  }) => void;
+export type ProcessorPreviewResult = ImageBase64Data & ImageDimensions;
+
+export type ProcessorRawResult = { hexData: string } & ImageDimensions;
+
+export type Props = ImageBase64Data & {
+  onPreviewResult: (arg: ProcessorPreviewResult) => void;
+  onRawResult: (res: ProcessorRawResult) => void;
   /**
    * number >= 0
    *  - 0:  full black
@@ -33,7 +29,7 @@ export default class ImageProcessor extends React.Component<Props> {
 
   componentDidUpdate(prevProps: Props) {
     if (prevProps.contrast !== this.props.contrast) this.setAndApplyContrast();
-    if (prevProps.srcImageBase64 !== this.props.srcImageBase64)
+    if (prevProps.imageBase64DataUri !== this.props.imageBase64DataUri)
       this.computeResult();
   }
 
@@ -48,7 +44,7 @@ export default class ImageProcessor extends React.Component<Props> {
         onPreviewResult({
           width: payload.width,
           height: payload.height,
-          base64Data: payload.base64Data,
+          imageBase64DataUri: payload.base64Data,
         });
         break;
       case "RAW_RESULT":
@@ -68,8 +64,8 @@ export default class ImageProcessor extends React.Component<Props> {
   };
 
   processImage = () => {
-    const { srcImageBase64 } = this.props;
-    this.injectJavaScript(`window.processImage("${srcImageBase64}");`);
+    const { imageBase64DataUri } = this.props;
+    this.injectJavaScript(`window.processImage("${imageBase64DataUri}");`);
   };
 
   setContrast = () => {

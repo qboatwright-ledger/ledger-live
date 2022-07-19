@@ -539,7 +539,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
         manifest={manifest}
         onReload={handleReload}
         onClose={onClose}
-        webview={targetRef.current}
+        webviewRef={targetRef}
         config={config?.topBarConfig}
       />
 

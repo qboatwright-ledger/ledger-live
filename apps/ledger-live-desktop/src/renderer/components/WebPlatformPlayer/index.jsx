@@ -5,12 +5,14 @@ import { getAccountBridge } from "@ledgerhq/live-common/bridge/index";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/currencies/index";
 import { getEnv } from "@ledgerhq/live-common/env";
 import { useToasts } from "@ledgerhq/live-common/notifications/ToastProvider/index";
-import React, { useState, useCallback, useEffect, useRef, useMemo } from "react";
-import styled from "styled-components";
 import { JSONRPCRequest } from "json-rpc-2.0";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
 
+import { prepareMessageToSign } from "@ledgerhq/live-common/hw/signMessage/index";
+import type { MessageData } from "@ledgerhq/live-common/hw/signMessage/types";
 import {
   accountToPlatformAccount,
   currencyToPlatformCurrency,
@@ -26,24 +28,22 @@ import {
   deserializePlatformTransaction,
   serializePlatformAccount,
   serializePlatformSignedTransaction,
-} from "@ledgerhq/live-common/platform/serializers"
+} from "@ledgerhq/live-common/platform/serializers";
 import type { AppManifest } from "@ledgerhq/live-common/platform/types";
 import { WebviewTag } from "electron";
+import logger from "~/logger";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import { openModal } from "~/renderer/actions/modals";
+import TrackPage from "~/renderer/analytics/TrackPage";
 import BigSpinner from "~/renderer/components/BigSpinner";
 import Box from "~/renderer/components/Box";
 import useTheme from "~/renderer/hooks/useTheme";
 import { accountsSelector } from "~/renderer/reducers/accounts";
-import TrackPage from "~/renderer/analytics/TrackPage";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import TopBar from "./TopBar";
 import * as tracking from "./tracking";
 import type { TopBarConfig } from "./type";
 import { handleMessageEvent, handleNewWindowEvent } from "./utils";
-import logger from "~/logger";
-import { prepareMessageToSign } from "@ledgerhq/live-common/hw/signMessage/index";
-import type { MessageData } from "@ledgerhq/live-common/hw/signMessage/types";
 
 const Container: ThemedComponent<{}> = styled.div`
   display: flex;

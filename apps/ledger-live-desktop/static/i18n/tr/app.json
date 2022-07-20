@@ -3147,7 +3147,7 @@
       "welcome" : {
         "title" : "Ledger'a Hoş Geldiniz",
         "description" : "Kriptonuzu bilgisayarınızdan güvenli bir şekilde yönetin.",
-        "cta" : "Başlangıç",
+        "cta" : "Hemen başla",
         "noDevice" : "Cihazınız yok mu? <0>Bir Ledger Nano X satın alın</0>",
         "languageWarning" : {
           "title" : "{{language}} dilinde başlayın",
@@ -3184,7 +3184,7 @@
       },
       "tutorial" : {
         "steps" : {
-          "getStarted" : "Başlangıç",
+          "getStarted" : "Hemen başla",
           "pinCode" : "PIN kodu",
           "recoveryPhrase" : "Kurtarma ifadesi",
           "hideRecoveryPhrase" : "Kurtarma ifadenizi saklayın",
@@ -3696,7 +3696,7 @@
     "termsLabel" : "Hizmet Şartları",
     "privacyLabel" : "Gizlilik Politikası",
     "switchLabel" : "Hizmet Şartları ve Gizlilik Politikasını okudum ve kabul ediyorum",
-    "cta" : "Ledger uygulamasına girin"
+    "cta" : "Ledger uygulamasına gir"
   },
   "updatedTerms" : {
     "title" : "Kullanım Koşulları Güncellemesi",
@@ -3710,7 +3710,7 @@
   },
   "families" : {
     "cardano" : {
-      "memoPlaceholder" : "Optional",
+      "memoPlaceholder" : "Tercihe bağlı",
       "memo" : "Memo"
     },
     "stellar" : {
@@ -4342,8 +4342,8 @@
     "SolanaUseAllAmountStakeWarning" : {
       "title" : "Gelecekteki işlem ücretleri için yeterli bakiyenin kaldığından emin olun"
     },
-    "SolanaTxSimulationFailedPendingOp" : {
-      "title" : "Önceki işleminiz henüz tamamlanmadı. Lütfen biraz bekleyin ve ardından işlem geçmişini kontrol edip tekrar deneyin."
+    "SolanaTxSimulationFailedWhilePendingOp" : {
+      "title" : "Önceki işleminiz henüz tamamlanmadı. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."
     },
     "SolanaTxConfirmationTimeout" : {
       "title" : "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."

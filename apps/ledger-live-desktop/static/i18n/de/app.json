@@ -81,7 +81,7 @@
     "selectValidatorNoOption" : "Kein passendes Konto zu \"{{accountName}}\" gefunden",
     "selectNoResults" : "Keine Ergebnisse gefunden zu \"{{query}}\"",
     "sortBy" : "Sortieren nach",
-    "save" : "Sparen Sie",
+    "save" : "Speichern",
     "lock" : "Sperren",
     "showMore" : "Mehr anzeigen",
     "back" : "Zurück",
@@ -255,7 +255,7 @@
         "currencyDisabledTooltip" : "Diese Währung ist für swap noch nicht verfügbar"
       },
       "to" : {
-        "title" : "Bis"
+        "title" : "An"
       },
       "notAvailable" : {
         "title" : "Swap ist in Ihrem Land noch nicht verfügbar",
@@ -453,7 +453,7 @@
         "currency" : "Krypto-Vermögenswert"
       },
       "to" : {
-        "title" : "Bis",
+        "title" : "An",
         "account" : "Konto",
         "amount" : "Zu erhaltender Betrag",
         "currency" : "Krypto-Vermögenswert",
@@ -493,7 +493,7 @@
         "summary" : {
           "title" : "Zusammenfassung",
           "from" : "Von",
-          "to" : "Bis",
+          "to" : "An",
           "toExchange" : "Zu sendender Betrag",
           "toReceive" : "Zu erhaltender Betrag",
           "terms" : "Allgemeine Geschäftsbedingungen",
@@ -543,7 +543,7 @@
       "from" : "Von",
       "fromAddress" : "Ursprungsadresse",
       "fromAddress_plural" : "Ursprungsadressen",
-      "to" : "Bis",
+      "to" : "An",
       "toProvider" : "Adresse des Anbieters",
       "initialAmount" : "Anfangsbetrag",
       "creditedAmount" : "Gutschrift"
@@ -1441,7 +1441,7 @@
     "fees" : "Gebühr",
     "noFees" : "Keine Gebühr",
     "from" : "Von",
-    "to" : "Bis",
+    "to" : "An",
     "identifier" : "Transaktions-ID",
     "viewOperation" : "Im Explorer ansehen",
     "showMore" : "Mehr {{recipients}} anzeigen",
@@ -1889,7 +1889,7 @@
         "utxoLag" : "Die Verifizierung und Unterzeichnung dieser Transaktion kann lange dauern, da das Konto eine beträchtliche Anzahl von Coins enthält.",
         "subaccountsWarning" : "Sie müssen dieses Konto mit {{ currency }} auffüllen, um die Token dieses Kontos zu senden",
         "from" : "Von",
-        "to" : "Bis",
+        "to" : "An",
         "selectAccountDebit" : "Zu belastendes Konto",
         "recipientAddress" : "Adresse des Empfängers",
         "amount" : "Betrag",
@@ -2769,7 +2769,7 @@
       "display" : "Allgemeines",
       "currencies" : "Kryptowährungen",
       "help" : "Hilfe",
-      "about" : "Über uns",
+      "about" : "Über diese App",
       "experimental" : "Experimentelle Funktionen",
       "accounts" : "Konten",
       "developer" : "Entwickler"
@@ -2945,7 +2945,7 @@
     "exportLogs" : {
       "title" : "Protokolle speichern",
       "desc" : "Das Speichern von Ledger Live-Logs kann für die Fehlerbehebung erforderlich sein.",
-      "btn" : "Sparen Sie"
+      "btn" : "Speichern"
     },
     "accounts" : {
       "hideEmptyTokens" : {
@@ -3020,7 +3020,7 @@
     "desc" : "Wählen Sie die Konten aus, für die der Verlauf gespeichert werden soll",
     "descSuccess" : "Die CSV-Datei Ihres Verlaufs wurde erfolgreich im gewählten Ordner gespeichert",
     "titleSuccess" : "Verlauf erfolgreich gespeichert",
-    "cta" : "Sparen Sie",
+    "cta" : "Speichern",
     "ctaSuccess" : "Fertig",
     "noAccounts" : "Keine Konten zum Exportieren",
     "selectedAccounts" : "Einzuschließende Konten",
@@ -4342,7 +4342,7 @@
     "SolanaUseAllAmountStakeWarning" : {
       "title" : "Stellen Sie sicher, dass Ihr Guthaben zur Deckung künftiger Transaktionsgebühren ausreicht"
     },
-    "SolanaTxSimulationFailedPendingOp" : {
+    "SolanaTxSimulationFailedWhilePendingOp" : {
       "title" : "Ihre vorherige Transaktion wurde noch nicht verarbeitet. Bitte warten Sie einen Moment und prüfen Sie vor einem erneuten Versuch zunächst den Transaktionsverlauf."
     },
     "SolanaTxConfirmationTimeout" : {

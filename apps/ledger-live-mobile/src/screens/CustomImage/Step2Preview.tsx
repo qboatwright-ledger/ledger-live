@@ -38,9 +38,9 @@ const boxToFitDimensions = {
 
 const contrasts = [
   { val: 1, color: "neutral.c70" },
-  { val: 2, color: "neutral.c50" },
-  { val: 5, color: "neutral.c40" },
-  { val: 8, color: "neutral.c30" },
+  { val: 1.5, color: "neutral.c50" },
+  { val: 2, color: "neutral.c40" },
+  { val: 3, color: "neutral.c30" },
 ];
 
 const Step2Preview: React.FC<{}> = () => {

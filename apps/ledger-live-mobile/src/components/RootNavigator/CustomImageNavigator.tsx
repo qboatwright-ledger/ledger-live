@@ -5,6 +5,7 @@ import { ScreenName } from "../../const";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import CroppingScreen from "../../screens/CustomImage/CroppingScreen";
 import PreviewScreen from "../../screens/CustomImage/PreviewScreen";
+import DebugScreen from "../../screens/CustomImage/DebugScreen";
 
 const Empty = () => null;
 
@@ -36,6 +37,11 @@ export default function CustomImageNavigator() {
         name={ScreenName.CustomImageTransferScreen}
         component={Empty}
         options={{ title: "" }}
+      />
+      <Stack.Screen
+        name={ScreenName.ImagePicker}
+        component={DebugScreen}
+        options={{ title: "Custom Img Debug" }}
       />
     </Stack.Navigator>
   );

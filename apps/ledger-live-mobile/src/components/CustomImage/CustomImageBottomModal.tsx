@@ -12,6 +12,7 @@ type Props = {
 };
 
 const CustomImageBottomModal: React.FC<Props> = props => {
+  const { onClose } = props;
   const { t } = useTranslation();
   const navigation = useNavigation();
   const handleUploadFromPhone = useCallback(async () => {
@@ -21,11 +22,11 @@ const CustomImageBottomModal: React.FC<Props> = props => {
         screen: ScreenName.CustomImageCroppingScreen,
         params: image,
       });
-      props.onClose && props.onClose();
+      onClose && onClose();
     } else {
       // TODO:
     }
-  }, [navigation, props.onClose]);
+  }, [navigation, onClose]);
 
   const handleFromUrl = useCallback(() => {
     navigation.navigate(NavigatorName.CustomImage, {
@@ -35,8 +36,26 @@ const CustomImageBottomModal: React.FC<Props> = props => {
           "https://img.phonandroid.com/2022/04/bored-ape-yacht-club.jpg",
       },
     });
-    props.onClose && props.onClose();
-  }, [navigation, props.onClose]);
+    onClose && onClose();
+  }, [navigation, onClose]);
+
+  const handleDebug = useCallback(() => {
+    navigation.navigate(NavigatorName.CustomImage, {
+      screen: ScreenName.ImagePicker,
+    });
+    onClose && onClose();
+  }, [navigation, onClose]);
+
+  const handleDebugUrl = useCallback(() => {
+    navigation.navigate(NavigatorName.CustomImage, {
+      screen: ScreenName.ImagePicker,
+      params: {
+        imageUrl:
+          "https://img.phonandroid.com/2022/04/bored-ape-yacht-club.jpg",
+      },
+    });
+    onClose && onClose();
+  }, [navigation, onClose]);
 
   return (
     <BottomModal isOpened={props.isOpened} onClose={props.onClose}>
@@ -51,7 +70,19 @@ const CustomImageBottomModal: React.FC<Props> = props => {
         onPress={handleFromUrl}
         title={"(debug) from fixed URL"}
         iconName={"ArrowFromBottom"}
-        event="" // TODO: get proper event
+        event=""
+      />
+      <BottomModalChoice
+        title="(debug screen) custom"
+        onPress={handleDebug}
+        iconName="Brackets"
+        event=""
+      />
+      <BottomModalChoice
+        title="(debug screen) url"
+        onPress={handleDebugUrl}
+        iconName="Brackets"
+        event=""
       />
     </BottomModal>
   );

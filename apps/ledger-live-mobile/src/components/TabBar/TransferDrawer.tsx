@@ -88,20 +88,6 @@ export default function TransferDrawer({ onClose }: ModalProps) {
     [onNavigate],
   );
 
-  const onPickImage = useCallback(() => {
-    onNavigate(NavigatorName.Base, { screen: ScreenName.ImagePicker });
-  }, [onNavigate]);
-
-  const onPickImageWithURL = useCallback(() => {
-    onNavigate(NavigatorName.Base, {
-      screen: ScreenName.ImagePicker,
-      params: {
-        imageUrl:
-          "https://img.phonandroid.com/2022/04/bored-ape-yacht-club.jpg",
-      },
-    });
-  }, [onNavigate]);
-
   const buttons = (
     <>
       <Box mb={8}>
@@ -198,22 +184,6 @@ export default function TransferDrawer({ onClose }: ModalProps) {
           />
         </Box>
       ) : null}
-      <Box mb={8}>
-        <TransferButton
-          title="Custom img"
-          description="Lorem ipsum"
-          onPress={onPickImage}
-          Icon={Icons.BracketsMedium}
-        />
-      </Box>
-      <Box mb={8}>
-        <TransferButton
-          title="Custom img (preselected URL)"
-          description="Lorem ipsum"
-          onPress={onPickImageWithURL}
-          Icon={Icons.BracketsMedium}
-        />
-      </Box>
     </>
   );
 

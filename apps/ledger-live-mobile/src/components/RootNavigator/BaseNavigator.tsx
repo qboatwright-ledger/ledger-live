@@ -81,7 +81,6 @@ import Learn from "../../screens/Learn";
 import { useNoNanoBuyNanoWallScreenOptions } from "../../context/NoNanoBuyNanoWall";
 import PostBuyDeviceSetupNanoWallScreen from "../../screens/PostBuyDeviceSetupNanoWallScreen";
 import CustomImageNavigator from "./CustomImageNavigator";
-import DebugScreen from "../../screens/CustomImage/DebugScreen";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
@@ -584,11 +583,6 @@ export default function BaseNavigator() {
         name={NavigatorName.Accounts}
         component={AccountsNavigator}
         options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name={ScreenName.ImagePicker}
-        component={DebugScreen}
-        options={{ title: "Custom Img Debug" }}
       />
       <Stack.Screen
         name={NavigatorName.CustomImage}

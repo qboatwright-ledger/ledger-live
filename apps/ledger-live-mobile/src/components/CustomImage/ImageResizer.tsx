@@ -14,7 +14,7 @@ const ImageResizer: React.FC<Props> = props => {
 
   useEffect(() => {
     manipulateAsync(
-      imageFileUri, // TODO: handle undefined imageFileUri
+      imageFileUri,
       [
         {
           resize: {

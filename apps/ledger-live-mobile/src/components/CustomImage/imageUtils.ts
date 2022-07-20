@@ -1,16 +1,10 @@
 import { Alert, Image } from "react-native";
-import {
-  cacheDirectory,
-  EncodingType,
-  readAsStringAsync,
-  StorageAccessFramework,
-} from "expo-file-system";
-import { uniqueId } from "lodash";
+import RNFetchBlob from "rn-fetch-blob";
 import { launchImageLibrary } from "react-native-image-picker";
-import { ImageBase64Data, ImageDimensions, ImageFileUri } from "./types";
+import { ImageDimensions, ImageFileUri, ImageUrl } from "./types";
 
 export async function importImageFromPhoneGallery(): Promise<
-  (ImageFileUri & ImageBase64Data & Partial<ImageDimensions>) | undefined
+  (ImageFileUri & Partial<ImageDimensions>) | undefined
 > {
   const {
     assets,
@@ -20,7 +14,7 @@ export async function importImageFromPhoneGallery(): Promise<
   } = await launchImageLibrary({
     mediaType: "photo",
     quality: 1,
-    includeBase64: true,
+    includeBase64: false,
   });
   if (didCancel) return;
   if (errorCode) {
@@ -32,14 +26,12 @@ export async function importImageFromPhoneGallery(): Promise<
     if (!asset) {
       throw new Error(`Import from gallery error: asset undefined`);
     }
-    const { base64, uri, width, height, type } = asset;
-    const fullBase64 = `data:${type};base64, ${base64}`;
+    const { uri, width, height } = asset;
     if (uri) {
       return {
         width,
         height,
         imageFileUri: uri,
-        imageBase64DataUri: fullBase64,
       };
     }
   }
@@ -59,55 +51,18 @@ export async function fetchImageBase64(imageUrl: string) {
     );
 }
 
-export async function loadImageBase64FromURI(
-  fileUri: string,
-  mimeType = "image/jpg",
-) {
-  const base64 = await readAsStringAsync(fileUri, {
-    encoding: EncodingType.Base64,
-  });
-  const fullBase64 = `data:${mimeType};base64, ${base64}`;
-  return fullBase64;
-}
-
-function getMimeTypeFromBase64(base64: string) {
-  return base64.split(";")[0].slice(5);
-}
-
 type Options = {
   encoding: EncodingType.UTF8 | EncodingType.Base64;
 };
 
-export async function createFileAndWriteContent(
-  parentUri: string,
-  fileName: string,
-  mimeType: string,
-  contents: string,
-  options: Options,
-) {
-  const fileUri = `${parentUri}/${fileName}`;
-  await StorageAccessFramework.writeAsStringAsync(fileUri, contents, options);
-  return fileUri;
-}
-
-export async function downloadImageToFile(imageUrl: string) {
-  const fileId = uniqueId();
-  const base64Image = await fetchImageBase64(imageUrl);
-  if (!base64Image) throw new Error("no result from image base64 download");
-  if (!cacheDirectory) throw new Error("no cache directory");
-  const mimeType = getMimeTypeFromBase64(base64Image || "");
-  const fileExtension = mimeType.split("/")[1];
-  const fileName = `${fileId}.${fileExtension}`;
-  const resultUri = await createFileAndWriteContent(
-    cacheDirectory,
-    fileName,
-    mimeType,
-    base64Image?.split(",")[1],
-    {
-      encoding: EncodingType.Base64,
-    },
+export async function downloadImageToFile({
+  imageUrl,
+}: ImageUrl): Promise<ImageFileUri> {
+  const res = await RNFetchBlob.config({ fileCache: true }).fetch(
+    "GET",
+    imageUrl,
   );
-  return resultUri;
+  return { imageFileUri: "file://" + res.path() };
 }
 
 export async function loadImageSizeAsync(

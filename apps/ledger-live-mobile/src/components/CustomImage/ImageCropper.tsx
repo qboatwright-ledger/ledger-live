@@ -7,11 +7,6 @@ import { ImageBase64Data, ImageDimensions, ImageFileUri } from "./types";
 export type CropResult = ImageDimensions & ImageFileUri;
 
 export type Props = ImageFileUri & {
-  /**
-   * - on Android, this must be a fileURI
-   * - on iOS, this can be a URL directly
-   */
-  // NB, on
   aspectRatio: { width: number; height: number };
   onResult: (res: CropResult) => void;
   style?: StyleProp<View>;
@@ -33,13 +28,9 @@ const ImageCropper: React.FC<Props> = React.forwardRef((props: Props, ref) => {
     async res => {
       const { height, width, uri: fileUri } = res;
       try {
-        // const base64 = await loadImageBase64FromURI(
-        //   Platform.OS === "android" ? `file://${fileUri}` : fileUri,
-        // );
         onResult({
           width,
           height,
-          // imageBase64DataUri: base64,
           imageFileUri: fileUri,
         });
       } catch (e) {

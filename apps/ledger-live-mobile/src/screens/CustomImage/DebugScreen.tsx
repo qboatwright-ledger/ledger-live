@@ -32,11 +32,11 @@ import {
   ImageDimensions,
   ImageDimensionsMaybe,
   ImageFileUri,
-  ImageURL,
+  ImageUrl,
 } from "../../components/CustomImage/types";
 import { cropAspectRatio } from "./shared";
 
-type RouteParams = Partial<ImageURL>;
+type RouteParams = Partial<ImageUrl>;
 
 const PreviewImage = styled(Image).attrs({
   resizeMode: "contain",
@@ -79,17 +79,14 @@ export default function DebugScreen() {
   useEffect(() => {
     if (paramsImageURL) {
       const loadImage = async () => {
-        const [dims, uri] = await Promise.all([
+        const [dims, { imageFileUri }] = await Promise.all([
           loadImageSizeAsync(paramsImageURL),
-          downloadImageToFile(paramsImageURL),
-          // true || Platform.OS === "android"
-          //   ? downloadImageToFile(paramsImageURL)
-          //   : paramsImageURL,
+          downloadImageToFile({ imageUrl: paramsImageURL }),
         ]);
         setImageToCrop({
           width: dims.width,
           height: dims.height,
-          imageFileUri: uri,
+          imageFileUri,
         });
       };
       loadImage();

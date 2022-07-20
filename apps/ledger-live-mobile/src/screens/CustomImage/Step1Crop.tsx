@@ -18,7 +18,7 @@ import ImageCropper, {
 import {
   ImageDimensions,
   ImageFileUri,
-  ImageURL,
+  ImageUrl,
 } from "../../components/CustomImage/types";
 import {
   downloadImageToFile,
@@ -30,7 +30,7 @@ import Button from "../../components/Button";
 import { ScreenName } from "../../const";
 import BottomContainer from "../../components/CustomImage/BottomButtonsContainer";
 
-type RouteParams = Partial<ImageURL> &
+type RouteParams = Partial<ImageUrl> &
   Partial<ImageFileUri> &
   Partial<ImageDimensions>;
 
@@ -56,14 +56,14 @@ const Step1Cropping: React.FC<{}> = () => {
     if (params?.imageUrl) {
       const { imageUrl } = params;
       const loadImage = async () => {
-        const [dims, uri] = await Promise.all([
+        const [dims, { imageFileUri }] = await Promise.all([
           loadImageSizeAsync(imageUrl),
-          downloadImageToFile(imageUrl),
+          downloadImageToFile({ imageUrl }),
         ]);
         setImageToCrop({
           width: dims.width,
           height: dims.height,
-          imageFileUri: uri,
+          imageFileUri,
         });
       };
       loadImage();

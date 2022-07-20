@@ -34,7 +34,8 @@ const CustomImageBottomModal: React.FC<Props> = props => {
       screen: ScreenName.CustomImageStep1Crop,
       params: {
         imageUrl:
-          "https://img.phonandroid.com/2022/04/bored-ape-yacht-club.jpg",
+          // "https://img.phonandroid.com/2022/04/bored-ape-yacht-club.jpg",
+          "https://effigis.com/wp-content/uploads/2015/02/Airbus_Pleiades_50cm_8bit_RGB_Yogyakarta.jpg",
       },
     });
     onClose && onClose();
@@ -52,7 +53,8 @@ const CustomImageBottomModal: React.FC<Props> = props => {
       screen: ScreenName.ImagePicker,
       params: {
         imageUrl:
-          "https://img.phonandroid.com/2022/04/bored-ape-yacht-club.jpg",
+          // "https://img.phonandroid.com/2022/04/bored-ape-yacht-club.jpg",
+          "https://effigis.com/wp-content/uploads/2015/02/Airbus_Pleiades_50cm_8bit_RGB_Yogyakarta.jpg",
       },
     });
     onClose && onClose();

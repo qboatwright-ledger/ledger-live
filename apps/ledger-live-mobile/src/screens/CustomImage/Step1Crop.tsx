@@ -39,7 +39,7 @@ export const boxToFitDimensions = {
   height: Dimensions.get("screen").height,
 };
 
-const CroppingScreen: React.FC<{}> = () => {
+const Step1Cropping: React.FC<{}> = () => {
   const cropperRef = useRef<CropView>(null);
   const [imageToCrop, setImageToCrop] = useState<
     (ImageFileUri & Partial<ImageDimensions>) | null
@@ -80,7 +80,7 @@ const CroppingScreen: React.FC<{}> = () => {
 
   const handleCropResult: ImageCropperProps["onResult"] = useCallback(
     (res: CropResult) => {
-      navigation.navigate(ScreenName.CustomImagePreviewScreen, res);
+      navigation.navigate(ScreenName.CustomImageStep2Preview, res);
     },
     [navigation],
   );
@@ -176,4 +176,4 @@ const CroppingScreen: React.FC<{}> = () => {
   );
 };
 
-export default CroppingScreen;
+export default Step1Cropping;

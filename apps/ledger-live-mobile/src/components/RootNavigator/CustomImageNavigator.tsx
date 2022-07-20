@@ -3,9 +3,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useTheme } from "styled-components/native";
 import { ScreenName } from "../../const";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
-import CroppingScreen from "../../screens/CustomImage/CroppingScreen";
-import PreviewScreen from "../../screens/CustomImage/PreviewScreen";
+import Step1Cropping from "../../screens/CustomImage/Step1Crop";
+import Step2Preview from "../../screens/CustomImage/Step2Preview";
 import DebugScreen from "../../screens/CustomImage/DebugScreen";
+import Step3Transfer from "../../screens/CustomImage/Step3Transfer";
 
 const Empty = () => null;
 
@@ -19,22 +20,22 @@ export default function CustomImageNavigator() {
   return (
     <Stack.Navigator screenOptions={stackNavigationConfig}>
       <Stack.Screen
-        name={ScreenName.CustomImageCroppingScreen}
-        component={CroppingScreen}
+        name={ScreenName.CustomImageStep1Crop}
+        component={Step1Cropping}
         options={{ title: "" }}
       />
       <Stack.Screen
-        name={ScreenName.CustomImagePreviewScreen}
-        component={PreviewScreen}
+        name={ScreenName.CustomImageStep2Preview}
+        component={Step2Preview}
+        options={{ title: "" }}
+      />
+      <Stack.Screen
+        name={ScreenName.CustomImageStep3Transfer}
+        component={Step3Transfer}
         options={{ title: "" }}
       />
       <Stack.Screen
         name={ScreenName.CustomImageErrorScreen}
-        component={Empty}
-        options={{ title: "" }}
-      />
-      <Stack.Screen
-        name={ScreenName.CustomImageTransferScreen}
         component={Empty}
         options={{ title: "" }}
       />

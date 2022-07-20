@@ -43,7 +43,7 @@ const contrasts = [
   { val: 8, color: "neutral.c30" },
 ];
 
-const PreviewScreen: React.FC<{}> = () => {
+const Step2Preview: React.FC<{}> = () => {
   const imageProcessorRef = useRef<ImageProcessor>(null);
   const [resizedImage, setResizedImage] = useState<ResizeResult | null>(null);
   const [contrast, setContrast] = useState(1);
@@ -60,7 +60,7 @@ const PreviewScreen: React.FC<{}> = () => {
   const { t } = useTranslation();
 
   const navigation = useNavigation();
-  const { params }: { params: RouteParams } = useRoute();
+  const { params }: { params?: RouteParams } = useRoute() || {};
 
   const croppedImage = params;
 
@@ -85,9 +85,9 @@ const PreviewScreen: React.FC<{}> = () => {
   const handleRawResult: ImageProcessorProps["onRawResult"] = useCallback(
     (data: ProcessorRawResult) => {
       setProcessorRawResult(data);
-      navigation.navigate(ScreenName.CustomImageTransferScreen, {
-        data,
-        preview: processorPreviewImage,
+      navigation.navigate(ScreenName.CustomImageStep3Transfer, {
+        rawData: data,
+        previewData: processorPreviewImage,
       });
       setRawResultLoading(false);
     },
@@ -183,4 +183,4 @@ const PreviewScreen: React.FC<{}> = () => {
   );
 };
 
-export default PreviewScreen;
+export default Step2Preview;

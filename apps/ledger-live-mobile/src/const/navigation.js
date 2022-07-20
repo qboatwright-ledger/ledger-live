@@ -367,10 +367,10 @@ export const ScreenName = {
   // Image picker
   ImagePicker: "ImagePicker",
 
-  CustomImageCroppingScreen: "CustomImageCroppingScreen",
-  CustomImagePreviewScreen: "CustomImagePreviewScreen",
+  CustomImageStep1Crop: "CustomImageStep1Crop",
+  CustomImageStep2Preview: "CustomImageStep2Preview",
+  CustomImageStep3Transfer: "CustomImageStep3Transfer",
   CustomImageErrorScreen: "CustomImageErrorScreen",
-  CustomImageTransferScreen: "CustomImageTransferScreen",
 };
 
 export const NavigatorName = {

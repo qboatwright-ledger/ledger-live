@@ -19,7 +19,7 @@ const CustomImageBottomModal: React.FC<Props> = props => {
     const image = await importImageFromPhoneGallery();
     if (image) {
       navigation.navigate(NavigatorName.CustomImage, {
-        screen: ScreenName.CustomImageCroppingScreen,
+        screen: ScreenName.CustomImageStep1Crop,
         params: image,
       });
       onClose && onClose();
@@ -30,7 +30,7 @@ const CustomImageBottomModal: React.FC<Props> = props => {
 
   const handleFromUrl = useCallback(() => {
     navigation.navigate(NavigatorName.CustomImage, {
-      screen: ScreenName.CustomImageCroppingScreen,
+      screen: ScreenName.CustomImageStep1Crop,
       params: {
         imageUrl:
           "https://img.phonandroid.com/2022/04/bored-ape-yacht-club.jpg",

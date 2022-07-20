@@ -5,7 +5,7 @@ import { ImageBase64Data, ImageDimensions, ImageFileUri } from "./types";
 export type ResizeResult = ImageBase64Data & ImageDimensions;
 
 export type Props = ImageFileUri & {
-  targetDimensions: { width: number; height: number };
+  targetDimensions: ImageDimensions;
   onResult: (res: ResizeResult) => void;
 };
 

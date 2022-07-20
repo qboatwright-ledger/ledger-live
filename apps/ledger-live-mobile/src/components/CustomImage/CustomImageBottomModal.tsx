@@ -3,8 +3,9 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { NavigatorName, ScreenName } from "../../const";
 import BottomModal, { Props as BottomModalProps } from "../BottomModal";
-import BottomModalChoice from "../BottomModalChoice";
+import ModalChoice from "./ModalChoice";
 import { importImageFromPhoneGallery } from "./imageUtils";
+import { Text } from "@ledgerhq/native-ui";
 
 type Props = {
   isOpened?: boolean;
@@ -59,31 +60,33 @@ const CustomImageBottomModal: React.FC<Props> = props => {
 
   return (
     <BottomModal isOpened={props.isOpened} onClose={props.onClose}>
-      {/* TODO: proper styling from design */}
-      <BottomModalChoice
+      <Text variant="h4" fontWeight="semiBold" pb={5}>
+        {t("customImage.drawer.title")}
+      </Text>
+      <ModalChoice
         onPress={handleUploadFromPhone}
-        title={t("customImage.modal.uploadFromPhone")}
+        title={t("customImage.drawer.options.uploadFromPhone")}
         iconName={"ArrowFromBottom"}
         event="" // TODO: get proper event
       />
-      <BottomModalChoice
+      <ModalChoice
         onPress={handleFromUrl}
         title={"(debug) from fixed URL"}
         iconName={"ArrowFromBottom"}
         event=""
       />
-      <BottomModalChoice
+      {/* <ModalChoice
         title="(debug screen) custom"
         onPress={handleDebug}
         iconName="Brackets"
         event=""
       />
-      <BottomModalChoice
+      <ModalChoice
         title="(debug screen) url"
         onPress={handleDebugUrl}
         iconName="Brackets"
         event=""
-      />
+      /> */}
     </BottomModal>
   );
 };

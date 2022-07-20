@@ -81,7 +81,7 @@ import Learn from "../../screens/Learn";
 import { useNoNanoBuyNanoWallScreenOptions } from "../../context/NoNanoBuyNanoWall";
 import PostBuyDeviceSetupNanoWallScreen from "../../screens/PostBuyDeviceSetupNanoWallScreen";
 import CustomImageNavigator from "./CustomImageNavigator";
-import CustomImageDebugScreen from "../../screens/CustomImage/CustomImageDebugScreen";
+import DebugScreen from "../../screens/CustomImage/DebugScreen";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
@@ -587,12 +587,13 @@ export default function BaseNavigator() {
       />
       <Stack.Screen
         name={ScreenName.ImagePicker}
-        component={CustomImageDebugScreen}
+        component={DebugScreen}
         options={{ title: "Custom Img Debug" }}
       />
       <Stack.Screen
         name={NavigatorName.CustomImage}
         component={CustomImageNavigator}
+        options={{ headerShown: false }}
       />
       {Object.keys(families).map(name => {
         const { component, options } = families[name];

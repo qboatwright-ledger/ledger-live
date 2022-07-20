@@ -1,3 +1,4 @@
+import { Flex } from "@ledgerhq/native-ui";
 import React from "react";
 import { WebView } from "react-native-webview";
 import { injectedCode } from "./injectedCode";
@@ -18,6 +19,7 @@ export type Props = ImageBase64Data & {
    *  - >1: more contrasted than the original
    * */
   contrast: number;
+  debug?: boolean;
 };
 
 /**
@@ -96,18 +98,20 @@ export default class ImageProcessor extends React.Component<Props> {
   };
 
   render() {
+    const { debug = false } = this.props;
     return (
       <>
-        <InjectedCodeDebugger injectedCode={injectedCode} />
-        <WebView
-          ref={c => (this.webViewRef = c)}
-          injectedJavaScript={injectedCode}
-          androidLayerType="software"
-          androidHardwareAccelerationDisabled
-          style={{ height: 0 }}
-          onLoadEnd={this.handleWebviewLoaded}
-          onMessage={this.handleMessage}
-        />
+        <InjectedCodeDebugger debug={debug} injectedCode={injectedCode} />
+        <Flex flex={0}>
+          <WebView
+            ref={c => (this.webViewRef = c)}
+            injectedJavaScript={injectedCode}
+            androidLayerType="software"
+            androidHardwareAccelerationDisabled
+            onLoadEnd={this.handleWebviewLoaded}
+            onMessage={this.handleMessage}
+          />
+        </Flex>
       </>
     );
   }

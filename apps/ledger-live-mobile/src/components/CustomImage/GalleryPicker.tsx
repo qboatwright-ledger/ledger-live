@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { Button, Flex } from "@ledgerhq/native-ui";
-import { launchImageLibrary } from "react-native-image-picker";
-import { Alert, Image } from "react-native";
+import { Image } from "react-native";
 import { ImageDimensions, ImageDimensionsMaybe, ImageFileUri } from "./types";
 import { importImageFromPhoneGallery } from "./imageUtils";
 

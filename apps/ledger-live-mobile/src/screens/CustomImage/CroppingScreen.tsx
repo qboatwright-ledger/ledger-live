@@ -9,8 +9,8 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { Flex, Icons, InfiniteLoader } from "@ledgerhq/native-ui";
 import { CropView } from "react-native-image-crop-tools";
 import { SafeAreaView } from "react-native-safe-area-context";
-import styled from "styled-components/native";
 import { useTranslation } from "react-i18next";
+import { Dimensions, Platform, View } from "react-native";
 import ImageCropper, {
   Props as ImageCropperProps,
   CropResult,
@@ -25,24 +25,26 @@ import {
   fitImageContain,
   loadImageSizeAsync,
 } from "../../components/CustomImage/imageUtils";
-import { boxToFitDimensions, cropAspectRatio } from "./shared";
+import { cropAspectRatio } from "./shared";
 import Button from "../../components/Button";
-import { navigationRef } from "../../rootnavigation";
 import { ScreenName } from "../../const";
-
-const Container = styled(SafeAreaView)`
-  flex: 1;
-`;
+import BottomContainer from "../../components/CustomImage/BottomButtonsContainer";
 
 type RouteParams = Partial<ImageURL> &
   Partial<ImageFileUri> &
   Partial<ImageDimensions>;
 
-const CustomImageCroppingScreen: React.FC<{}> = () => {
+export const boxToFitDimensions = {
+  width: Dimensions.get("screen").width,
+  height: Dimensions.get("screen").height,
+};
+
+const CroppingScreen: React.FC<{}> = () => {
   const cropperRef = useRef<CropView>(null);
   const [imageToCrop, setImageToCrop] = useState<
     (ImageFileUri & Partial<ImageDimensions>) | null
   >(null);
+  const [rotated, setRotated] = useState(false);
 
   const { t } = useTranslation();
 
@@ -88,27 +90,39 @@ const CustomImageCroppingScreen: React.FC<{}> = () => {
   }, [cropperRef]);
 
   const handlePressRotateLeft = useCallback(() => {
-    cropperRef?.current?.rotateImage(false);
-  }, [cropperRef]);
+    if (cropperRef?.current) {
+      cropperRef.current.rotateImage(false);
+      setRotated(!rotated);
+    }
+  }, [cropperRef, rotated, setRotated]);
 
   const handlePressRotateRight = useCallback(() => {
-    cropperRef?.current?.rotateImage(true);
-  }, [cropperRef]);
+    if (cropperRef?.current) {
+      cropperRef.current.rotateImage(true);
+      setRotated(!rotated);
+    }
+  }, [cropperRef, rotated, setRotated]);
 
   const sourceDimensions = useMemo(
     () =>
       fitImageContain(
         {
-          height: imageToCrop?.height ?? 200,
-          width: imageToCrop?.width ?? 200,
+          height:
+            (Platform.OS === "android" && rotated
+              ? imageToCrop?.width
+              : imageToCrop?.height) ?? 200,
+          width:
+            (Platform.OS === "android" && rotated
+              ? imageToCrop?.height
+              : imageToCrop?.width) ?? 200,
         },
         boxToFitDimensions,
       ),
-    [imageToCrop?.height, imageToCrop?.width],
+    [imageToCrop?.height, imageToCrop?.width, rotated],
   );
 
   return (
-    <Container>
+    <Flex flex={1}>
       <Flex
         flex={1}
         flexDirection="column"
@@ -129,34 +143,37 @@ const CustomImageCroppingScreen: React.FC<{}> = () => {
           )}
         </Flex>
         {imageToCrop ? (
-          <>
-            <Flex flexDirection="row" p={5}>
+          <BottomContainer>
+            <Flex flexDirection="row">
+              {/* <View style={{ transform: [{ scaleX: -1 }] }}>
+                <Button
+                  ml={5}
+                  type="main"
+                  Icon={Icons.DelegateMedium}
+                  onPress={handlePressRotateLeft}
+                />
+              </View>
               <Button
                 mr={5}
                 type="main"
-                Icon={Icons.ChevronLeftMedium}
-                onPress={handlePressRotateLeft}
-              />
-              <Button
-                mr={5}
-                type="main"
-                Icon={Icons.ChevronRightMedium}
+                Icon={Icons.DelegateMedium}
                 onPress={handlePressRotateRight}
-              />
+              /> */}
               <Button
                 flex={1}
                 type="main"
+                size="large"
                 onPress={handlePressNext}
                 outline={false}
               >
                 {t("common.next")}
               </Button>
             </Flex>
-          </>
+          </BottomContainer>
         ) : null}
       </Flex>
-    </Container>
+    </Flex>
   );
 };
 
-export default CustomImageCroppingScreen;
+export default CroppingScreen;

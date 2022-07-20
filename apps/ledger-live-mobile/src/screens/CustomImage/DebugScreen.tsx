@@ -34,7 +34,7 @@ import {
   ImageFileUri,
   ImageURL,
 } from "../../components/CustomImage/types";
-import { boxToFitDimensions, cropAspectRatio } from "./shared";
+import { cropAspectRatio } from "./shared";
 
 type RouteParams = Partial<ImageURL>;
 
@@ -45,13 +45,18 @@ const PreviewImage = styled(Image).attrs({
   height: 200px;
 `;
 
+const boxToFitDimensions = {
+  height: Dimensions.get("screen").height,
+  width: Dimensions.get("screen").width,
+};
+
 type ImageToCrop = Partial<ImageDimensions> & ImageFileUri;
 
 type ProcessorRawResult = ImageDimensions & {
   hexData: string;
 };
 
-export default function CustomImageDebugScreen() {
+export default function DebugScreen() {
   const imageProcessorRef = useRef<ImageProcessor>(null);
   const [imageToCrop, setImageToCrop] = useState<ImageToCrop | null>(null);
   const [croppedImage, setCroppedImage] = useState<CropResult | null>(null);
@@ -204,6 +209,7 @@ export default function CustomImageDebugScreen() {
               Image processing:
             </Text>
             <ImageProcessor
+              debug
               ref={imageProcessorRef}
               imageBase64DataUri={resizedImage?.imageBase64DataUri}
               onPreviewResult={handlePreviewResult}

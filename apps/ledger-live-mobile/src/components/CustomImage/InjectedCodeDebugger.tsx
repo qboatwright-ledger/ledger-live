@@ -4,8 +4,10 @@ import { ScrollView } from "react-native";
 
 export function InjectedCodeDebugger({
   injectedCode,
+  debug,
 }: {
   injectedCode: string;
+  debug?: boolean;
 }) {
   const [sourceVisible, setSourceVisible] = useState(false);
   const toggleShowSource = useCallback(() => {
@@ -14,11 +16,13 @@ export function InjectedCodeDebugger({
   const warningVisible = injectedCode?.trim() === "[bytecode]"; // see https://github.com/facebook/hermes/issues/612
   return (
     <>
-      <Switch
-        checked={sourceVisible}
-        onChange={toggleShowSource}
-        label="Show injected code"
-      />
+      {debug && (
+        <Switch
+          checked={sourceVisible}
+          onChange={toggleShowSource}
+          label="Show injected code"
+        />
+      )}
       {sourceVisible && (
         <ScrollView horizontal>
           <Text>{injectedCode}</Text>

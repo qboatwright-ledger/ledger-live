@@ -4426,6 +4426,7 @@
   "customImage": {
     "modal": {
       "uploadFromPhone": "Upload from my phone"
-    }
+    },
+    "selectContrast": "Select your contrast"
   }
 }

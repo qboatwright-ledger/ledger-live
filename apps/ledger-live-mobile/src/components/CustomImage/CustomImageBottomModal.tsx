@@ -13,7 +13,6 @@ type Props = {
 
 const CustomImageBottomModal: React.FC<Props> = props => {
   const { t } = useTranslation();
-  const { onClose } = props;
   const navigation = useNavigation();
   const handleUploadFromPhone = useCallback(async () => {
     const image = await importImageFromPhoneGallery();

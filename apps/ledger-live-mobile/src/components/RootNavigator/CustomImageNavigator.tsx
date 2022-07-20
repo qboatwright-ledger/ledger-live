@@ -3,7 +3,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useTheme } from "styled-components/native";
 import { ScreenName } from "../../const";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
-import CustomImageCroppingScreen from "../../screens/CustomImage/CustomImageCroppingScreen";
+import CroppingScreen from "../../screens/CustomImage/CroppingScreen";
+import PreviewScreen from "../../screens/CustomImage/PreviewScreen";
+
+const Empty = () => null;
 
 export default function CustomImageNavigator() {
   const { colors } = useTheme();
@@ -13,34 +16,26 @@ export default function CustomImageNavigator() {
   );
 
   return (
-    <Stack.Navigator screenOptions={stackNavigationConfig} title="">
+    <Stack.Navigator screenOptions={stackNavigationConfig}>
       <Stack.Screen
         name={ScreenName.CustomImageCroppingScreen}
-        component={CustomImageCroppingScreen}
-        options={{
-          headerShown: false,
-        }}
+        component={CroppingScreen}
+        options={{ title: "" }}
       />
       <Stack.Screen
         name={ScreenName.CustomImagePreviewScreen}
-        component={() => null}
-        options={{
-          headerShown: false,
-        }}
+        component={PreviewScreen}
+        options={{ title: "" }}
       />
       <Stack.Screen
         name={ScreenName.CustomImageErrorScreen}
-        component={() => null}
-        options={{
-          headerShown: false,
-        }}
+        component={Empty}
+        options={{ title: "" }}
       />
       <Stack.Screen
         name={ScreenName.CustomImageTransferScreen}
-        component={() => null}
-        options={{
-          headerShown: false,
-        }}
+        component={Empty}
+        options={{ title: "" }}
       />
     </Stack.Navigator>
   );

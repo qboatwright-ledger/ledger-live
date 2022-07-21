@@ -1,9 +1,10 @@
-import { Alert, Image } from "react-native";
+import { Image } from "react-native";
 import RNFetchBlob, { FetchBlobResponse, StatefulPromise } from "rn-fetch-blob";
 import { launchImageLibrary } from "react-native-image-picker";
 import { ImageDimensions, ImageFileUri, ImageUrl } from "./types";
 import {
   ImageDownloadError,
+  ImageLoadFromGalleryError,
   ImageMetadataLoadingError,
   ImageTooLargeError,
 } from "./errors";
@@ -11,34 +12,36 @@ import {
 export async function importImageFromPhoneGallery(): Promise<
   (ImageFileUri & Partial<ImageDimensions>) | undefined
 > {
-  const {
-    assets,
-    didCancel,
-    errorCode,
-    errorMessage,
-  } = await launchImageLibrary({
-    mediaType: "photo",
-    quality: 1,
-    includeBase64: false,
-  });
-  if (didCancel) return;
-  if (errorCode) {
-    throw new Error(
-      `Import from gallery error: ${[errorCode]}: ${errorMessage}`,
-    );
-  } else {
-    const asset = assets && assets[0];
-    if (!asset) {
-      throw new Error(`Import from gallery error: asset undefined`);
+  try {
+    const {
+      assets,
+      didCancel,
+      errorCode,
+      // errorMessage,
+    } = await launchImageLibrary({
+      mediaType: "photo",
+      quality: 1,
+      includeBase64: false,
+    });
+    if (didCancel) return;
+    if (errorCode) {
+      throw new ImageLoadFromGalleryError();
+    } else {
+      const asset = assets && assets[0];
+      if (!asset) {
+        throw new ImageLoadFromGalleryError();
+      }
+      const { uri, width, height } = asset;
+      if (uri) {
+        return {
+          width,
+          height,
+          imageFileUri: uri,
+        };
+      }
     }
-    const { uri, width, height } = asset;
-    if (uri) {
-      return {
-        width,
-        height,
-        imageFileUri: uri,
-      };
-    }
+  } catch (e) {
+    throw new ImageLoadFromGalleryError();
   }
 }
 
@@ -80,8 +83,7 @@ export async function downloadImageToFile({
 }
 
 export async function loadImageToFileWithDimensions(
-  source: Partial<ImageUrl> & Partial<ImageFileUri> &
-    Partial<ImageDimensions>,
+  source: Partial<ImageUrl> & Partial<ImageFileUri> & Partial<ImageDimensions>,
 ): Promise<ImageFileUri & Partial<ImageDimensions>> {
   if (source?.imageFileUri) {
     return {

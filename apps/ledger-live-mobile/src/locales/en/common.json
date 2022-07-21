@@ -647,9 +647,13 @@
     "CardanoMinAmountError": {
       "title": "Minimum {{amount}} ADA required"
     },
+    "ImageLoadFromGalleryError": {
+      "title": "Image loading from gallery failed",
+      "description": "Please try again with another image"
+    },
     "ImageDownloadError": {
       "title": "Image download failed",
-      "description": "Please try again"
+      "description": "Please try again with another image"
     },
     "ImageMetadataLoadingError": {
       "title": "Image metadata loading failed",

@@ -1518,7 +1518,8 @@
       "fees" : "Tarifas",
       "provider" : "Proveedor",
       "payoutNetworkFees" : "Tarifas de pago",
-      "payoutNetworkFeesTooltip" : "Este importe no se mostrará en el dispositivo"
+      "payoutNetworkFeesTooltip" : "Este importe no se mostrará en el dispositivo",
+      "acceptTerms" : "Al validar esta transacción, acepto los <0>términos de uso </0>de\n<0> {{provider}}</0>"
     },
     "swap2" : {
       "amountSent" : "Importe a enviar",
@@ -4342,7 +4343,7 @@
     "SolanaUseAllAmountStakeWarning" : {
       "title" : "Asegúrate de que tu saldo restante es suficiente para cubrir las tarifas de transacciones futuras"
     },
-    "SolanaTxSimulationFailedPendingOp" : {
+    "SolanaTxSimulationFailedWhilePendingOp" : {
       "title" : "Tu transacción anterior todavía no se ha procesado. Espera un momento y comprueba el historial de transacciones antes de intentarlo de nuevo."
     },
     "SolanaTxConfirmationTimeout" : {

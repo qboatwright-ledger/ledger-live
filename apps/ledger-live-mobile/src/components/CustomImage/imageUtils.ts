@@ -1,7 +1,12 @@
 import { Alert, Image } from "react-native";
-import RNFetchBlob from "rn-fetch-blob";
+import RNFetchBlob, { FetchBlobResponse, StatefulPromise } from "rn-fetch-blob";
 import { launchImageLibrary } from "react-native-image-picker";
 import { ImageDimensions, ImageFileUri, ImageUrl } from "./types";
+import {
+  ImageDownloadError,
+  ImageMetadataLoadingError,
+  ImageTooLargeError,
+} from "./errors";
 
 export async function importImageFromPhoneGallery(): Promise<
   (ImageFileUri & Partial<ImageDimensions>) | undefined
@@ -51,18 +56,65 @@ export async function fetchImageBase64(imageUrl: string) {
     );
 }
 
-type Options = {
-  encoding: EncodingType.UTF8 | EncodingType.Base64;
-};
+export function downloadImageToFileWithCancellable({
+  imageUrl,
+}: ImageUrl): [Promise<ImageFileUri>, StatefulPromise<FetchBlobResponse>] {
+  const downloadTask = RNFetchBlob.config({ fileCache: true }).fetch(
+    "GET",
+    imageUrl,
+  );
+  return [
+    downloadTask
+      .then(res => ({ imageFileUri: "file://" + res.path() }))
+      .catch(() => {
+        throw new ImageDownloadError();
+      }),
+    downloadTask,
+  ];
+}
 
 export async function downloadImageToFile({
   imageUrl,
 }: ImageUrl): Promise<ImageFileUri> {
-  const res = await RNFetchBlob.config({ fileCache: true }).fetch(
-    "GET",
-    imageUrl,
-  );
-  return { imageFileUri: "file://" + res.path() };
+  return downloadImageToFileWithCancellable({ imageUrl })[0];
+}
+
+export async function loadImageToFileWithDimensions(
+  source: Partial<ImageUrl> & Partial<ImageFileUri> &
+    Partial<ImageDimensions>,
+): Promise<ImageFileUri & Partial<ImageDimensions>> {
+  if (source?.imageFileUri) {
+    return {
+      imageFileUri: source?.imageFileUri,
+      height: source?.height,
+      width: source?.width,
+    };
+  }
+  if (source?.imageUrl) {
+    const { imageUrl } = source;
+    const [downloadPromise, downloadTask] = downloadImageToFileWithCancellable({
+      imageUrl,
+    });
+    try {
+      const [dims, { imageFileUri }] = await Promise.all([
+        loadImageSizeAsync(imageUrl),
+        downloadPromise,
+      ]);
+      return {
+        width: dims.width,
+        height: dims.height,
+        imageFileUri,
+      };
+    } catch (e) {
+      /**
+       * in case an error happens in loadImageSizeAsync we have to cancel the
+       * download task
+       * */
+      downloadTask.cancel();
+      throw e;
+    }
+  }
+  throw new Error("No source specified"); // this shouldn't happen
 }
 
 export async function loadImageSizeAsync(
@@ -75,7 +127,12 @@ export async function loadImageSizeAsync(
         resolve({ width, height });
       },
       error => {
-        reject(error);
+        console.error(error);
+        if (error?.message?.startsWith("Pool hard cap violation? ")) {
+          reject(new ImageTooLargeError());
+        } else {
+          reject(new ImageMetadataLoadingError());
+        }
       },
     );
   });

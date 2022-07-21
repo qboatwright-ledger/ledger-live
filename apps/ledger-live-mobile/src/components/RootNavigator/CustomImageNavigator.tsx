@@ -7,6 +7,7 @@ import Step1Cropping from "../../screens/CustomImage/Step1Crop";
 import Step2Preview from "../../screens/CustomImage/Step2Preview";
 import DebugScreen from "../../screens/CustomImage/DebugScreen";
 import Step3Transfer from "../../screens/CustomImage/Step3Transfer";
+import ErrorScreen from "../../screens/CustomImage/ErrorScreen";
 
 const Empty = () => null;
 
@@ -36,8 +37,8 @@ export default function CustomImageNavigator() {
       />
       <Stack.Screen
         name={ScreenName.CustomImageErrorScreen}
-        component={Empty}
-        options={{ title: "" }}
+        component={ErrorScreen}
+        options={{ title: "", headerLeft: Empty }}
       />
       <Stack.Screen
         name={ScreenName.ImagePicker}

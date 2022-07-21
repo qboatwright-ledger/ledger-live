@@ -35,7 +35,8 @@ const CustomImageBottomModal: React.FC<Props> = props => {
       params: {
         imageUrl:
           // "https://img.phonandroid.com/2022/04/bored-ape-yacht-club.jpg",
-          "https://effigis.com/wp-content/uploads/2015/02/Airbus_Pleiades_50cm_8bit_RGB_Yogyakarta.jpg",
+          // "https://effigis.com/wp-content/uploads/2015/02/Airbus_Pleiades_50cm_8bit_RGB_Yogyakarta.jpg",
+          "https://upload.wikimedia.org/wikipedia/commons/9/9d/Pieter_Bruegel_the_Elder_-_The_Fall_of_the_Rebel_Angels_-_Google_Art_Project.jpg",
       },
     });
     onClose && onClose();

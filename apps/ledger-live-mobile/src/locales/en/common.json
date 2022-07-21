@@ -646,6 +646,18 @@
     },
     "CardanoMinAmountError": {
       "title": "Minimum {{amount}} ADA required"
+    },
+    "ImageDownloadError": {
+      "title": "Image download failed",
+      "description": "Please try again"
+    },
+    "ImageMetadataLoadingError": {
+      "title": "Image metadata loading failed",
+      "description": "Please try again with another image"
+    },
+    "ImageTooLargeError": {
+      "title": "Image too large",
+      "description": "Please try with a smaller image"
     }
   },
   "bluetooth": {
@@ -4430,6 +4442,7 @@
         "uploadFromPhone": "Upload from my phone"
       }
     },
+    "uploadAnotherImage": "Upload another image",
     "selectContrast": "Select your contrast"
   }
 }

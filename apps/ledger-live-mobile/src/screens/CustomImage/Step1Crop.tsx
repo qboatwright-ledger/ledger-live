@@ -24,6 +24,7 @@ import {
   downloadImageToFile,
   fitImageContain,
   loadImageSizeAsync,
+  loadImageToFileWithDimensions,
 } from "../../components/CustomImage/imageUtils";
 import { cropAspectRatio } from "./shared";
 import Button from "../../components/Button";
@@ -54,28 +55,15 @@ const Step1Cropping: React.FC<{}> = () => {
 
   /** LOAD SOURCE IMAGE FROM PARAMS */
   useEffect(() => {
-    if (params?.imageUrl) {
-      const { imageUrl } = params;
-      const loadImage = async () => {
-        const [dims, { imageFileUri }] = await Promise.all([
-          loadImageSizeAsync(imageUrl),
-          downloadImageToFile({ imageUrl }),
-        ]);
-        setImageToCrop({
-          width: dims.width,
-          height: dims.height,
-          imageFileUri,
-        });
-      };
-      loadImage();
-    } else if (params?.imageFileUri) {
-      setImageToCrop({
-        imageFileUri: params?.imageFileUri,
-        height: params?.height,
-        width: params?.width,
+    loadImageToFileWithDimensions(params)
+      .then(res => {
+        setImageToCrop(res);
+      })
+      .catch(error => {
+        console.error(error);
+        navigation.navigate(ScreenName.CustomImageErrorScreen, { error });
       });
-    }
-  }, [params]);
+  }, [navigation, params]);
 
   /** CROP IMAGE HANDLING */
 

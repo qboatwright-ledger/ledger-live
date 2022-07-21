@@ -1518,7 +1518,8 @@
       "fees" : "手数料",
       "provider" : "プロバイダー",
       "payoutNetworkFees" : "ペイアウト手数料",
-      "payoutNetworkFeesTooltip" : "これはデバイスには表示されません。"
+      "payoutNetworkFeesTooltip" : "これはデバイスには表示されません。",
+      "acceptTerms" : "このトランザクションを検証することにより、私は\n<0><0>{{provider}}</0>の利用規約</0>に同意します"
     },
     "swap2" : {
       "amountSent" : "送付額",
@@ -1842,7 +1843,7 @@
     "steps" : {
       "chooseAccount" : {
         "title" : "アカウント",
-        "label" : "引き落としアカウント",
+        "label" : "受取アカウント",
         "parentAccount" : "1. {{currencyName}}アカウントを選択",
         "token" : "2. トークンを選択する",
         "verifyTokenType" : "<0>{{token}}</0>が<0>{{tokenType}}</0>トークンであることを確認してください。{{currency}}アカウント他の暗号資産を送信すると失われる可能性があります。",
@@ -4342,7 +4343,7 @@
     "SolanaUseAllAmountStakeWarning" : {
       "title" : "今後のトランザクション手数料に十分な残高を確保してください"
     },
-    "SolanaTxSimulationFailedPendingOp" : {
+    "SolanaTxSimulationFailedWhilePendingOp" : {
       "title" : "前回のトランザクションはまだ処理されていません。しばらく待ってから、トランザクション履歴を確認した上でもう一度やり直してください。"
     },
     "SolanaTxConfirmationTimeout" : {

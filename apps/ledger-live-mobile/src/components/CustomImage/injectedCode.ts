@@ -43,14 +43,14 @@ function codeToInject() {
         0.114 * imageData[i + 2];
       // grayscale
 
-      gray = (gray - 128) * contrastAmount + 128;
+      gray = Math.min(255, Math.max((gray - 128) * contrastAmount + 128, 0));
       // contrast
 
       const reducedGrayLevel = Math.floor(gray / 16);
       const finalGray = reducedGrayLevel * 16;
       // color reduction to 16 levels of gray
 
-      rawResult = rawResult.concat((reducedGrayLevel).toString(16));
+      rawResult = rawResult.concat(reducedGrayLevel.toString(16));
       // adding hexadecimal value of this pixel
 
       filteredImageData.push(finalGray);

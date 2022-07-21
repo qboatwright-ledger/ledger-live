@@ -25,7 +25,13 @@ function codeToInject() {
 
   /* eslint-enable prettier/prettier */
 
-  /* eslint-disable no-unused-vars */
+  function clampRGB(val: number) {
+    return Math.min(255, Math.max(val, 0));
+  }
+
+  function contrastRGB(rgbVal: number, contrastVal: number) {
+    return (rgbVal - 128) * contrastVal + 128;
+  }
 
   // simutaneously apply grayscale and contrast to the image
   function applyFilter(
@@ -36,26 +42,30 @@ function codeToInject() {
 
     const filteredImageData = [];
 
+    const d = 15 / 255; // (N-1) / 255, with N=16 the number of color levels
+
     for (let i = 0; i < imageData.length; i += 4) {
-      let gray =
+      /** gray rgb value for the pixel, in [0, 255] */
+      const gray256 =
         0.299 * imageData[i] +
         0.587 * imageData[i + 1] +
         0.114 * imageData[i + 2];
-      // grayscale
 
-      gray = Math.min(255, Math.max((gray - 128) * contrastAmount + 128, 0));
-      // contrast
+      /** gray rgb value after applying the contrast, in [0,255] */
+      const contrastedGray256 =
+        Math.round(clampRGB(contrastRGB(gray256, contrastAmount)) * d) / d;
 
-      const reducedGrayLevel = Math.floor(gray / 16);
-      const finalGray = reducedGrayLevel * 16;
-      // color reduction to 16 levels of gray
+      /** gray rgb value after applying the contrast, in [0, 15] */
+      const contrastedGray16 = Math.floor(contrastedGray256 / 16);
 
-      rawResult = rawResult.concat(reducedGrayLevel.toString(16));
+      const grayHex = contrastedGray16.toString(16);
+
+      rawResult = rawResult.concat(grayHex);
       // adding hexadecimal value of this pixel
 
-      filteredImageData.push(finalGray);
-      filteredImageData.push(finalGray);
-      filteredImageData.push(finalGray);
+      filteredImageData.push(contrastedGray256);
+      filteredImageData.push(contrastedGray256);
+      filteredImageData.push(contrastedGray256);
       // push 3 bytes for color (all the same == gray)
 
       filteredImageData.push(255);

@@ -12,6 +12,7 @@ import {
   decodeNftId,
   getNftCapabilities,
   useNftCollectionMetadata,
+  getFloorPrice,
 } from "@ledgerhq/live-common/nft/index";
 import { BigNumber } from "bignumber.js";
 import { useSelector } from "react-redux";
@@ -319,8 +320,8 @@ const NftViewer = ({ route }: Props) => {
                 type="main"
                 Icon={Icons.BracketsMedium}
                 onPress={() =>
-                  navigation.navigate(NavigatorName.Base, {
-                    screen: ScreenName.ImagePicker,
+                  navigation.navigate(NavigatorName.CustomImage, {
+                    screen: ScreenName.CustomImageStep1Crop,
                     params: {
                       imageUrl: nftMetadata.media,
                     },

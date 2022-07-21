@@ -1518,7 +1518,8 @@
       "fees" : "수수료",
       "provider" : "공급자",
       "payoutNetworkFees" : "지불금 비용",
-      "payoutNetworkFeesTooltip" : "이 금액은 장치에 표시되지 않습니다"
+      "payoutNetworkFeesTooltip" : "이 금액은 장치에 표시되지 않습니다",
+      "acceptTerms" : "본인은 이 트랜잭션을 확인함으로써 \n<0><0>{{provider}}</0>의 이용약관</0>을 수락합니다."
     },
     "swap2" : {
       "amountSent" : "전송 금액",
@@ -4342,7 +4343,7 @@
     "SolanaUseAllAmountStakeWarning" : {
       "title" : "향후 트랜잭션 수수료 지불에 필요한 잔액을 충분히 남겨 두세요"
     },
-    "SolanaTxSimulationFailedPendingOp" : {
+    "SolanaTxSimulationFailedWhilePendingOp" : {
       "title" : "이전 트랜잭션이 아직 처리되지 않았습니다. 잠시 기다려 트랜잭션 내역을 확인한 후 다시 시도하세요."
     },
     "SolanaTxConfirmationTimeout" : {

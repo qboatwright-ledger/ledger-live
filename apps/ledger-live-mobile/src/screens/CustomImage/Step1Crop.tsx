@@ -29,6 +29,7 @@ import { cropAspectRatio } from "./shared";
 import Button from "../../components/Button";
 import { ScreenName } from "../../const";
 import BottomContainer from "../../components/CustomImage/BottomButtonsContainer";
+import Touchable from "../../components/Touchable";
 
 type RouteParams = Partial<ImageUrl> &
   Partial<ImageFileUri> &
@@ -96,13 +97,6 @@ const Step1Cropping: React.FC<{}> = () => {
     }
   }, [cropperRef, rotated, setRotated]);
 
-  const handlePressRotateRight = useCallback(() => {
-    if (cropperRef?.current) {
-      cropperRef.current.rotateImage(true);
-      setRotated(!rotated);
-    }
-  }, [cropperRef, rotated, setRotated]);
-
   const sourceDimensions = useMemo(
     () =>
       fitImageContain(
@@ -144,21 +138,19 @@ const Step1Cropping: React.FC<{}> = () => {
         </Flex>
         {imageToCrop ? (
           <BottomContainer>
+            <Flex mb={7} alignSelf="center">
+              <Touchable onPress={handlePressRotateLeft}>
+                <Flex
+                  px={7}
+                  py={4}
+                  borderRadius={100}
+                  backgroundColor="neutral.c30"
+                >
+                  <Icons.ReverseMedium size={24} />
+                </Flex>
+              </Touchable>
+            </Flex>
             <Flex flexDirection="row">
-              {/* <View style={{ transform: [{ scaleX: -1 }] }}>
-                <Button
-                  ml={5}
-                  type="main"
-                  Icon={Icons.DelegateMedium}
-                  onPress={handlePressRotateLeft}
-                />
-              </View>
-              <Button
-                mr={5}
-                type="main"
-                Icon={Icons.DelegateMedium}
-                onPress={handlePressRotateRight}
-              /> */}
               <Button
                 flex={1}
                 type="main"

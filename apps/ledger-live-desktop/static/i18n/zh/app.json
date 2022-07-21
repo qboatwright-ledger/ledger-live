@@ -1518,7 +1518,8 @@
       "fees" : "费用",
       "provider" : "提供方",
       "payoutNetworkFees" : "支出费用",
-      "payoutNetworkFeesTooltip" : "该数额不会在您的设备上显示"
+      "payoutNetworkFeesTooltip" : "该数额不会在您的设备上显示",
+      "acceptTerms" : "验证此交易，即表示我接受\n<0><0>{{provider}}</0>的使用条款</0>"
     },
     "swap2" : {
       "amountSent" : "发送数额",
@@ -4342,7 +4343,7 @@
     "SolanaUseAllAmountStakeWarning" : {
       "title" : "确保您有足够的余额剩余，用作未来的交易费"
     },
-    "SolanaTxSimulationFailedPendingOp" : {
+    "SolanaTxSimulationFailedWhilePendingOp" : {
       "title" : "您之前的交易尚未处理。请稍等片刻后检查交易记录，然后重试。"
     },
     "SolanaTxConfirmationTimeout" : {

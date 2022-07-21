@@ -620,6 +620,8 @@ importers:
       react-native-fingerprint-scanner: git+https://github.com/hieuvp/react-native-fingerprint-scanner.git#f1d136f605412d58e4de9e7e155d6f818ba24731
       react-native-flipper-performance-plugin: ^0.2.1
       react-native-gesture-handler: ^2.5.0
+      react-native-image-crop-tools: ^1.6.2
+      react-native-image-picker: ^4.8.4
       react-native-keychain: ^7.0.0
       react-native-level-fs: ^3.0.0
       react-native-localize: ^2.2.1
@@ -778,6 +780,8 @@ importers:
       react-native-fast-image: 8.5.11_zqxy7fpkavjkgz5xll7ed4r6rq
       react-native-fingerprint-scanner: github.com/hieuvp/react-native-fingerprint-scanner/f1d136f605412d58e4de9e7e155d6f818ba24731_react-native@0.68.2
       react-native-gesture-handler: 2.5.0_mk7ksnag22facomrynqrp7v6gy
+      react-native-image-crop-tools: 1.6.2_zqxy7fpkavjkgz5xll7ed4r6rq
+      react-native-image-picker: 4.8.4_zqxy7fpkavjkgz5xll7ed4r6rq
       react-native-keychain: 7.0.0
       react-native-level-fs: 3.0.1_asyncstorage-down@4.2.0
       react-native-localize: 2.2.1_zqxy7fpkavjkgz5xll7ed4r6rq
@@ -20612,7 +20616,7 @@ packages:
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.5_ovpqj5wn7dv5iunpkty63trwiy
+      styled-components: 5.3.5_fane7jikarojcev26y27hpbhu4
 
   /babel-plugin-syntax-jsx/6.18.0:
     resolution: {integrity: sha512-qrPaCSo9c8RHNRHIotaufGbuOBN8rtdC4QrrFFc43vyWCCz7Kl7GL1PGaXtMGQZUXrkCjNEgxDfmAuAabr/rlw==}
@@ -21914,7 +21918,7 @@ packages:
       mkdirp: 0.5.6
       move-concurrently: 1.0.1
       p-map: 3.0.0
-      promise-inflight: 1.0.1
+      promise-inflight: 1.0.1_bluebird@3.7.2
       rimraf: 2.7.1
       ssri: 7.1.1
       unique-filename: 1.1.1
@@ -25893,7 +25897,7 @@ packages:
     dependencies:
       confusing-browser-globals: 1.0.11
       eslint: 7.32.0
-      eslint-plugin-import: 2.26.0_eslint@7.32.0
+      eslint-plugin-import: 2.26.0_ffi3uiz42rv3jyhs6cr7p7qqry
       object.assign: 4.1.2
       object.entries: 1.1.5
     dev: true
@@ -25910,7 +25914,7 @@ packages:
     dependencies:
       eslint: 7.32.0
       eslint-config-airbnb-base: 14.2.1_hpmu7kn6tcn2vnxpfzvv33bxmy
-      eslint-plugin-import: 2.26.0_eslint@7.32.0
+      eslint-plugin-import: 2.26.0_ffi3uiz42rv3jyhs6cr7p7qqry
       eslint-plugin-jsx-a11y: 6.5.1_eslint@7.32.0
       eslint-plugin-react: 7.29.4_eslint@7.32.0
       eslint-plugin-react-hooks: 4.5.0_eslint@7.32.0
@@ -33326,7 +33330,7 @@ packages:
       jest-resolve:
         optional: true
     dependencies:
-      jest-resolve: 28.1.1_metro@0.67.0
+      jest-resolve: 28.1.1
     dev: true
 
   /jest-regex-util/24.9.0:
@@ -36483,6 +36487,24 @@ packages:
       - supports-color
       - utf-8-validate
 
+  /metro-config/0.67.0_5rj3ktdhebdtkdjqejo5rbxriu:
+    resolution: {integrity: sha512-ThAwUmzZwTbKyyrIn2bKIcJDPDBS0LKAbqJZQioflvBGfcgA21h3fdL3IxRmvCEl6OnkEWI0Tn1Z9w2GLAjf2g==}
+    peerDependencies:
+      metro-transform-worker: '*'
+    peerDependenciesMeta:
+      metro-transform-worker:
+        optional: true
+    dependencies:
+      cosmiconfig: 5.2.1
+      jest-validate: 26.6.2
+      metro: 0.67.0
+      metro-cache: 0.67.0_metro@0.67.0
+      metro-core: 0.67.0_metro@0.67.0
+      metro-runtime: 0.67.0
+      metro-transform-worker: 0.67.0_metro-minify-uglify@0.67.0
+    transitivePeerDependencies:
+      - metro
+
   /metro-config/0.67.0_h77kaxayu5kga6qsud7rauzt6a:
     resolution: {integrity: sha512-ThAwUmzZwTbKyyrIn2bKIcJDPDBS0LKAbqJZQioflvBGfcgA21h3fdL3IxRmvCEl6OnkEWI0Tn1Z9w2GLAjf2g==}
     peerDependencies:
@@ -36758,7 +36780,7 @@ packages:
       '@babel/parser': 7.18.5
       '@babel/types': 7.18.4
       babel-preset-fbjs: 3.4.0_@babel+core@7.18.5
-      metro: 0.67.0
+      metro: 0.67.0_h77kaxayu5kga6qsud7rauzt6a
       metro-babel-transformer: 0.67.0
       metro-cache: 0.67.0_metro@0.67.0
       metro-cache-key: 0.67.0
@@ -36831,6 +36853,68 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - encoding
+      - supports-color
+      - utf-8-validate
+
+  /metro/0.67.0_h77kaxayu5kga6qsud7rauzt6a:
+    resolution: {integrity: sha512-DwuBGAFcAivoac/swz8Lp7Y5Bcge1tzT7T6K0nf1ubqJP8YzBUtyR4pkjEYVUzVu/NZf7O54kHSPVu1ibYzOBQ==}
+    hasBin: true
+    dependencies:
+      '@babel/code-frame': 7.16.7
+      '@babel/core': 7.18.5
+      '@babel/generator': 7.18.2
+      '@babel/parser': 7.18.5
+      '@babel/template': 7.16.7
+      '@babel/traverse': 7.18.5
+      '@babel/types': 7.18.4
+      absolute-path: 0.0.0
+      accepts: 1.3.8
+      async: 2.6.4
+      chalk: 4.1.2
+      ci-info: 2.0.0
+      connect: 3.7.0
+      debug: 2.6.9
+      denodeify: 1.2.1
+      error-stack-parser: 2.0.7
+      fs-extra: 1.0.0
+      graceful-fs: 4.2.10
+      hermes-parser: 0.5.0
+      image-size: 0.6.3
+      invariant: 2.2.4
+      jest-haste-map: 27.5.1_metro@0.67.0
+      jest-worker: 26.6.2_metro@0.67.0
+      lodash.throttle: 4.1.1
+      metro-babel-transformer: 0.67.0
+      metro-cache: 0.67.0_metro@0.67.0
+      metro-cache-key: 0.67.0
+      metro-config: 0.67.0_5rj3ktdhebdtkdjqejo5rbxriu
+      metro-core: 0.67.0_metro@0.67.0
+      metro-hermes-compiler: 0.67.0
+      metro-inspector-proxy: 0.67.0
+      metro-minify-uglify: 0.67.0
+      metro-react-native-babel-preset: 0.67.0
+      metro-resolver: 0.67.0
+      metro-runtime: 0.67.0
+      metro-source-map: 0.67.0
+      metro-symbolicate: 0.67.0
+      metro-transform-plugins: 0.67.0
+      metro-transform-worker: 0.67.0_metro-minify-uglify@0.67.0
+      mime-types: 2.1.35
+      mkdirp: 0.5.6
+      node-fetch: 2.6.7
+      nullthrows: 1.1.1
+      rimraf: 2.7.1
+      serialize-error: 2.1.0
+      source-map: 0.5.7
+      strip-ansi: 6.0.1
+      temp: 0.8.3
+      throat: 5.0.0
+      ws: 7.5.7
+      yargs: 15.4.1
+    transitivePeerDependencies:
+      - bufferutil
+      - encoding
+      - metro-transform-worker
       - supports-color
       - utf-8-validate
 
@@ -38284,6 +38368,7 @@ packages:
   /options/0.0.6:
     resolution: {integrity: sha1-7CLTEoBrtT5zF3Pnza788cZDEo8=}
     engines: {node: '>=0.4.0'}
+    dev: true
 
   /ora/3.4.0:
     resolution: {integrity: sha512-eNwHudNbO1folBP3JsZ19v9azXWtQZjICdr3Q0TDPIaeBQ3mXLrh54wM+er0+hSp+dWKf+Z8KM58CYzEyIYxYg==}
@@ -40786,7 +40871,6 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
-    dev: true
 
   /react-docgen-typescript/2.2.2_typescript@4.6.4:
     resolution: {integrity: sha512-tvg2ZtOpOi6QDwsb3GZhOjDkkX0h8Z2gipvTg6OVMUyoYoURhEiRNePT8NZItTVCDh39JJHnLdfCOkzoLbFnTg==}
@@ -41073,6 +41157,7 @@ packages:
     transitivePeerDependencies:
       - '@babel/preset-env'
       - supports-color
+    dev: true
 
   /react-native-codegen/0.0.7:
     resolution: {integrity: sha512-dwNgR8zJ3ALr480QnAmpTiqvFo+rDtq6V5oCggKhYFlRjzOmVSFn3YD41u8ltvKS5G2nQ8gCs2vReFFnRGLYng==}
@@ -41201,6 +41286,26 @@ packages:
 
   /react-native-gradle-plugin/0.0.6:
     resolution: {integrity: sha512-eIlgtsmDp1jLC24dRn43hB3kEcZVqx6DUQbR0N1ABXGnMEafm9I3V3dUUeD1vh+Dy5WqijSoEwLNUPLgu5zDMg==}
+    dev: false
+
+  /react-native-image-crop-tools/1.6.2_zqxy7fpkavjkgz5xll7ed4r6rq:
+    resolution: {integrity: sha512-yndxSrHTCKPxxXlkCS62JQzlSlAK/K4pxyqu+IfacK/baykfXvSB7ps7WB74C0gFFnhfXSrgcktrjHMjJwXTyA==}
+    peerDependencies:
+      react: ^16.8.1
+      react-native: '>=0.59.0-rc.0 <1.0.x'
+    dependencies:
+      react: 17.0.2
+      react-native: 0.68.2_shn3lkepuadv4od4dudas6ijbq
+    dev: false
+
+  /react-native-image-picker/4.8.4_zqxy7fpkavjkgz5xll7ed4r6rq:
+    resolution: {integrity: sha512-Mjh2j/sddyolb16EpmprWzbtyeFvW8Xgzr/8WNi9d6bR2FC/kL78cY/a+7Yzujg5ZDtT1MWys+eWw/qtfwgGiw==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      react: 17.0.2
+      react-native: 0.68.2_shn3lkepuadv4od4dudas6ijbq
     dev: false
 
   /react-native-keychain/7.0.0:
@@ -46722,6 +46827,7 @@ packages:
 
   /ultron/1.0.2:
     resolution: {integrity: sha1-rOEWq1V80Zc4ak6I9GhTeMiy5Po=}
+    dev: true
 
   /ultron/1.1.1:
     resolution: {integrity: sha512-UIEXBNeYmKptWH6z8ZnqTeS8fV74zG0/eRU9VGkpzz+LIJNs8W/zM/L+7ctCkRrgbNnnR0xxw4bKOr0cW0N0Og==}
@@ -49369,6 +49475,7 @@ packages:
     dependencies:
       options: 0.0.6
       ultron: 1.0.2
+    dev: true
 
   /ws/3.3.3:
     resolution: {integrity: sha512-nnWLa/NwZSt4KQJu51MYlCcSQ5g7INpOrOMt4XV8j4dqTXdmlUmSHQ8/oLC069ckre0fRsgfvsKwbTdtKLCDkA==}
@@ -49488,6 +49595,7 @@ packages:
     dependencies:
       simple-plist: 1.3.1
       uuid: 3.4.0
+    dev: true
 
   /xcode/3.0.1:
     resolution: {integrity: sha512-kCz5k7J7XbJtjABOvkc5lJmkiDh8VhjVCGNiqdKCscmVpdVUpEAyXv1xmCLkQJ5dsHqx3IPO4XW+NTDhU/fatA==}
@@ -49872,6 +49980,7 @@ packages:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 21.0.1
+    dev: true
 
   /yargs/8.0.2:
     resolution: {integrity: sha1-YpmpBVsc78lp/355wdkY3Osiw2A=}

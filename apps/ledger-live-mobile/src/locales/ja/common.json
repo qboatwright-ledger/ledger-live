@@ -929,10 +929,6 @@
       "earn" : {
         "title" : "報酬獲得",
         "desc" : "不労所得を獲得して暗号資産を運用する"
-      },
-      "mint": {
-        "title": "ミント”,",
-        "desc": "[ L ] MarketでコラボNFTをミントしましょう"
       }
     },
     "comingSoon" : "近日公開",
@@ -2144,6 +2140,10 @@
     },
     "fees" : {
       "title" : "手数料を編集"
+    },
+    "manageCard" : {
+      "title" : "CLカードを管理",
+      "description" : "CLカードを注文して管理する"
     },
     "receive" : {
       "title" : "受け取る",
@@ -4388,10 +4388,7 @@
       "tokenContractCopied" : "トークンアドレスがコピーされました！",
       "tokenId" : "トークンID",
       "tokenIdCopied" : "トークンIDがコピーされました！",
-      "quantity" : "数量",
-      "attributes" : {
-        "floorPrice" : "フロア価格"
-      }
+      "quantity" : "数量"
     },
     "viewerModal" : {
       "viewOn" : "表示",
@@ -4407,6 +4404,16 @@
     },
     "operations" : {
       "title" : "取引履歴"
+    }
+  },
+  "hedera" : {
+    "name" : "Hedera",
+    "createHederaAccountHelp" : {
+      "text" : "Hederaアカウントの作成方法については、",
+      "link" : "こちらのサポート記事をご参照ください。"
+    },
+    "currentAddress" : {
+      "messageIfVirtual" : "{{name}}アドレスがLedgerデバイスで確認できません。リスクを理解した上で、自己責任でご利用ください。"
     }
   }
 }

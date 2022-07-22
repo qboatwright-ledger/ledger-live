@@ -20,6 +20,8 @@ const testUrls = {
     "https://effigis.com/wp-content/uploads/2015/02/Airbus_Pleiades_50cm_8bit_RGB_Yogyakarta.jpg",
   hugeImage:
     "https://upload.wikimedia.org/wikipedia/commons/9/9d/Pieter_Bruegel_the_Elder_-_The_Fall_of_the_Rebel_Angels_-_Google_Art_Project.jpg",
+  veryThinHugeImage:
+    "https://cdn.theatlantic.com/assets/media/img/posts/NbYbNrs.png",
 };
 
 const CustomImageBottomModal: React.FC<Props> = props => {

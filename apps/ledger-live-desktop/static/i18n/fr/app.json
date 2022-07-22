@@ -228,7 +228,6 @@
       "kyc" : "Vérification"
     },
     "form" : {
-      "changeCTA" : "Modifier",
       "ratesDrawer" : {
         "title" : "Taux",
         "quote" : "Prix",
@@ -237,7 +236,7 @@
       "details" : {
         "label" : {
           "provider" : "Prestataire",
-          "rate" : "Prix",
+          "rate" : "Taux",
           "fees" : "Frais de réseau",
           "target" : "Compte bénéficiaire"
         },
@@ -265,28 +264,14 @@
       "providers" : {
         "kyc" : {
           "required" : "Vous devez passer la vérification d’identité.",
-          "complete" : "Vérification",
+          "complete" : "Vérifier",
           "update" : "Actualiser",
           "rejected" : "Vérification d’identité rejetée, merci de recommencer.",
-          "rejectedContactProviderSupport" : "Vérification rejetée, contactez l’assistance de {{providerName}}",
-          "updateRequired" : "Complétez ou mettez à jour votre vérification d’identité",
           "status" : {
             "pending" : "En attente",
             "approved" : "Approuvé",
-            "closed" : "Rejeté",
-            "upgradeRequired" : "Vérification d’identité incomplète"
+            "closed" : "Rejeté"
           }
-        },
-        "login" : {
-          "required" : "Connectez-vous pour utiliser ce prestataire.",
-          "complete" : "Se connecter"
-        },
-        "mfa" : {
-          "required" : "Configurez une authentification multifactorielle pour utiliser ce prestataire.",
-          "complete" : "Configurer une MFA"
-        },
-        "withdrawalsBlockedError" : {
-          "message" : "Votre retrait a été bloqué par {{providerName}}.\n\n Pour plus d’informations, contactez leur service d’assistance."
         }
       }
     },
@@ -361,7 +346,6 @@
     "title" : "Swap",
     "titleCrypto" : "Échanger {{currency}}",
     "whatIsSwap" : "Qu’est-ce que le Swap ?",
-    "decentralizedSwapAvailable" : "Pour certains échanges, vous pouvez utiliser le Swap décentralisé. Découvrez <0>ParaSwap</0> et <1>1inch</1>.",
     "paraswap" : {
       "cta" : " Jeter un œil",
       "description" : "Vous cherchez ParaSwap ? Il se trouve maintenant dans l’onglet Discover."
@@ -498,9 +482,9 @@
       "subtitle" : "Veuillez mettre à jour Ledger Live et vérifier à nouveau votre identité pour échanger avec Wyre",
       "cta" : "Réinitialiser la vérification"
     },
-    "resetThirdPartyDataModal" : {
-      "title" : "Supprimer vos données locales partagées avec des tiers",
-      "subtitle" : "Vous vous apprêtez à supprimer vos données stockées localement qui sont partagées avec des tiers. Vous devrez peut-être soumettre à nouveau votre vérification d’identité et/ou vous reconnecter pour accéder aux services fournis par nos partenaires.",
+    "resetKYCModal" : {
+      "title" : "Supprimer votre vérification",
+      "subtitle" : "Supprimez votre vérification pour effacer tous les tokens stockés sur votre ordinateur. Pour accéder aux services de nos partenaires, vous devrez renvoyer vos données.",
       "cta" : "Confirmer"
     },
     "modal" : {
@@ -1299,8 +1283,7 @@
         "description" : "Description",
         "tokenAddress" : "Adresse du token",
         "tokenId" : "Identifiant du token",
-        "quantity" : "Nombre",
-        "floorPrice" : "Prix plancher"
+        "quantity" : "Nombre"
       }
     },
     "collections" : {
@@ -1535,8 +1518,7 @@
       "fees" : "Frais",
       "provider" : "Prestataire",
       "payoutNetworkFees" : "Frais de réception",
-      "payoutNetworkFeesTooltip" : "Ce montant n’apparaîtra pas sur votre appareil.",
-      "acceptTerms" : "By validating this transaction, I accept\n<0>{{provider}}'s terms of use</0>"
+      "payoutNetworkFeesTooltip" : "Ce montant n’apparaîtra pas sur votre appareil."
     },
     "swap2" : {
       "amountSent" : "Montant à envoyer",
@@ -2086,10 +2068,10 @@
     "replaceable" : "Remplaçable",
     "cannotSelect" : {
       "unconfirmed" : "Vous ne pouvez pas sélectionner des coins parmi des transactions non confirmées et remplaçables.",
-      "pending" : "Vous ne pouvez pas sélectionner des coins parmi des transactions en attente (hormis vos UTXO non dépensés)",
       "last" : "Vous devez au moins en sélectionner un."
     },
     "pending" : "En attente",
+    "pickUnconfirmedRBF" : "Inclure les coins des transactions non confirmées et remplaçables.",
     "pickingStrategy" : "Stratégie de sélection des UTXO",
     "pickingStrategyLabels" : {
       "DEEP_OUTPUTS_FIRST" : "Coins plus vieux en premier (FIFO)",
@@ -2862,8 +2844,8 @@
       "softResetTitle" : "Vider le cache",
       "softResetDesc" : "Effacez le cache de Ledger Live pour forcer la resynchronisation avec la blockchain.",
       "softReset" : "Effacer",
-      "resetThirdPartyData" : "Réinitialiser les données fournies à des tiers",
-      "resetThirdPartyDataDesc" : "Supprimez toutes vos données stockées localement et partagées avec des tiers, qui sont utilisées pour accéder aux prestataires de transactions tiers.",
+      "resetKYC" : "Réinitialiser les données de vérification",
+      "resetKYCDesc" : "Effacez toutes vos données de vérification d’identité stockées localement pour utiliser les services de prestataires tiers.",
       "hardResetTitle" : "Réinitialiser Ledger Live",
       "hardResetDesc" : "Effacez toutes les données de Ledger Live stockées sur votre ordinateur, y compris vos comptes, l’historique de vos transactions et vos paramètres.",
       "hardReset" : "Réinitialiser",
@@ -3166,7 +3148,7 @@
         "title" : "Bienvenue sur Ledger",
         "description" : "Gérez vos cryptos en toute sécurité depuis votre ordinateur.",
         "cta" : "Commencer",
-        "noDevice" : "Pas encore de wallet Ledger ? <0>Achetez un Ledger Nano X</0>.",
+        "noDevice" : "Pas encore d’appareil ? <0>Achetez un Ledger Nano X</0>.",
         "languageWarning" : {
           "title" : "Commencez en {{language}}.",
           "desc" : "Nous ajoutons des langues supplémentaires afin de faciliter vos premiers pas avec Ledger. L’expérience Ledger sera bientôt entièrement disponible dans plusieurs langues.",
@@ -3452,7 +3434,7 @@
         },
         "validateTransactions" : {
           "title" : "Validez vos transactions",
-          "description" : "Achetez, vendez, gérez, échangez et gagnez des cryptos en toute sécurité sur Ledger Live. Vous devez valider chaque transaction de vos cryptos avec votre Nano."
+          "description" : "Achetez, vendez, gérez, échangez et gagnez des cryptos en toute sécurité sur Ledger Live. Vous devez valider chaque transaction en cryptos avec votre Nano."
         },
         "setUpNanoWallet" : {
           "title" : "Configurez votre Nano",
@@ -4394,6 +4376,12 @@
     },
     "currentAddress" : {
       "messageIfVirtual" : "Votre adresse {{name}} n’a pas été confirmée sur votre appareil Ledger. Il est risqué de l’utiliser."
+    },
+    "send" : {
+      "memo" : {
+        "label" : "Mémo (facultatif)",
+        "characterCount" : "{{memoLength}} / {{memoMaxLength}}"
+      }
     }
   }
 }

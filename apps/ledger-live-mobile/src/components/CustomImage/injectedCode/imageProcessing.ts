@@ -21,6 +21,8 @@ function codeToInject() {
 
   "show source";
 
+  const DEBUG = false;
+
   function clampRGB(val: number) {
     return Math.min(255, Math.max(val, 0));
   }
@@ -37,7 +39,8 @@ function codeToInject() {
     let hexRawResult = "";
     const filteredImageData = [];
 
-    const d = 15 / 255; // (N-1) / 255, with N=16 the number of color levels
+    const numLevelsOfGray = 16;
+    const rgbStep = 255 / (numLevelsOfGray - 1);
 
     for (let i = 0; i < imageData.length; i += 4) {
       /** gray rgb value for the pixel, in [0, 255] */
@@ -46,12 +49,17 @@ function codeToInject() {
         0.587 * imageData[i + 1] +
         0.114 * imageData[i + 2];
 
-      /** gray rgb value after applying the contrast, in [0,255] */
-      const contrastedGray256 =
-        Math.round(clampRGB(contrastRGB(gray256, contrastAmount)) * d) / d;
-
       /** gray rgb value after applying the contrast, in [0, 15] */
-      const contrastedGray16 = Math.floor(contrastedGray256 / 16);
+      const contrastedGray16 = Math.floor(
+        clampRGB(contrastRGB(gray256, contrastAmount)) / rgbStep,
+      );
+
+      /** gray rgb value after applying the contrast, in [0,255] */
+      const contrastedGray256 = contrastedGray16 * rgbStep;
+
+      if ((i === 0 || i === 1000) && DEBUG) {
+        log([contrastedGray256, contrastedGray16]);
+      }
 
       const grayHex = contrastedGray16.toString(16);
 
@@ -78,12 +86,12 @@ function codeToInject() {
   };
 
   /** helper to log stuff in RN JS thread */
-  // const log = (data: any) => {
-  //   postDataToWebView({ type: "LOG", payload: data });
-  // };
+  const log = (data: any) => {
+    postDataToWebView({ type: "LOG", payload: data });
+  };
 
   const logError = (error: Error) => {
-    postDataToWebView({ type: "ERROR", payload: error.toString()});
+    postDataToWebView({ type: "ERROR", payload: error.toString() });
   };
 
   let image: any = null;
@@ -175,9 +183,8 @@ function codeToInject() {
   window.requestRawResult = () => {
     /**
      * stringifying and then parsing rawResult is a heavy operation that
-     * takes a lot of time so we should think of a strategy to request it
-     * just once from the outside (for instance when the user is satisfied
-     * with the preview)
+     * takes a lot of time so we should we should do this only once the user is
+     * satisfied with the preview.
      */
     postDataToWebView({
       type: "RAW_RESULT",

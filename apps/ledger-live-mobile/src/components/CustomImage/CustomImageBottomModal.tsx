@@ -6,11 +6,20 @@ import { NavigatorName, ScreenName } from "../../const";
 import BottomModal, { Props as BottomModalProps } from "../BottomModal";
 import ModalChoice from "./ModalChoice";
 import { importImageFromPhoneGallery } from "./imageUtils";
-import { ImageLoadFromGalleryError } from "./errors";
 
 type Props = {
   isOpened?: boolean;
   onClose: BottomModalProps["onClose"];
+};
+
+const testUrls = {
+  boredApe: "https://img.phonandroid.com/2022/04/bored-ape-yacht-club.jpg",
+  chessboard:
+    "https://media.istockphoto.com/vectors/checkered-pattern-black-and-white-vector-id806894546?k=20&m=806894546&s=612x612&w=0&h=ci54bNwp8kTWiyNqtUKgqMkOau_Hl875T66oiEMbH64=",
+  bigImage:
+    "https://effigis.com/wp-content/uploads/2015/02/Airbus_Pleiades_50cm_8bit_RGB_Yogyakarta.jpg",
+  hugeImage:
+    "https://upload.wikimedia.org/wikipedia/commons/9/9d/Pieter_Bruegel_the_Elder_-_The_Fall_of_the_Rebel_Angels_-_Google_Art_Project.jpg",
 };
 
 const CustomImageBottomModal: React.FC<Props> = props => {
@@ -43,10 +52,7 @@ const CustomImageBottomModal: React.FC<Props> = props => {
     navigation.navigate(NavigatorName.CustomImage, {
       screen: ScreenName.CustomImageStep1Crop,
       params: {
-        imageUrl:
-          "https://img.phonandroid.com/2022/04/bored-ape-yacht-club.jpg",
-        // "https://effigis.com/wp-content/uploads/2015/02/Airbus_Pleiades_50cm_8bit_RGB_Yogyakarta.jpg",
-        // "https://upload.wikimedia.org/wikipedia/commons/9/9d/Pieter_Bruegel_the_Elder_-_The_Fall_of_the_Rebel_Angels_-_Google_Art_Project.jpg",
+        imageUrl: testUrls.boredApe,
       },
     });
     onClose && onClose();
@@ -63,9 +69,7 @@ const CustomImageBottomModal: React.FC<Props> = props => {
     navigation.navigate(NavigatorName.CustomImage, {
       screen: ScreenName.ImagePicker,
       params: {
-        imageUrl:
-          // "https://img.phonandroid.com/2022/04/bored-ape-yacht-club.jpg",
-          "https://effigis.com/wp-content/uploads/2015/02/Airbus_Pleiades_50cm_8bit_RGB_Yogyakarta.jpg",
+        imageUrl: testUrls.boredApe,
       },
     });
     onClose && onClose();
@@ -95,17 +99,17 @@ const CustomImageBottomModal: React.FC<Props> = props => {
             event=""
           />
           {/* <ModalChoice
-        title="(debug screen) custom"
-        onPress={handleDebug}
-        iconName="Brackets"
-        event=""
-      />
-      <ModalChoice
-        title="(debug screen) url"
-        onPress={handleDebugUrl}
-        iconName="Brackets"
-        event=""
-      /> */}
+            title="(debug screen) custom"
+            onPress={handleDebug}
+            iconName="Brackets"
+            event=""
+          />
+          <ModalChoice
+            title="(debug screen) url"
+            onPress={handleDebugUrl}
+            iconName="Brackets"
+            event=""
+          /> */}
         </>
       )}
     </BottomModal>

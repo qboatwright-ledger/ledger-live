@@ -3,43 +3,28 @@ import React from "react";
 import { WebView } from "react-native-webview";
 import { WebViewErrorEvent } from "react-native-webview/lib/WebViewTypes";
 import { ImageProcessingError } from "./errors";
-import { injectedCode } from "./injectedCode/imageProcessing";
+import { ProcessorPreviewResult, ProcessorRawResult } from "./ImageProcessor";
+import { injectedCode } from "./injectedCode/resultDataTesting";
 import { InjectedCodeDebugger } from "./InjectedCodeDebugger";
 import { ImageBase64Data, ImageDimensions } from "./types";
 
-export type ProcessorPreviewResult = ImageBase64Data & ImageDimensions;
-
-export type ProcessorRawResult = { hexData: string } & ImageDimensions;
-
-export type Props = ImageBase64Data & {
+export type Props = ProcessorRawResult & {
   onError: (error: Error) => void;
   onPreviewResult: (arg: ProcessorPreviewResult) => void;
-  onRawResult: (res: ProcessorRawResult) => void;
-  /**
-   * number >= 0
-   *  - 0:  full black
-   *  - 1:  original contrast
-   *  - >1: more contrasted than the original
-   * */
-  contrast: number;
   debug?: boolean;
 };
 
-/**
- * using a class component here because we need to access some methods from
- * the parent using a ref
- *  */
-export default class ImageProcessor extends React.Component<Props> {
+export default class ResultDataTester extends React.Component<Props> {
   webViewRef: WebView<{}> | null = null;
 
   componentDidUpdate(prevProps: Props) {
-    if (prevProps.contrast !== this.props.contrast) this.setAndApplyContrast();
-    if (prevProps.imageBase64DataUri !== this.props.imageBase64DataUri)
+    if (prevProps.hexData !== this.props.hexData) {
       this.computeResult();
+    }
   }
 
   handleMessage = ({ nativeEvent: { data } }: any) => {
-    const { onError, onPreviewResult, onRawResult } = this.props;
+    const { onError, onPreviewResult } = this.props;
     const { type, payload } = JSON.parse(data);
     switch (type) {
       case "LOG":
@@ -60,22 +45,6 @@ export default class ImageProcessor extends React.Component<Props> {
           imageBase64DataUri: payload.base64Data,
         });
         break;
-      case "RAW_RESULT":
-        if (
-          !payload.width ||
-          !payload.height ||
-          !payload.hexData ||
-          payload.hexData.length !== payload.width * payload.height
-        ) {
-          onError(new ImageProcessingError());
-          break;
-        }
-        onRawResult({
-          width: payload.width,
-          height: payload.height,
-          hexData: payload.hexData,
-        });
-        break;
       default:
         break;
     }
@@ -86,26 +55,13 @@ export default class ImageProcessor extends React.Component<Props> {
   };
 
   processImage = () => {
-    const { imageBase64DataUri } = this.props;
-    this.injectJavaScript(`window.processImage("${imageBase64DataUri}");`);
-  };
-
-  setContrast = () => {
-    const { contrast } = this.props;
-    this.injectJavaScript(`window.setImageContrast(${contrast});`);
-  };
-
-  setAndApplyContrast = () => {
-    const { contrast } = this.props;
-    this.injectJavaScript(`window.setAndApplyImageContrast(${contrast})`);
-  };
-
-  requestRawResult = () => {
-    this.injectJavaScript("window.requestRawResult();");
+    const { hexData, width, height } = this.props;
+    this.injectJavaScript(
+      `window.reconstructImage(${width}, ${height}, "${hexData}");`,
+    );
   };
 
   computeResult = () => {
-    this.setContrast();
     this.processImage();
   };
 

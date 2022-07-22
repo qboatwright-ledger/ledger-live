@@ -30,9 +30,11 @@ import { ImagePreviewError } from "../../components/CustomImage/errors";
 
 type RouteParams = CropResult;
 
-const PreviewImage = styled.Image.attrs({
+export const PreviewImage = styled.Image.attrs({
   resizeMode: "contain",
 })`
+  align-self: center;
+  margin: 16px;
   width: 200px;
   height: 200px;
 `;

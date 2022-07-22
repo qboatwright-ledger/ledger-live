@@ -80,7 +80,8 @@
     },
     "seeMore" : "查看更多",
     "moreInfo" : "更多信息",
-    "buyEth" : "购买以太坊"
+    "buyEth" : "购买以太坊",
+    "comingSoon" : "敬请期待"
   },
   "errors" : {
     "countervaluesUnavailable" : {
@@ -1980,6 +1981,31 @@
         "android" : "在 Google Play（谷歌应用商店）内评论"
       }
     },
+    "notifications" : {
+      "title" : "通知",
+      "desc" : "管理通知",
+      "allowed" : {
+        "title" : "允许通知",
+        "desc" : "接收关于加密货币、市场趋势等内容的通知。"
+      },
+      "transactions" : {
+        "title" : "交易",
+        "desc" : "加密货币转移时获得通知。"
+      },
+      "market" : {
+        "title" : "市场",
+        "desc" : "接收加密货币市场的实时推送通知。"
+      },
+      "announcement" : {
+        "title" : "公告",
+        "desc" : "接收加密货币市场的实时推送通知。"
+      },
+      "price" : {
+        "title" : "价格提醒",
+        "desc" : "接收收藏币种的提醒",
+        "label" : "敬请期待"
+      }
+    },
     "help" : {
       "title" : "帮助",
       "header" : "帮助",
@@ -2011,6 +2037,14 @@
       "customManifest" : {
         "title" : "加载自定义平台清单"
       }
+    }
+  },
+  "notifications" : {
+    "prompt" : {
+      "title" : "打开通知",
+      "desc" : "获取关于 Ledger Live 和 Ledger 产品的最新资讯。",
+      "allow" : "允许通知",
+      "later" : "以后再说"
     }
   },
   "migrateAccounts" : {

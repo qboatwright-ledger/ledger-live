@@ -228,7 +228,6 @@
       "kyc" : "本人確認手続き"
     },
     "form" : {
-      "changeCTA" : "変更",
       "ratesDrawer" : {
         "title" : "レート",
         "quote" : "見積もり",
@@ -268,25 +267,11 @@
           "complete" : "KYC（本人確認）を完了",
           "update" : "KYC（本人確認）を更新",
           "rejected" : "KYCが却下されたため、承認申請をやり直す必要があります。",
-          "rejectedContactProviderSupport" : "KYCが拒否されました。{{providerName}}サポートにお問い合わせください。",
-          "updateRequired" : "KYC（本人確認手続き）を完了または更新する",
           "status" : {
             "pending" : "KYC（本人確認）申請中",
             "approved" : "KYC（本人確認）承認済み",
-            "closed" : "KYC（本人確認）却下",
-            "upgradeRequired" : "KYC（本人確認手続き）未完了"
+            "closed" : "KYC（本人確認）却下"
           }
-        },
-        "login" : {
-          "required" : "このプロバイダーでログインする必要があります",
-          "complete" : "ログイン"
-        },
-        "mfa" : {
-          "required" : "このプロバイダーでMFA（多要素認証）を設定する必要があります",
-          "complete" : "MFAを設定"
-        },
-        "withdrawalsBlockedError" : {
-          "message" : "お客様の引き出しは {{providerName}}によってブロックされています。\n\n詳細については、サポートにお問い合わせください。"
         }
       }
     },
@@ -361,7 +346,6 @@
     "title" : "スワップ",
     "titleCrypto" : "スワップ{{currency}}",
     "whatIsSwap" : "スワップとは",
-    "decentralizedSwapAvailable" : "一部のトランザクションでは、分散型スワップの使用を検討することができます。<0>ParaSwapと<1>1inch</1>の詳細をチェック",
     "paraswap" : {
       "cta" : " 確認する",
       "description" : "Paraswapをお探しですか？この項目は「Discover」タブに移動されました。"
@@ -498,9 +482,9 @@
       "subtitle" : "Wyreでスワップを実行するには、Ledger Liveを最新バージョンにアップデートし、本人確認を再度行ってください",
       "cta" : "認証をリセット"
     },
-    "resetThirdPartyDataModal" : {
-      "title" : "ローカルのサードパーティーのデータを削除",
-      "subtitle" : "ローカルのサードパーティーのデータを削除します。弊社のパートナーが提供するサービスにアクセスするには、KYC（本人確認）の再提出や再度ログインが必要になる場合があります。",
+    "resetKYCModal" : {
+      "title" : "KYC（本人確認）を削除",
+      "subtitle" : "KYC（本人確認）を削除すると、コンピューター上にローカルで保有しているすべてのトークンが消去されます。Ledgerのパートナーが提供するサービスにアクセスするには、KYC（本人確認）を再提出する必要があります。",
       "cta" : "確認"
     },
     "modal" : {
@@ -1299,8 +1283,7 @@
         "description" : "説明",
         "tokenAddress" : "トークンアドレス",
         "tokenId" : "トークンID",
-        "quantity" : "数量",
-        "floorPrice" : "フロア価格"
+        "quantity" : "数量"
       }
     },
     "collections" : {
@@ -1535,8 +1518,7 @@
       "fees" : "手数料",
       "provider" : "プロバイダー",
       "payoutNetworkFees" : "ペイアウト手数料",
-      "payoutNetworkFeesTooltip" : "これはデバイスには表示されません。",
-      "acceptTerms" : "By validating this transaction, I accept\n<0>{{provider}}'s terms of use</0>"
+      "payoutNetworkFeesTooltip" : "これはデバイスには表示されません。"
     },
     "swap2" : {
       "amountSent" : "送付額",
@@ -1860,7 +1842,7 @@
     "steps" : {
       "chooseAccount" : {
         "title" : "アカウント",
-        "label" : "引き落としアカウント",
+        "label" : "受取アカウント",
         "parentAccount" : "1. {{currencyName}}アカウントを選択",
         "token" : "2. トークンを選択する",
         "verifyTokenType" : "<0>{{token}}</0>が<0>{{tokenType}}</0>トークンであることを確認してください。{{currency}}アカウント他の暗号資産を送信すると失われる可能性があります。",
@@ -2086,10 +2068,10 @@
     "replaceable" : "置き換え可能",
     "cannotSelect" : {
       "unconfirmed" : "未確認で変更可能なトランザクションのコインは選択できません。",
-      "pending" : "保留中のトランザクションからはコインを選択できません。(アウトプット変更を除く)",
       "last" : "1人以上のバリデーターを選択する必要があります。"
     },
     "pending" : "保留状態",
+    "pickUnconfirmedRBF" : "未確認で変更可能なトランザクションのコインを含む",
     "pickingStrategy" : "UTXOピッキング戦略",
     "pickingStrategyLabels" : {
       "DEEP_OUTPUTS_FIRST" : "先入れ先出し方式(FIFO)",
@@ -2862,8 +2844,8 @@
       "softResetTitle" : "Cacheを削除する",
       "softResetDesc" : "Ledger LiveのCacheを削除し、ブロックチェーンと再同期する。",
       "softReset" : "クリア",
-      "resetThirdPartyData" : "サードパーティーのデータをリセット",
-      "resetThirdPartyDataDesc" : "サードパーティーのトランザクションプロバイダーへのアクセスに使用される、ローカルのサードパーティーのデータをすべて消去します。",
+      "resetKYC" : "KYC（本人確認）データをリセット",
+      "resetKYCDesc" : "ローカルに保存されている、サードパーティの取引プロバイダーへのアクセスに使用されるKYC（本人確認）データをすべて消去します。",
       "hardResetTitle" : "Ledger Liveをリセットします",
       "hardResetDesc" : "お使いのコンピューターに保存された、アカウント、取引履歴、設定などのLedger Liveデータすべてを削除する。",
       "hardReset" : "リセット",
@@ -4394,6 +4376,12 @@
     },
     "currentAddress" : {
       "messageIfVirtual" : "{{name}}アドレスがLedgerデバイス上で確認できません。リスクを理解した上で、自己責任でご利用ください。"
+    },
+    "send" : {
+      "memo" : {
+        "label" : "メモ (任意)",
+        "characterCount" : "{{memoLength}}/ {{memoMaxLength}}"
+      }
     }
   }
 }

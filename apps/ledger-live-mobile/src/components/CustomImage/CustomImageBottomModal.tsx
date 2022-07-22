@@ -58,22 +58,22 @@ const CustomImageBottomModal: React.FC<Props> = props => {
     onClose && onClose();
   }, [navigation, onClose]);
 
-  const handleDebug = useCallback(() => {
-    navigation.navigate(NavigatorName.CustomImage, {
-      screen: ScreenName.ImagePicker,
-    });
-    onClose && onClose();
-  }, [navigation, onClose]);
+  // const handleDebug = useCallback(() => {
+  //   navigation.navigate(NavigatorName.CustomImage, {
+  //     screen: ScreenName.ImagePicker,
+  //   });
+  //   onClose && onClose();
+  // }, [navigation, onClose]);
 
-  const handleDebugUrl = useCallback(() => {
-    navigation.navigate(NavigatorName.CustomImage, {
-      screen: ScreenName.ImagePicker,
-      params: {
-        imageUrl: testUrls.boredApe,
-      },
-    });
-    onClose && onClose();
-  }, [navigation, onClose]);
+  // const handleDebugUrl = useCallback(() => {
+  //   navigation.navigate(NavigatorName.CustomImage, {
+  //     screen: ScreenName.ImagePicker,
+  //     params: {
+  //       imageUrl: testUrls.boredApe,
+  //     },
+  //   });
+  //   onClose && onClose();
+  // }, [navigation, onClose]);
 
   return (
     <BottomModal isOpened={props.isOpened} onClose={props.onClose}>

@@ -10,36 +10,36 @@ import {
 } from "./errors";
 
 export async function importImageFromPhoneGallery(): Promise<
-  (ImageFileUri & Partial<ImageDimensions>) | undefined
+  (ImageFileUri & Partial<ImageDimensions>) | void
 > {
   try {
     const {
       assets,
       didCancel,
       errorCode,
-      // errorMessage,
+      errorMessage,
     } = await launchImageLibrary({
       mediaType: "photo",
       quality: 1,
       includeBase64: false,
     });
-    if (didCancel) return;
+    if (didCancel) return undefined;
     if (errorCode) {
-      throw new ImageLoadFromGalleryError();
-    } else {
-      const asset = assets && assets[0];
-      if (!asset) {
-        throw new ImageLoadFromGalleryError();
-      }
-      const { uri, width, height } = asset;
-      if (uri) {
-        return {
-          width,
-          height,
-          imageFileUri: uri,
-        };
-      }
+      throw new Error(errorMessage);
     }
+    const asset = assets && assets[0];
+    if (!asset) {
+      throw new Error();
+    }
+    const { uri, width, height } = asset;
+    if (uri) {
+      return {
+        width,
+        height,
+        imageFileUri: uri,
+      };
+    }
+    throw new Error();
   } catch (e) {
     throw new ImageLoadFromGalleryError();
   }

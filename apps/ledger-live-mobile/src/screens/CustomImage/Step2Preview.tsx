@@ -3,6 +3,14 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
+import { Button, Flex, InfiniteLoader, Text } from "@ledgerhq/native-ui";
+import {
+  Dimensions,
+  ImageErrorEventData,
+  LayoutChangeEvent,
+  NativeSyntheticEvent,
+  Pressable,
+} from "react-native";
 import { CropResult } from "../../components/CustomImage/ImageCropper";
 import ImageResizer, {
   Props as ImageResizerProps,
@@ -14,15 +22,7 @@ import ImageProcessor, {
   ProcessorRawResult,
 } from "../../components/CustomImage/ImageProcessor";
 import { cropAspectRatio } from "./shared";
-import { Button, Flex, InfiniteLoader, Text } from "@ledgerhq/native-ui";
 import { fitImageContain } from "../../components/CustomImage/imageUtils";
-import {
-  Dimensions,
-  ImageErrorEventData,
-  LayoutChangeEvent,
-  NativeSyntheticEvent,
-  Pressable,
-} from "react-native";
 import BottomButtonsContainer from "../../components/CustomImage/BottomButtonsContainer";
 import ContrastChoice from "../../components/CustomImage/ContrastChoice";
 import { ScreenName } from "../../const";
@@ -60,10 +60,6 @@ const Step2Preview: React.FC<{}> = () => {
     setProcessorPreviewImage,
   ] = useState<ProcessorPreviewResult | null>(null);
   const [rawResultLoading, setRawResultLoading] = useState(false);
-  const [
-    processorRawResult,
-    setProcessorRawResult,
-  ] = useState<ProcessorRawResult | null>(null);
 
   const { t } = useTranslation();
 
@@ -100,19 +96,13 @@ const Step2Preview: React.FC<{}> = () => {
 
   const handleRawResult: ImageProcessorProps["onRawResult"] = useCallback(
     (data: ProcessorRawResult) => {
-      setProcessorRawResult(data);
       navigation.navigate(ScreenName.CustomImageStep3Transfer, {
         rawData: data,
         previewData: processorPreviewImage,
       });
       setRawResultLoading(false);
     },
-    [
-      navigation,
-      setProcessorRawResult,
-      setRawResultLoading,
-      processorPreviewImage,
-    ],
+    [navigation, setRawResultLoading, processorPreviewImage],
   );
 
   const handlePreviewImageError = useCallback(

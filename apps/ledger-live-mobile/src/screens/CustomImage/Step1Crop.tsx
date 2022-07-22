@@ -21,9 +21,7 @@ import {
   ImageUrl,
 } from "../../components/CustomImage/types";
 import {
-  downloadImageToFile,
   fitImageContain,
-  loadImageSizeAsync,
   loadImageToFileWithDimensions,
 } from "../../components/CustomImage/imageUtils";
 import { cropAspectRatio } from "./shared";

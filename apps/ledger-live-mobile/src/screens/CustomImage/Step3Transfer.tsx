@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
-import { Dimensions, SafeAreaView, ScrollView } from "react-native";
+import { Dimensions, ScrollView } from "react-native";
 import { Flex, InfiniteLoader, Text } from "@ledgerhq/native-ui";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import {
@@ -42,7 +42,7 @@ displayed on the preview screen.
 This should NOT happen, it means that some data has been lost.`;
 
 const Step3Transfer: React.FC<{}> = () => {
-  const { params }: { params?: RouteParams } = useRoute() || {};
+  const { params }: { params?: RouteParams } = useRoute();
 
   const navigation = useNavigation();
 
@@ -51,7 +51,7 @@ const Step3Transfer: React.FC<{}> = () => {
     setReconstructedPreviewResult,
   ] = useState<ProcessorPreviewResult | null>(null);
 
-  const { rawData, previewData } = params;
+  const { rawData, previewData } = params || {};
 
   const handlePreviewResult = useCallback((res: ProcessorPreviewResult) => {
     setReconstructedPreviewResult(res);
@@ -107,7 +107,7 @@ const Step3Transfer: React.FC<{}> = () => {
           <Text variant="h3" py={4} alignSelf="flex-start">
             Image reconstructed from raw data:
           </Text>
-          <Alert title={infoMessage} />
+          <Alert type="primary" title={infoMessage} />
           {reconstructedPreviewResult?.imageBase64DataUri ? (
             <Flex mt={5}>
               {reconstructedPreviewResult?.imageBase64DataUri ===

@@ -44,7 +44,7 @@ const ImageCropper: React.FC<Props> = React.forwardRef((props: Props, ref) => {
   );
 
   const handleSave = useCallback(() => {
-    cropViewRef?.current?.saveImage(undefined, 100);
+    cropViewRef?.current?.saveImage(true, 100);
   }, []);
 
   return (

@@ -80,7 +80,8 @@
     },
     "seeMore" : "詳細を表示",
     "moreInfo" : "詳細はこちら",
-    "buyEth" : "Ethereumを購入"
+    "buyEth" : "Ethereumを購入",
+    "comingSoon" : "近日公開"
   },
   "errors" : {
     "countervaluesUnavailable" : {
@@ -1980,6 +1981,31 @@
         "android" : "Google Playストアでレビュー"
       }
     },
+    "notifications" : {
+      "title" : "通知",
+      "desc" : "通知を管理",
+      "allowed" : {
+        "title" : "通知を許可",
+        "desc" : "暗号資産、市場の傾向などについて通知を受信します。"
+      },
+      "transactions" : {
+        "title" : "トランザクション",
+        "desc" : "暗号資産の値動きがあると通知を受け取ります。"
+      },
+      "market" : {
+        "title" : "Market",
+        "desc" : "暗号資産市場に関するライブプッシュ(自動)通知を受信します。"
+      },
+      "announcement" : {
+        "title" : "お知らせ",
+        "desc" : "暗号資産市場に関するライブプッシュ通知を受信します。"
+      },
+      "price" : {
+        "title" : "価格アラート",
+        "desc" : "お気に入りのコインのアラートを受け取る",
+        "label" : "近日公開"
+      }
+    },
     "help" : {
       "title" : "ヘルプ",
       "header" : "ヘルプ",
@@ -2011,6 +2037,14 @@
       "customManifest" : {
         "title" : "カスタムプラットフォームマニフェストを読み込む"
       }
+    }
+  },
+  "notifications" : {
+    "prompt" : {
+      "title" : "通知をオンにする",
+      "desc" : "Ledger LiveとLedger製品に関する最新情報を入手しましょう。",
+      "allow" : "通知を許可",
+      "later" : "後で"
     }
   },
   "migrateAccounts" : {

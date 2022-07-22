@@ -929,10 +929,6 @@
       "earn" : {
         "title" : "소득 창출",
         "desc" : "불로소득을 얻고 암호화폐를 성장시키세요"
-      },
-      "mint": {
-        "title": "민팅",
-        "desc": "[ L ] Market 독점 콜라보레이션 NFT 민팅"
       }
     },
     "comingSoon" : "곧 출시 예정",
@@ -2144,6 +2140,10 @@
     },
     "fees" : {
       "title" : "수수료 편집"
+    },
+    "manageCard" : {
+      "title" : "CL 카드 관리",
+      "description" : "CL 카드 신청 및 관리"
     },
     "receive" : {
       "title" : "수령",
@@ -4388,10 +4388,7 @@
       "tokenContractCopied" : "토큰 주소 복사됨 !",
       "tokenId" : "토큰 ID",
       "tokenIdCopied" : "토큰 ID가 복사되었습니다!",
-      "quantity" : "수량",
-      "attributes" : {
-        "floorPrice" : "가격 하한선"
-      }
+      "quantity" : "수량"
     },
     "viewerModal" : {
       "viewOn" : "다음에서 보기:",
@@ -4407,6 +4404,16 @@
     },
     "operations" : {
       "title" : "거래 내역"
+    }
+  },
+  "hedera" : {
+    "name" : "헤데라",
+    "createHederaAccountHelp" : {
+      "text" : "헤데라 계정 생성 방법은",
+      "link" : "이 지원 문서를 참조하세요."
+    },
+    "currentAddress" : {
+      "messageIfVirtual" : "Ledger 장치에서 귀하의 {{name}} 주소를 확인할 수 없습니다. 사용은 본인의 책임입니다."
     }
   }
 }

@@ -929,10 +929,6 @@
       "earn" : {
         "title" : "Gana",
         "desc" : "Gana ingresos pasivos y haz crecer tus activos cripto"
-      },
-      "mint": {
-        "title": "Acuñar",
-        "desc": "Acuña NFTs de colaboraciones exclusivas en [ L ] Market"
       }
     },
     "comingSoon" : "próximamente",
@@ -2144,6 +2140,10 @@
     },
     "fees" : {
       "title" : "Editar tarifas"
+    },
+    "manageCard" : {
+      "title" : "Gestionar Tarjeta CL",
+      "description" : "Pedir y gestionar la Tarjeta CL"
     },
     "receive" : {
       "title" : "Recibir",
@@ -4388,10 +4388,7 @@
       "tokenContractCopied" : "¡Dirección de token copiada!",
       "tokenId" : "ID de token",
       "tokenIdCopied" : "¡ID de token copiado!",
-      "quantity" : "Cantidad",
-      "attributes" : {
-        "floorPrice" : "Precio base"
-      }
+      "quantity" : "Cantidad"
     },
     "viewerModal" : {
       "viewOn" : "Ver en",
@@ -4407,6 +4404,16 @@
     },
     "operations" : {
       "title" : "Historial de transacciones"
+    }
+  },
+  "hedera" : {
+    "name" : "Hedera",
+    "createHederaAccountHelp" : {
+      "text" : "Consulta este artículo de soporte para aprender",
+      "link" : "a crear una cuenta de Hedera"
+    },
+    "currentAddress" : {
+      "messageIfVirtual" : "No se puede confirmar tu dirección {{name}} en tu dispositivo Ledger. Si lo usas es bajo tu propio riesgo."
     }
   }
 }

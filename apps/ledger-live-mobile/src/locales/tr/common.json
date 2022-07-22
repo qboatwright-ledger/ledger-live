@@ -879,7 +879,7 @@
     "stepWelcome" : {
       "title" : "En güvenli kripto para ve NFT cüzdanı",
       "subtitle" : "Kriptolarınızı ve NFT'lerinizi Ledger Live'da güvenle yönetin, satın alın ve artırın.",
-      "start" : "Başlangıç",
+      "start" : "Hemen başla",
       "noDevice" : "Cihazınız yok mu?",
       "buy" : "{{fullDeviceName}} satın al",
       "terms" : "“Hemen Başla” butonuna dokunarak bunlara izin vermiş ve kabul etmiş olursunuz:",
@@ -1493,7 +1493,7 @@
       },
       "addAccounts" : {
         "addAccounts" : "Varlık ekle",
-        "title" : "Başlangıç",
+        "title" : "Hemen başla",
         "description" : "Ortaklarımızdan kripto satın alabilir veya cüzdanınızı kurabilirsiniz"
       }
     },
@@ -1591,7 +1591,7 @@
     }
   },
   "operationDetails" : {
-    "title" : "İşlem detayları",
+    "title" : "İşlem bilgileri",
     "account" : "Hesap",
     "date" : "Tarih",
     "confirmed" : "Onaylandı",
@@ -1657,7 +1657,7 @@
   },
   "operationList" : {
     "noOperations" : "İşlem Yok",
-    "noMoreOperations" : "Başka İşlem Yok"
+    "noMoreTransactions" : "Başka işlem yok"
   },
   "selectableAccountsList" : {
     "deselectAll" : "Tüm seçimi kaldır",
@@ -1698,7 +1698,7 @@
     "sell" : "Sat",
     "swap" : "Takas et",
     "manage" : "Yönet",
-    "lastOperations" : "Son işlemler",
+    "lastTransactions" : "Son işlemler",
     "emptyState" : {
       "title" : "Henüz kripto varlığınız yok mu?",
       "desc" : "<1><0>{{managerAppName}}</0></1> uygulaması yüklüyse hesabınıza varlık almaya başlayabilirsiniz",
@@ -1835,7 +1835,7 @@
     "header" : "Varlık dağılımı",
     "list" : "Varlık dağılımı ({{count}})",
     "assets" : "varlık",
-    "assets_plural" : "güvenle saklayın",
+    "assets_plural" : "varlık",
     "total" : "Toplam bakiye:",
     "listAccount" : "Varlık dağılımı ({{count}})",
     "title" : "Varlıklar",

@@ -929,10 +929,6 @@
       "earn" : {
         "title" : "Kazanın",
         "desc" : "Pasif gelir elde edin ve kripto varlıklarınızı artırın"
-      },
-      "mint": {
-        "title": "Mintleyin",
-        "desc": "[ L ] Market’teki özel iş birlikleri kapsamında NFT’ler mintleyin"
       }
     },
     "comingSoon" : "Çok yakında",
@@ -2144,6 +2140,10 @@
     },
     "fees" : {
       "title" : "Ücretleri düzenle"
+    },
+    "manageCard" : {
+      "title" : "CL Kartı Ayarlayın",
+      "description" : "CL Kartı Sipariş Edin ve Ayarlayın"
     },
     "receive" : {
       "title" : "Al",
@@ -4388,10 +4388,7 @@
       "tokenContractCopied" : "Token Adresi kopyalandı!",
       "tokenId" : "Token Kimliği (Token ID)",
       "tokenIdCopied" : "Token Kimliği kopyalandı!",
-      "quantity" : "Miktar",
-      "attributes" : {
-        "floorPrice" : "Taban Fiyat"
-      }
+      "quantity" : "Miktar"
     },
     "viewerModal" : {
       "viewOn" : "Burada görüntüle:",
@@ -4407,6 +4404,16 @@
     },
     "operations" : {
       "title" : "İşlem geçmişi"
+    }
+  },
+  "hedera" : {
+    "name" : "hedera",
+    "createHederaAccountHelp" : {
+      "text" : "Bu destek makalesini inceleyerek",
+      "link" : "Hedera hesabının nasıl oluşturulduğunu öğrenebilirsiniz"
+    },
+    "currentAddress" : {
+      "messageIfVirtual" : "{{name}} adresiniz Ledger cihazınızda onaylanamıyor. Kullandığınız takdirde sorumluluk size aittir."
     }
   }
 }

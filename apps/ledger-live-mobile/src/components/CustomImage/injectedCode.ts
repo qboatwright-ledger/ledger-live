@@ -78,8 +78,12 @@ function codeToInject() {
   };
 
   /** helper to log stuff in RN JS thread */
-  const log = (data: any) => {
-    postDataToWebView({ type: "LOG", payload: data });
+  // const log = (data: any) => {
+  //   postDataToWebView({ type: "LOG", payload: data });
+  // };
+
+  const logError = (error: Error) => {
+    postDataToWebView({ type: "ERROR", payload: error.toString()});
   };
 
   let image: any = null;
@@ -138,7 +142,7 @@ function codeToInject() {
       });
     } catch (e) {
       if (e instanceof Error) {
-        log(e.toString());
+        logError(e);
         console.error(e);
       }
     }

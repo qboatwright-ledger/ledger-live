@@ -45,10 +45,14 @@ export default class ImageProcessor extends React.Component<Props> {
       case "LOG":
         __DEV__ && console.log("WEBVIEWLOG:", payload); // eslint-disable-line no-console
         break;
+      case "ERROR":
+        __DEV__ && console.error(payload);
+        onError(new ImageProcessingError());
+        break;
       case "BASE64_RESULT":
         if (!payload.width || !payload.height || !payload.base64Data) {
           onError(new ImageProcessingError());
-          return;
+          break;
         }
         onPreviewResult({
           width: payload.width,
@@ -64,7 +68,7 @@ export default class ImageProcessor extends React.Component<Props> {
           payload.hexData.length !== payload.width * payload.height
         ) {
           onError(new ImageProcessingError());
-          return;
+          break;
         }
         onRawResult({
           width: payload.width,

@@ -53,17 +53,22 @@ const Step1Cropping: React.FC<{}> = () => {
   const navigation = useNavigation();
   const { params }: { params: RouteParams } = useRoute();
 
+  const handleError = useCallback(
+    (error: Error) => {
+      console.error(error);
+      navigation.navigate(ScreenName.CustomImageErrorScreen, { error });
+    },
+    [navigation],
+  );
+
   /** LOAD SOURCE IMAGE FROM PARAMS */
   useEffect(() => {
     loadImageToFileWithDimensions(params)
       .then(res => {
         setImageToCrop(res);
       })
-      .catch(error => {
-        console.error(error);
-        navigation.navigate(ScreenName.CustomImageErrorScreen, { error });
-      });
-  }, [navigation, params]);
+      .catch(handleError);
+  }, [params, setImageToCrop, handleError]);
 
   /** CROP IMAGE HANDLING */
 
@@ -118,6 +123,7 @@ const Step1Cropping: React.FC<{}> = () => {
               imageFileUri={imageToCrop.imageFileUri}
               aspectRatio={cropAspectRatio}
               style={sourceDimensions}
+              onError={handleError}
               onResult={handleCropResult}
             />
           ) : (

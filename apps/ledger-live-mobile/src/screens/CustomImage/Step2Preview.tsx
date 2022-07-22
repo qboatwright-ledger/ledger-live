@@ -16,11 +16,17 @@ import ImageProcessor, {
 import { cropAspectRatio } from "./shared";
 import { Button, Flex, InfiniteLoader, Text } from "@ledgerhq/native-ui";
 import { fitImageContain } from "../../components/CustomImage/imageUtils";
-import { Dimensions, LayoutChangeEvent, Pressable, View } from "react-native";
+import {
+  Dimensions,
+  ImageErrorEventData,
+  LayoutChangeEvent,
+  NativeSyntheticEvent,
+  Pressable,
+} from "react-native";
 import BottomButtonsContainer from "../../components/CustomImage/BottomButtonsContainer";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import ContrastChoice from "../../components/CustomImage/ContrastChoice";
 import { ScreenName } from "../../const";
+import { ImagePreviewError } from "../../components/CustomImage/errors";
 
 type RouteParams = CropResult;
 
@@ -64,6 +70,14 @@ const Step2Preview: React.FC<{}> = () => {
 
   const croppedImage = params;
 
+  const handleError = useCallback(
+    (error: Error) => {
+      console.error(error);
+      navigation.navigate(ScreenName.CustomImageErrorScreen, { error });
+    },
+    [navigation],
+  );
+
   /** RESIZED IMAGE HANDLING */
 
   const handleResizeResult: ImageResizerProps["onResult"] = useCallback(
@@ -99,6 +113,14 @@ const Step2Preview: React.FC<{}> = () => {
     ],
   );
 
+  const handlePreviewImageError = useCallback(
+    ({ nativeEvent }: NativeSyntheticEvent<ImageErrorEventData>) => {
+      console.error(nativeEvent.error);
+      handleError(new ImagePreviewError());
+    },
+    [handleError],
+  );
+
   const requestRawResult = useCallback(() => {
     imageProcessorRef?.current?.requestRawResult();
     setRawResultLoading(true);
@@ -122,6 +144,7 @@ const Step2Preview: React.FC<{}> = () => {
         <ImageResizer
           targetDimensions={cropAspectRatio}
           imageFileUri={croppedImage?.imageFileUri}
+          onError={handleError}
           onResult={handleResizeResult}
         />
       )}
@@ -130,6 +153,7 @@ const Step2Preview: React.FC<{}> = () => {
           ref={imageProcessorRef}
           imageBase64DataUri={resizedImage?.imageBase64DataUri}
           onPreviewResult={handlePreviewResult}
+          onError={handleError}
           onRawResult={handleRawResult}
           contrast={contrast}
         />
@@ -142,6 +166,7 @@ const Step2Preview: React.FC<{}> = () => {
       >
         {processorPreviewImage?.imageBase64DataUri ? (
           <PreviewImage
+            onError={handlePreviewImageError}
             fadeDuration={0}
             source={{ uri: processorPreviewImage.imageBase64DataUri }}
             style={{

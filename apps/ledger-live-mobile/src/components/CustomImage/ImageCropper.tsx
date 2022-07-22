@@ -3,12 +3,14 @@ import { Button, Flex } from "@ledgerhq/native-ui";
 import { CropView } from "react-native-image-crop-tools";
 import { StyleProp, View } from "react-native";
 import { ImageBase64Data, ImageDimensions, ImageFileUri } from "./types";
+import { ImageCropError } from "./errors";
 
 export type CropResult = ImageDimensions & ImageFileUri;
 
 export type Props = ImageFileUri & {
   aspectRatio: { width: number; height: number };
   onResult: (res: CropResult) => void;
+  onError: (res: Error) => void;
   style?: StyleProp<View>;
   withButton?: boolean;
 };
@@ -18,6 +20,7 @@ const ImageCropper: React.FC<Props> = React.forwardRef((props: Props, ref) => {
     style,
     imageFileUri,
     aspectRatio,
+    onError,
     onResult,
     withButton = false,
   } = props;
@@ -27,17 +30,17 @@ const ImageCropper: React.FC<Props> = React.forwardRef((props: Props, ref) => {
   const handleImageCrop = useCallback(
     async res => {
       const { height, width, uri: fileUri } = res;
-      try {
-        onResult({
-          width,
-          height,
-          imageFileUri: fileUri,
-        });
-      } catch (e) {
-        console.error(e);
+      if (!fileUri) {
+        onError(new ImageCropError());
+        return;
       }
+      onResult({
+        width,
+        height,
+        imageFileUri: fileUri,
+      });
     },
-    [onResult],
+    [onError, onResult],
   );
 
   const handleSave = useCallback(() => {

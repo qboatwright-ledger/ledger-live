@@ -662,6 +662,22 @@
     "ImageTooLargeError": {
       "title": "Image too large",
       "description": "Please try with a smaller image"
+    },
+    "ImageCropError": {
+      "title": "Cropping of the image failed",
+      "description": "Please try again with another image"
+    },
+    "ImageResizeError": {
+      "title": "Resizing of the image failed",
+      "description": "Please try again with another image"
+    },
+    "ImagePreviewError": {
+      "title": "Preview of the image failed",
+      "description": "Please try again with another image"
+    },
+    "ImageProcessingError": {
+      "title": "Processing of the image failed",
+      "description": "Please try again with another image"
     }
   },
   "bluetooth": {

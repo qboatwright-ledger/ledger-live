@@ -10,20 +10,16 @@ declare global {
 
 /* This function is meant to be stringified and its body injected in the webview */
 function codeToInject() {
-  /* eslint-disable prettier/prettier */
   /**
    * The following line is a hermes directive that allows
    * Function.prototype.toString() to return clear stringified code that can
    * thus be injected.
-   * 
+   *
    * ⚠️ IN DEBUG this doesn't work until you hot reload this file (just save the file and it will work)
    * see https://github.com/facebook/hermes/issues/612
-   *  */ 
-  
+   *  */
 
-  "show source"
-
-  /* eslint-enable prettier/prettier */
+  "show source";
 
   function clampRGB(val: number) {
     return Math.min(255, Math.max(val, 0));
@@ -37,9 +33,8 @@ function codeToInject() {
   function applyFilter(
     imageData: Uint8ClampedArray,
     contrastAmount: number,
-  ): Uint8ClampedArray {
-    rawResult = "";
-
+  ): { imageDataResult: Uint8ClampedArray; hexRawResult: string } {
+    let hexRawResult = "";
     const filteredImageData = [];
 
     const d = 15 / 255; // (N-1) / 255, with N=16 the number of color levels
@@ -60,7 +55,7 @@ function codeToInject() {
 
       const grayHex = contrastedGray16.toString(16);
 
-      rawResult = rawResult.concat(grayHex);
+      hexRawResult = hexRawResult.concat(grayHex);
       // adding hexadecimal value of this pixel
 
       filteredImageData.push(contrastedGray256);
@@ -72,7 +67,10 @@ function codeToInject() {
       // push alpha = max = 255
     }
 
-    return Uint8ClampedArray.from(filteredImageData);
+    return {
+      imageDataResult: Uint8ClampedArray.from(filteredImageData),
+      hexRawResult,
+    };
   }
 
   const postDataToWebView = (data: any) => {
@@ -87,7 +85,8 @@ function codeToInject() {
   let image: any = null;
 
   /**
-   * This is a hexadecimal representation of the final image.
+   * Hexadecimal representation of the final image.
+   * The final image is grayscale with 16 levels of gray.
    * It has 1 char per pixel, each character being an hexadecimal value
    * between 0 and F (0 and 15).
    * This solution is chosen as it's the most straightforward way to stringify
@@ -109,7 +108,11 @@ function codeToInject() {
 
       const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
-      const grayData = applyFilter(imageData.data, contrast);
+      const { imageDataResult: grayData, hexRawResult } = applyFilter(
+        imageData.data,
+        contrast,
+      );
+      rawResult = hexRawResult;
 
       const grayCanvas = document.createElement("canvas");
       grayCanvas.width = image.width;
@@ -119,7 +122,7 @@ function codeToInject() {
       if (!grayContext) return;
 
       grayContext.putImageData(
-        new ImageData(grayData, image.width, image.height),
+        new ImageData(grayData, image.width, image.height), // eslint-disable-line no-undef
         0,
         0,
       );
@@ -145,7 +148,7 @@ function codeToInject() {
    * store functions as a property of window so we can access them easily after minification
    * */
   window.processImage = imgBase64 => {
-    image = new Image();
+    image = new Image(); // eslint-disable-line no-undef
 
     image.onload = () => {
       computeResult();

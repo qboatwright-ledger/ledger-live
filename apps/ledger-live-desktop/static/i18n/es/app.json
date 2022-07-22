@@ -1283,7 +1283,8 @@
         "description" : "Descripción",
         "tokenAddress" : "Dirección del token",
         "tokenId" : "ID de token",
-        "quantity" : "Cantidad"
+        "quantity" : "Cantidad",
+        "floorPrice" : "Precio base"
       }
     },
     "collections" : {
@@ -4342,7 +4343,7 @@
     "SolanaUseAllAmountStakeWarning" : {
       "title" : "Asegúrate de que tu saldo restante es suficiente para cubrir las tarifas de transacciones futuras"
     },
-    "SolanaTxSimulationFailedPendingOp" : {
+    "SolanaTxSimulationFailedWhilePendingOp" : {
       "title" : "Tu transacción anterior todavía no se ha procesado. Espera un momento y comprueba el historial de transacciones antes de intentarlo de nuevo."
     },
     "SolanaTxConfirmationTimeout" : {

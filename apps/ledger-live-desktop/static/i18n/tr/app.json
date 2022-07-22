@@ -228,7 +228,6 @@
       "kyc" : "KYC"
     },
     "form" : {
-      "changeCTA" : "Değiştir",
       "ratesDrawer" : {
         "title" : "Kur",
         "quote" : "Teklif",
@@ -268,25 +267,11 @@
           "complete" : "KYC'yi tamamla",
           "update" : "KYC'yi yenile",
           "rejected" : "KYC reddedildi; doğrulamayı yeniden başlatın",
-          "rejectedContactProviderSupport" : "KYC reddedildi, lütfen {{providerName}} desteğiyle iletişime geçin",
-          "updateRequired" : "KYC'nizi tamamlayın veya güncelleyin",
           "status" : {
             "pending" : "KYC beklemede",
             "approved" : "KYC onaylandı",
-            "closed" : "KYC reddedildi",
-            "upgradeRequired" : "KYC eksik"
+            "closed" : "KYC reddedildi"
           }
-        },
-        "login" : {
-          "required" : "Bu sağlayıcı ile giriş yapmanız gerekiyor",
-          "complete" : "Oturum aç"
-        },
-        "mfa" : {
-          "required" : "Bu sağlayıcı ile MFA kurmanız gerekiyor",
-          "complete" : "MFA kur"
-        },
-        "withdrawalsBlockedError" : {
-          "message" : "Çekim işleminiz {{providerName}} tarafından engellendi. \n\n Daha fazla bilgi almak için lütfen onların destek ekibiyle iletişime geçin."
         }
       }
     },
@@ -361,7 +346,6 @@
     "title" : "Takas edin",
     "titleCrypto" : "{{currency}} takas edin",
     "whatIsSwap" : "Takas (Swap) Nedir?",
-    "decentralizedSwapAvailable" : "Bazı işlemler için merkeziyetsiz SWAP (takas) kullanmayı düşünebilirsiniz. <0>ParaSwap</0>'i ve <1>1inch</1>'i keşfedin.",
     "paraswap" : {
       "cta" : " Göz at",
       "description" : "Paraswap'ı mı arıyorsunuz? Keşfet sekmesine taşındı."
@@ -498,9 +482,9 @@
       "subtitle" : "Wyre ile takas işlemleri yapmak için lütfen Ledger Live uygulamasını son sürümüne güncelleyin ve kimliğinizi tekrar doğrulayın",
       "cta" : "Doğrulamayı sıfırla"
     },
-    "resetThirdPartyDataModal" : {
-      "title" : "Yerel üçüncü taraf verilerinizi silin",
-      "subtitle" : "Yerel üçüncü taraf verilerinizi silin. İş ortaklarımız tarafından sağlanan hizmetlere erişmek için KYC'nizi yeniden göndermeniz veya tekrar oturum açmanız gerekebilir.",
+    "resetKYCModal" : {
+      "title" : "KYC belgelerinizi silin",
+      "subtitle" : "Bilgisayarınızda yerel olarak depolanan tüm token'ları silmek için KYC belgelerinizi silin. İş ortaklarımızın sağladığı hizmetleri kullanmak için KYC belgelerinizi tekrar göndermeniz gerekecektir.",
       "cta" : "Onayla"
     },
     "modal" : {
@@ -1299,8 +1283,7 @@
         "description" : "Açıklama",
         "tokenAddress" : "Token Adresi",
         "tokenId" : "Token Kimliği (Token ID)",
-        "quantity" : "Miktar",
-        "floorPrice" : "Taban Fiyat"
+        "quantity" : "Miktar"
       }
     },
     "collections" : {
@@ -1535,8 +1518,7 @@
       "fees" : "Ücretler",
       "provider" : "Sağlayıcı",
       "payoutNetworkFees" : "Ödeme ücretleri",
-      "payoutNetworkFeesTooltip" : "Bu tutar cihazınızda gösterilmeyecektir",
-      "acceptTerms" : "By validating this transaction, I accept\n<0>{{provider}}'s terms of use</0>"
+      "payoutNetworkFeesTooltip" : "Bu tutar cihazınızda gösterilmeyecektir"
     },
     "swap2" : {
       "amountSent" : "Gönderilecek tutar",
@@ -1864,7 +1846,7 @@
         "parentAccount" : "1. {{currencyName}} hesabı seçin",
         "token" : "2. Token seçin",
         "verifyTokenType" : "Lütfen <0>{{token}}</0> token'ının <0>{{tokenType}}</0> türü bir token olduğunu doğrulayın. {{currency}} hesabına gönderilen diğer tüm kripto varlıklar kaybolabilir.",
-        "warningTokenType" : "Lütfen {{currency}} hesaplarına sadece <0>{{ticker}}/0> veya <0>{{tokenType}}</0> türü token'lar gönderin. Diğer kripto varlıklarının gönderilmesi, fonların kalıcı olarak kaybedilmesine yol açabilir."
+        "warningTokenType" : "Lütfen {{currency}} hesaplarına sadece <0>{{ticker}}</0> veya <0>{{tokenType}}</0> türü token'lar gönderin. Diğer kripto varlıklarının gönderilmesi, fonların kalıcı olarak kaybedilmesine yol açabilir."
       },
       "connectDevice" : {
         "title" : "Cihaz",
@@ -2086,10 +2068,10 @@
     "replaceable" : "değiştirilebilir",
     "cannotSelect" : {
       "unconfirmed" : "Onaylanmamış, değiştirilebilir işlemlerdeki coin'lerden seçemezsiniz.",
-      "pending" : "Bekleyen işlemlerdeki coin'lerden seçemezsiniz. (harcanmamış UTXO hariç)",
       "last" : "En az birinin seçili olması gerekiyor"
     },
     "pending" : "beklemede",
+    "pickUnconfirmedRBF" : "Onaylanmamış, değiştirilebilir işlemlerdeki coin'leri dahil edin.",
     "pickingStrategy" : "UTXO toplama stratejisi",
     "pickingStrategyLabels" : {
       "DEEP_OUTPUTS_FIRST" : "Önce en eski coin'ler (FIFO)",
@@ -2862,8 +2844,8 @@
       "softResetTitle" : "Önbelleği temizleyin",
       "softResetDesc" : "Blok zinciri ile tekrar senkronizasyona zorlamak için Ledger Live önbelleğini temizleyin.",
       "softReset" : "Temizle",
-      "resetThirdPartyData" : "Üçüncü taraf verilerini sıfırla",
-      "resetThirdPartyDataDesc" : "Üçüncü taraf işlem sağlayıcısına erişmek için kullanılan tüm yerel üçüncü taraf verilerinizi silin.",
+      "resetKYC" : "KYC verilerini sıfırla",
+      "resetKYCDesc" : "Üçüncü taraf işlem sağlayıcısına erişmek için yerel olarak depolanan tüm Müşterinizi Tanıyın (KYC) verilerinizi silin.",
       "hardResetTitle" : "Ledger Live'ı sıfırlayın",
       "hardResetDesc" : "Hesaplarınız, işlem geçmişleriniz ve ayarlarınız da dahil olmak üzere bilgisayarınızda depolanan tüm Ledger Live verilerini silin.",
       "hardReset" : "Sıfırla",
@@ -3165,7 +3147,7 @@
       "welcome" : {
         "title" : "Ledger'a Hoş Geldiniz",
         "description" : "Kriptonuzu bilgisayarınızdan güvenli bir şekilde yönetin.",
-        "cta" : "Başlangıç",
+        "cta" : "Hemen başla",
         "noDevice" : "Cihazınız yok mu? <0>Bir Ledger Nano X satın alın</0>",
         "languageWarning" : {
           "title" : "{{language}} dilinde başlayın",
@@ -3202,7 +3184,7 @@
       },
       "tutorial" : {
         "steps" : {
-          "getStarted" : "Başlangıç",
+          "getStarted" : "Hemen başla",
           "pinCode" : "PIN kodu",
           "recoveryPhrase" : "Kurtarma ifadesi",
           "hideRecoveryPhrase" : "Kurtarma ifadenizi saklayın",
@@ -3714,7 +3696,7 @@
     "termsLabel" : "Hizmet Şartları",
     "privacyLabel" : "Gizlilik Politikası",
     "switchLabel" : "Hizmet Şartları ve Gizlilik Politikasını okudum ve kabul ediyorum",
-    "cta" : "Ledger uygulamasına girin"
+    "cta" : "Ledger uygulamasına gir"
   },
   "updatedTerms" : {
     "title" : "Kullanım Koşulları Güncellemesi",
@@ -4394,6 +4376,12 @@
     },
     "currentAddress" : {
       "messageIfVirtual" : "{{name}} adresiniz Ledger cihazınızda onaylanamıyor. Kullandığınız takdirde sorumluluk size aittir."
+    },
+    "send" : {
+      "memo" : {
+        "label" : "Memo (isteğe bağlı)",
+        "characterCount" : "{{memoLength}} / {{memoMaxLength}}"
+      }
     }
   }
 }

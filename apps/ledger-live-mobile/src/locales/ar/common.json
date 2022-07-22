@@ -2141,6 +2141,10 @@
     "fees" : {
       "title" : "تعديل الرسوم"
     },
+    "manageCard" : {
+      "title" : "إدارة بطاقة CL",
+      "description" : "طلب وإدارة بطاقة CL"
+    },
     "receive" : {
       "title" : "تلقي",
       "description" : "تلقي الأصول المشفرة من محفظة أخرى.",
@@ -4384,10 +4388,7 @@
       "tokenContractCopied" : "تم نسخ عنوان رمز التوكن !",
       "tokenId" : "مُعرّف رمز التوكن",
       "tokenIdCopied" : "تم نسخ مُعرف رمز التوكن !",
-      "quantity" : "الكمية",
-      "attributes" : {
-        "floorPrice" : "أقل سعر"
-      }
+      "quantity" : "الكمية"
     },
     "viewerModal" : {
       "viewOn" : "مشاهدة على",
@@ -4403,6 +4404,16 @@
     },
     "operations" : {
       "title" : "سجل المعاملات"
+    }
+  },
+  "hedera" : {
+    "name" : "hedera",
+    "createHederaAccountHelp" : {
+      "text" : "يُرجى الاطلاع على مقالة الدعم هذه لمعرفة",
+      "link" : "كيفية إنشاء حساب Hedera"
+    },
+    "currentAddress" : {
+      "messageIfVirtual" : "عنوانك {{name}} لا يمكن تأكيده على جهازك Ledger. استخدمه على مسؤوليتك الخاصة."
     }
   }
 }

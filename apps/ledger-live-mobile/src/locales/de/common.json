@@ -929,10 +929,6 @@
       "earn" : {
         "title" : "Verdienen",
         "desc" : "Verdienen Sie ein passives Einkommen und vermehren Sie Ihr Kryptovermögen"
-      },
-      "mint": {
-        "title": "Minting",
-        "desc": "Minte NFTs von exklusiven Kollaborationen auf [ L ] Market"
       }
     },
     "comingSoon" : "In Kürze verfügbar",
@@ -2144,6 +2140,10 @@
     },
     "fees" : {
       "title" : "Gebühren bearbeiten"
+    },
+    "manageCard" : {
+      "title" : "CL Card verwalten",
+      "description" : "Bestellen und verwalten Sie Ihre CL Card"
     },
     "receive" : {
       "title" : "Empfangen",
@@ -4388,10 +4388,7 @@
       "tokenContractCopied" : "Token-Adresse kopiert!",
       "tokenId" : "Token ID",
       "tokenIdCopied" : "Token-ID kopiert!",
-      "quantity" : "Menge",
-      "attributes" : {
-        "floorPrice" : "Tiefstpreis"
-      }
+      "quantity" : "Menge"
     },
     "viewerModal" : {
       "viewOn" : "Ansehen auf",
@@ -4407,6 +4404,16 @@
     },
     "operations" : {
       "title" : "Transaktionsverlauf"
+    }
+  },
+  "hedera" : {
+    "name" : "Hedera",
+    "createHederaAccountHelp" : {
+      "text" : "In diesem Support-Artikel erhalten Sie weitere Informationen zur",
+      "link" : "Erstellung eines Hedera-Kontos"
+    },
+    "currentAddress" : {
+      "messageIfVirtual" : "Ihre {{name}}-Adresse kann auf Ihrem Ledger-Gerät nicht bestätigt werden. Nutzung auf eigenes Risiko."
     }
   }
 }

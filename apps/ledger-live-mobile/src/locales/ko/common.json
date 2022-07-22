@@ -80,7 +80,8 @@
     },
     "seeMore" : "더 보기",
     "moreInfo" : "자세한 정보",
-    "buyEth" : "이더리움 구매"
+    "buyEth" : "이더리움 구매",
+    "comingSoon" : "곧 출시 예정"
   },
   "errors" : {
     "countervaluesUnavailable" : {
@@ -1980,6 +1981,31 @@
         "android" : "구글 플레이 스토어에서 리뷰"
       }
     },
+    "notifications" : {
+      "title" : "알림",
+      "desc" : "알림 관리",
+      "allowed" : {
+        "title" : "알림 허용",
+        "desc" : "암호화폐 및 시장 상황에 대한 알림 받기"
+      },
+      "transactions" : {
+        "title" : "트랜잭션",
+        "desc" : "암호화폐 이체 시 알림을 받으세요."
+      },
+      "market" : {
+        "title" : "마켓",
+        "desc" : "암호화폐 시장에 대한 실시간 푸시 알림을 받으세요"
+      },
+      "announcement" : {
+        "title" : "발표",
+        "desc" : "암호화폐 시장에 대한 실시간 푸시 알림을 받으세요"
+      },
+      "price" : {
+        "title" : "가격 알림",
+        "desc" : "좋아하는 코인에 대한 위험 알림을 수신하세요",
+        "label" : "곧 출시 예정"
+      }
+    },
     "help" : {
       "title" : "도움말",
       "header" : "도움말",
@@ -2011,6 +2037,14 @@
       "customManifest" : {
         "title" : "커스텀 플랫폼 Manifest 불러오기"
       }
+    }
+  },
+  "notifications" : {
+    "prompt" : {
+      "title" : "알림 켜기",
+      "desc" : "Ledger Live와 Ledger 제품 관련 최신 정보 받기",
+      "allow" : "알림 허용",
+      "later" : "다음에 결정하기"
     }
   },
   "migrateAccounts" : {

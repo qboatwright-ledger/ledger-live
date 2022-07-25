@@ -1,4 +1,4 @@
-import { Image } from "react-native";
+import { Alert, Image } from "react-native";
 import RNFetchBlob, { FetchBlobResponse, StatefulPromise } from "rn-fetch-blob";
 import { launchImageLibrary } from "react-native-image-picker";
 import { ImageDimensions, ImageFileUri, ImageUrl } from "./types";
@@ -10,7 +10,7 @@ import {
 } from "./errors";
 
 export async function importImageFromPhoneGallery(): Promise<
-  (ImageFileUri & Partial<ImageDimensions>) | void
+  (ImageFileUri & Partial<ImageDimensions>) | null
 > {
   try {
     const {
@@ -23,14 +23,12 @@ export async function importImageFromPhoneGallery(): Promise<
       quality: 1,
       includeBase64: false,
     });
-    if (didCancel) return undefined;
-    if (errorCode) {
-      throw new Error(errorMessage);
+    if (didCancel) {
+      Alert.alert("didCancel");
     }
+    if (errorCode) throw new Error(errorMessage);
     const asset = assets && assets[0];
-    if (!asset) {
-      throw new Error();
-    }
+    if (!asset) throw new Error("asset is falsy");
     const { uri, width, height } = asset;
     if (uri) {
       return {
@@ -39,8 +37,10 @@ export async function importImageFromPhoneGallery(): Promise<
         imageFileUri: uri,
       };
     }
-    throw new Error();
+    throw new Error("uri is falsy");
   } catch (e) {
+    console.error(e);
+    Alert.alert("error", (e as Error).toString());
     throw new ImageLoadFromGalleryError();
   }
 }

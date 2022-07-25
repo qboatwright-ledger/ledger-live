@@ -6,6 +6,8 @@ import { NavigatorName, ScreenName } from "../../const";
 import BottomModal, { Props as BottomModalProps } from "../BottomModal";
 import ModalChoice from "./ModalChoice";
 import { importImageFromPhoneGallery } from "./imageUtils";
+import { ImageDimensions, ImageFileUri } from "./types";
+import { Alert } from "react-native";
 
 type Props = {
   isOpened?: boolean;
@@ -32,11 +34,12 @@ const CustomImageBottomModal: React.FC<Props> = props => {
   const handleUploadFromPhone = useCallback(async () => {
     try {
       setIsLoading(true);
-      const image = await importImageFromPhoneGallery();
-      if (image) {
+      const importResult = await importImageFromPhoneGallery();
+      Alert.alert("importResult", JSON.stringify(importResult, null, 2));
+      if (importResult !== null) {
         navigation.navigate(NavigatorName.CustomImage, {
           screen: ScreenName.CustomImageStep1Crop,
-          params: image,
+          params: importResult,
         });
       }
     } catch (error) {
@@ -54,7 +57,7 @@ const CustomImageBottomModal: React.FC<Props> = props => {
     navigation.navigate(NavigatorName.CustomImage, {
       screen: ScreenName.CustomImageStep1Crop,
       params: {
-        imageUrl: testUrls.boredApe,
+        imageUrl: testUrls.veryThinHugeImage,
       },
     });
     onClose && onClose();

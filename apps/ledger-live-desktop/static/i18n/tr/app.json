@@ -1846,7 +1846,7 @@
         "parentAccount" : "1. {{currencyName}} hesabı seçin",
         "token" : "2. Token seçin",
         "verifyTokenType" : "Lütfen <0>{{token}}</0> token'ının <0>{{tokenType}}</0> türü bir token olduğunu doğrulayın. {{currency}} hesabına gönderilen diğer tüm kripto varlıklar kaybolabilir.",
-        "warningTokenType" : "Lütfen {{currency}} hesaplarına sadece <0>{{ticker}}/0> veya <0>{{tokenType}}</0> türü token'lar gönderin. Diğer kripto varlıklarının gönderilmesi, fonların kalıcı olarak kaybedilmesine yol açabilir."
+        "warningTokenType" : "Lütfen {{currency}} hesaplarına sadece <0>{{ticker}}</0> veya <0>{{tokenType}}</0> türü token'lar gönderin. Diğer kripto varlıklarının gönderilmesi, fonların kalıcı olarak kaybedilmesine yol açabilir."
       },
       "connectDevice" : {
         "title" : "Cihaz",
@@ -3105,6 +3105,7 @@
         "link" : "Kurtarma ifadesi hakkında daha fazla bilgi",
         "title2" : "Nano cihazıma erişimimi kaybedersem ne olur?",
         "paragraph3" : "Endişelenmeyin ve şu adımları izleyin:",
+        "paragraph4" : "Tüm cüzdanlar, kurtarma ifadesini kullanarak, aynı özel anahtarları hesaplayabilir ve kriptolarınıza erişimi sağlayabilir.",
         "points" : {
           "1" : "Yeni bir donanım cüzdan alın.",
           "2" : "Ledger uygulamasında “Yeni bir cihazda kurtarma ifadesiyle geri yükle” seçeneğini seçin",
@@ -3147,7 +3148,7 @@
       "welcome" : {
         "title" : "Ledger'a Hoş Geldiniz",
         "description" : "Kriptonuzu bilgisayarınızdan güvenli bir şekilde yönetin.",
-        "cta" : "Başlangıç",
+        "cta" : "Hemen başla",
         "noDevice" : "Cihazınız yok mu? <0>Bir Ledger Nano X satın alın</0>",
         "languageWarning" : {
           "title" : "{{language}} dilinde başlayın",
@@ -3184,7 +3185,7 @@
       },
       "tutorial" : {
         "steps" : {
-          "getStarted" : "Başlangıç",
+          "getStarted" : "Hemen başla",
           "pinCode" : "PIN kodu",
           "recoveryPhrase" : "Kurtarma ifadesi",
           "hideRecoveryPhrase" : "Kurtarma ifadenizi saklayın",
@@ -3211,6 +3212,10 @@
             "buttons" : {
               "next" : "Tamam, hazırım!",
               "prev" : "Önceki adım"
+            },
+            "help" : {
+              "help" : "Yardım gerekli",
+              "descr" : "Ne yapmanız gerektiğini bilmiyor musunuz? Bu adımı tamamlamak için yardım alın."
             }
           },
           "deviceHowTo" : {
@@ -3234,9 +3239,14 @@
               "next" : "Sonraki adım",
               "prev" : "Önceki adım",
               "help" : "Yardım gerekli"
+            },
+            "help" : {
+              "help" : "Yardım gerekli",
+              "descr" : "Ne yapmanız gerektiğini bilmiyor musunuz? Bu adımı tamamlamak için yardım alın."
             }
           },
           "deviceHowTo2" : {
+            "title" : "Başlamanın en iyi yolu:",
             "turnOn" : {
               "title" : "Nano'yu açın",
               "descr" : "Cihazınızı USB kablosuyla bilgisayarınıza bağlayın."
@@ -3257,6 +3267,10 @@
               "next" : "Sonraki adım",
               "prev" : "Önceki adım",
               "help" : "Yardım gerekli"
+            },
+            "help" : {
+              "help" : "Yardım gerekli",
+              "descr" : "Ne yapmanız gerektiğini bilmiyor musunuz? Bu adımı tamamlamak için yardım alın."
             }
           },
           "pinCode" : {
@@ -3267,6 +3281,10 @@
               "next" : "PIN kodunu ayarla",
               "prev" : "Önceki adım",
               "help" : "Yardım gerekli"
+            },
+            "help" : {
+              "help" : "Yardım gerekli",
+              "descr" : "Ne yapmanız gerektiğini bilmiyor musunuz? Bu adımı tamamlamak için yardım alın."
             }
           },
           "quizSuccess" : {
@@ -3280,10 +3298,14 @@
           },
           "quizFailure" : {
             "title" : "İşin ustası olmanıza az kaldı...",
-            "paragraph" : "Merak etmeyin! Ledger, yolculuğunuz boyunca size rehberlik etmek için burada. Yakında kripto güvenliğiniz konusunda çok daha rahat hissedeceksiniz.\n\nSadece küçük bir adım kaldı!",
+            "paragraph" : "Merak etmeyin! Ledger, yolculuğunuz boyunca size rehberlik edecek. Yakında kripto güvenliğiniz konusunda çok daha rahat hissedeceksiniz.\n\nSadece küçük bir adım kaldı!",
             "buttons" : {
               "next" : "Sonraki adım",
               "prev" : "Önceki adım"
+            },
+            "help" : {
+              "help" : "Yardım gerekli",
+              "descr" : "Ne yapmanız gerektiğini bilmiyor musunuz? Bu adımı tamamlamak için yardım alın."
             }
           },
           "pinCodeHowTo" : {
@@ -3299,6 +3321,10 @@
               "next" : "Sonraki adım",
               "prev" : "Önceki adım",
               "help" : "Yardım gerekli"
+            },
+            "help" : {
+              "help" : "Yardım gerekli",
+              "descr" : "Ne yapmanız gerektiğini bilmiyor musunuz? Bu adımı tamamlamak için yardım alın."
             }
           },
           "existingRecoveryPhrase" : {
@@ -3313,7 +3339,7 @@
             },
             "warning" : {
               "title" : "Bizzat oluşturmadığınız bir kurtarma ifadesini kullanmayın.",
-              "desc" : "Ledger donanım cüzdanınızın PIN kodu ve kurtarma ifadesi sadece ve sadece sizin elinizle oluşturulmalıdır. Anahtar kelimeleri önceden türetilmiş veya PIN kodu önceden belirlenmiş bir cihaz aldıysanız ürünü kullanmayın ve müşteri destek ekibimizle iletişime geçin.",
+              "desc" : "Ledger donanım cüzdanınızın PIN kodu ve kurtarma ifadesi sadece ve sadece sizin tarafınızdan oluşturulmalıdır. Anahtar kelimeleri önceden türetilmiş veya PIN kodu önceden belirlenmiş bir cihaz aldıysanız ürünü kullanmayın ve müşteri destek ekibimizle iletişime geçin.",
               "supportLink" : "Müşteri destek ekibiyle iletişime geç"
             }
           },
@@ -3330,6 +3356,10 @@
               "next" : "Sonraki adım",
               "prev" : "Önceki adım",
               "help" : "Yardım gerekli"
+            },
+            "help" : {
+              "help" : "Yardım gerekli",
+              "descr" : "Ne yapmanız gerektiğini bilmiyor musunuz? Bu adımı tamamlamak için yardım alın."
             }
           },
           "newRecoveryPhrase" : {
@@ -3341,6 +3371,10 @@
               "next" : "Kurtarma ifadesi",
               "prev" : "Önceki adım",
               "help" : "Yardım gerekli"
+            },
+            "help" : {
+              "help" : "Yardım gerekli",
+              "descr" : "Ne yapmanız gerektiğini bilmiyor musunuz? Bu adımı tamamlamak için yardım alın."
             }
           },
           "recoveryHowTo" : {
@@ -3366,6 +3400,10 @@
               "next" : "Sonraki adım",
               "prev" : "Önceki adım",
               "help" : "Yardım gerekli"
+            },
+            "help" : {
+              "help" : "Yardım gerekli",
+              "descr" : "Ne yapmanız gerektiğini bilmiyor musunuz? Bu adımı tamamlamak için yardım alın."
             }
           },
           "recoveryHowTo3" : {
@@ -3380,6 +3418,10 @@
               "next" : "Sonraki adım",
               "prev" : "Önceki adım",
               "help" : "Yardım gerekli"
+            },
+            "help" : {
+              "help" : "Yardım gerekli",
+              "descr" : "Ne yapmanız gerektiğini bilmiyor musunuz? Bu adımı tamamlamak için yardım alın."
             }
           },
           "genuineCheck" : {
@@ -3403,6 +3445,10 @@
               "prev" : "Önceki adım",
               "help" : "Yardım gerekli",
               "learn" : "Nasıl gizleyeceğinizi öğrenin"
+            },
+            "help" : {
+              "help" : "Yardım gerekli",
+              "descr" : "Ne yapmanız gerektiğini bilmiyor musunuz? Bu adımı tamamlamak için yardım alın."
             }
           },
           "pairMyNano" : {
@@ -3412,6 +3458,10 @@
               "next" : "Nano cihazımı kontrol et",
               "prev" : "Önceki adım",
               "help" : "Yardım gerekli"
+            },
+            "help" : {
+              "help" : "Yardım gerekli",
+              "descr" : "Ne yapmanız gerektiğini bilmiyor musunuz? Bu adımı tamamlamak için yardım alın."
             }
           }
         }
@@ -3439,7 +3489,7 @@
         "setUpNanoWallet" : {
           "title" : "Nano'nuzu kuralım!",
           "description" : "Nano cihazınızın güvenliğini sağlayarak başlayacağız.",
-          "CTA" : "Haydi yapalım!"
+          "CTA" : "Haydi başlayalım!"
         }
       }
     },
@@ -3696,7 +3746,9 @@
     "termsLabel" : "Hizmet Şartları",
     "privacyLabel" : "Gizlilik Politikası",
     "switchLabel" : "Hizmet Şartları ve Gizlilik Politikasını okudum ve kabul ediyorum",
-    "cta" : "Ledger uygulamasına girin"
+    "cta" : "Ledger uygulamasına gir",
+    "termsCheckboxLabel" : "Kullanım Koşullarını okudum ve kabul ediyorum",
+    "privacyCheckboxLabel" : "Gizlilik Politikasını okudum ve kabul ediyorum"
   },
   "updatedTerms" : {
     "title" : "Kullanım Koşulları Güncellemesi",
@@ -3708,9 +3760,159 @@
     "link" : "Kullanım Koşulları",
     "cta" : "Devam"
   },
+  "v3" : {
+    "onboarding" : {
+      "screens" : {
+        "welcome" : {
+          "title" : "Ledger Live'a hoş geldiniz",
+          "description" : "Kriptonuzu bilgisayarınızdan güvenli bir şekilde yönetin.",
+          "nextButton" : "Başlangıç",
+          "noDevice" : "Cihazınız yok mu?",
+          "buyLink" : "Cihazınız yok mu? Ledger Nano X satın alın",
+          "byTapping" : "\"Hemen Başla\" butonuna dokunduğunuzda bunlara izin vermiş ve rıza göstermiş olursunuz:",
+          "termsAndConditions" : "Hüküm ve Koşullar",
+          "and" : "ve",
+          "privacyPolicy" : "Gizlilik Politikası",
+          "steps" : {
+            "0" : {
+              "title" : "Kriptolarınıza erişin",
+              "desc" : "Kripto varlıklarınız blok zincirinde saklanır. Onlara erişmek ve onları yönetmek için özel anahtarınızı kullanın"
+            },
+            "1" : {
+              "title" : "Özel anahtarınıza sahip çıkın",
+              "desc" : "Özel anahtarınız Nano'nuzda saklanır. Fonlarınızın sadece sizin kontrolünüzde olması için ona başka hiç kimse erişmemelidir."
+            },
+            "2" : {
+              "title" : "Çevrim dışı kalın",
+              "desc" : "Nano cihazınız \"soğuk depolama\" cüzdanı olarak çalışır. Yani özel anahtarınız, bu uygulamayı kullanırken bile asla çevrim içi olarak ifşa edilmez."
+            },
+            "3" : {
+              "title" : "İşlemleri onaylayın",
+              "desc" : "Ledger Live sayesinde güvenliğinizden feragat etmeden kripto alıp satabilir, yönetebilir, takas edebilir ve kazanabilirsiniz.<br/>Her kripto işleminizi Nano cihazınızla onaylıyor olacaksınız."
+            },
+            "4" : {
+              "title" : "Nano cihazınızı kuralım",
+              "desc" : "Nano cihazınızın kurulumuyla başlayacağız"
+            }
+          }
+        },
+        "selectDevice" : {
+          "title" : "Cihazınızı seçin",
+          "selectLabel" : "Seç"
+        },
+        "selectUseCase" : {
+          "hasNoRecovery" : "{{deviceName}} cihazınızı ilk kez mi kullanıyorsunuz?",
+          "hasRecovery" : "Kurtarma ifadeniz var mı?",
+          "options" : {
+            "1" : {
+              "title" : "Yeni bir {{deviceName}} kurun",
+              "description" : "Haydi cihazınızı kurmaya başlayalım"
+            },
+            "2" : {
+              "title" : "{{deviceName}} cihazınızı bağlayın",
+              "description" : "Cihazınız zaten kurulu mu? Uygulamaya bağlayın!"
+            },
+            "3" : {
+              "title" : "Kurtarma ifadenizi yeni bir cihazda geri yükleyin",
+              "description" : "Özel anahtarlarınızı yeni bir Nano üzerinde geri yüklemek için mevcut bir kurtarma ifadesini kullanın!"
+            }
+          }
+        }
+      },
+      "pedagogy" : {
+        "heading" : "Temel Bilgiler",
+        "screens" : {
+          "accessYourCoins" : {
+            "title" : "Kriptolarınıza erişin",
+            "description" : "Kripto varlıklarınız blok zincirinde saklanır. Kriptolarınıza erişmek ve onları yönetmek için bir özel anahtara ihtiyacınız var."
+          },
+          "ownYourPrivateKey" : {
+            "title" : "Özel anahtarınıza sahip çıkın",
+            "description" : "Özel anahtarınız Nano'nuzda saklanır. Fonlarınızı kontrol eden tek kişi olmak için özel anahtar sadece sizde olmalıdır."
+          },
+          "stayOffline" : {
+            "title" : "Çevrim dışı kalın",
+            "description" : "Nano cihazınız \"soğuk depolama\" cüzdanı olarak çalışır. Yani özel anahtarınız, bu uygulamayı kullanırken bile asla çevrim içi olarak açığa çıkmaz."
+          },
+          "validateTransactions" : {
+            "title" : "İşlemleri onaylayın",
+            "description" : "Ledger Live sayesinde güvenliğinizden feragat etmeden kripto alıp satabilir, yönetebilir, takas edebilir ve kazanabilirsiniz. Her kripto işleminizi Nano cihazınızla onaylıyor olacaksınız."
+          },
+          "setUpNanoWallet" : {
+            "title" : "Nano'nuzu kuralım!",
+            "description" : "Nano cihazınızın güvenliğini sağlayarak başlayacağız.",
+            "CTA" : "Haydi başlayalım!"
+          }
+        }
+      },
+      "quizz" : {
+        "heading" : "Sınav",
+        "title" : "Sınav zamanı!",
+        "descr" : "Donanım cüzdanınızla ilgili yaygın yanılgılardan kaçınmak için 3 basit soruyu yanıtlayın.",
+        "buttons" : {
+          "start" : "Sınava hazırım",
+          "next" : "Sonraki soru",
+          "finish" : "Sınavı tamamla"
+        },
+        "questions" : {
+          "1" : {
+            "text" : "Bir Ledger kullanıcısı olarak kriptolarım şurada saklanır:",
+            "answers" : {
+              "1" : "Benim Nano'mda",
+              "2" : "Blok zincirinde"
+            },
+            "results" : {
+              "success" : {
+                "title" : "Tebrikler!",
+                "text" : "Kriptolarınız her zaman blok zincirinde saklanır. Donanım cüzdanınız yalnızca kriptolarınıza erişmenizi sağlayan özel anahtarınızı tutar."
+              },
+              "fail" : {
+                "title" : "Yanlış!",
+                "text" : "Kriptolarınız her zaman blok zincirinde saklanır. Donanım cüzdanınız yalnızca kriptolarınıza erişmenizi sağlayan özel anahtarınızı tutar."
+              }
+            }
+          },
+          "2" : {
+            "text" : "Eğer kurtarma ifadem artık güvende ya da gizli değilse...",
+            "answers" : {
+              "1" : "Sorun değil, Ledger bana bir kopyasını gönderebilir",
+              "2" : "Kriptolarım artık güvende değildir ve onları güvenli bir yere aktarmam gerekir"
+            },
+            "results" : {
+              "success" : {
+                "title" : "Tebrikler!",
+                "text" : "Kurtarma ifadenizi bilen herkes kripto varlıklarınızı çalabilir. \nKaybederseniz, kriptolarınızı vakit kaybetmeden güvenli bir yere aktarmanız gerekir."
+              },
+              "fail" : {
+                "title" : "Yanlış!",
+                "text" : "Kurtarma ifadenizi bilen herkes kripto varlıklarınızı çalabilir. \nKaybederseniz, kriptolarınızı vakit kaybetmeden güvenli bir yere aktarmanız gerekir."
+              }
+            }
+          },
+          "3" : {
+            "text" : "Nano'mu Ledger uygulamasına bağladığımda, özel anahtarım...",
+            "answers" : {
+              "1" : "Çevrim dışı kalmaya devam eder",
+              "2" : "Kısa süreliğine internete bağlanır"
+            },
+            "results" : {
+              "success" : {
+                "title" : "Tebrikler!",
+                "text" : "Özel anahtarınız donanım cüzdanınızda her zaman çevrim dışı kalır. Ledger uygulaması Nano'ya bağlandığında bile özel anahtarınıza erişemez. Cihazınızdaki her işlemi fiziksel olarak onaylamanız gerekir."
+              },
+              "fail" : {
+                "title" : "Yanlış!",
+                "text" : "Özel anahtarınız donanım cüzdanınızda her zaman çevrim dışı kalır. Ledger uygulaması Nano'ya bağlandığında bile özel anahtarınıza erişemez. Cihazınızdaki her işlemi fiziksel olarak onaylamanız gerekir."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "families" : {
     "cardano" : {
-      "memoPlaceholder" : "Optional",
+      "memoPlaceholder" : "Tercihe bağlı",
       "memo" : "Memo"
     },
     "stellar" : {
@@ -4342,8 +4544,8 @@
     "SolanaUseAllAmountStakeWarning" : {
       "title" : "Gelecekteki işlem ücretleri için yeterli bakiyenin kaldığından emin olun"
     },
-    "SolanaTxSimulationFailedPendingOp" : {
-      "title" : "Önceki işleminiz henüz tamamlanmadı. Lütfen biraz bekleyin ve ardından işlem geçmişini kontrol edip tekrar deneyin."
+    "SolanaTxSimulationFailedWhilePendingOp" : {
+      "title" : "Önceki işleminiz henüz tamamlanmadı. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."
     },
     "SolanaTxConfirmationTimeout" : {
       "title" : "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."

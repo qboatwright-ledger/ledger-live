@@ -1,4 +1,4 @@
-import { Alert, Image } from "react-native";
+import { Image } from "react-native";
 import RNFetchBlob, { FetchBlobResponse, StatefulPromise } from "rn-fetch-blob";
 import { launchImageLibrary } from "react-native-image-picker";
 import * as ImagePicker from "expo-image-picker";
@@ -20,9 +20,7 @@ export async function importImageFromPhoneGalleryExpo(): Promise<
       quality: 1,
       base64: false,
     });
-    Alert.alert("result", JSON.stringify(result, null, 2));
     if (result.cancelled) {
-      Alert.alert("cancelled");
       return null;
     }
     const { uri, width, height } = result;
@@ -36,7 +34,6 @@ export async function importImageFromPhoneGalleryExpo(): Promise<
     throw new Error("uri is falsy");
   } catch (e) {
     console.error(e);
-    Alert.alert("error", (e as Error).toString());
     throw new ImageLoadFromGalleryError();
   }
 }
@@ -50,10 +47,8 @@ export async function importImageFromPhoneGallery(): Promise<
       quality: 1,
       includeBase64: false,
     });
-    Alert.alert("result", JSON.stringify(result, null, 2));
     const { assets, didCancel, errorCode, errorMessage } = result;
     if (didCancel) {
-      Alert.alert("didCancel");
       return null;
     }
     if (errorCode) throw new Error(errorMessage);
@@ -70,7 +65,6 @@ export async function importImageFromPhoneGallery(): Promise<
     throw new Error("uri is falsy");
   } catch (e) {
     console.error(e);
-    Alert.alert("error", (e as Error).toString());
     throw new ImageLoadFromGalleryError();
   }
 }

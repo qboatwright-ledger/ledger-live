@@ -10,7 +10,6 @@ import {
   importImageFromPhoneGalleryExpo,
 } from "./imageUtils";
 import { ImageDimensions, ImageFileUri } from "./types";
-import { Alert } from "react-native";
 
 type Props = {
   isOpened?: boolean;
@@ -38,7 +37,6 @@ const CustomImageBottomModal: React.FC<Props> = props => {
     try {
       setIsLoading(true);
       const importResult = await importImageFromPhoneGalleryExpo();
-      Alert.alert("importResult", JSON.stringify(importResult, null, 2));
       if (importResult !== null) {
         navigation.navigate(NavigatorName.CustomImage, {
           screen: ScreenName.CustomImageStep1Crop,

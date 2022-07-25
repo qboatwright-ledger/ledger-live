@@ -14,6 +14,9 @@ export const defaultFeatures: DefaultFeatures = {
       debug: false,
     },
   },
+  deviceInitialApps: {
+    enabled: false
+  },
   ratings: {
     enabled: false,
     params: {

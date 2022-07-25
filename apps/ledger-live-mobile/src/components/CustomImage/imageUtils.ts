@@ -13,18 +13,16 @@ export async function importImageFromPhoneGallery(): Promise<
   (ImageFileUri & Partial<ImageDimensions>) | null
 > {
   try {
-    const {
-      assets,
-      didCancel,
-      errorCode,
-      errorMessage,
-    } = await launchImageLibrary({
+    const result = await launchImageLibrary({
       mediaType: "photo",
       quality: 1,
       includeBase64: false,
     });
+    Alert.alert("result", JSON.stringify(result, null, 2));
+    const { assets, didCancel, errorCode, errorMessage } = result;
     if (didCancel) {
       Alert.alert("didCancel");
+      return null;
     }
     if (errorCode) throw new Error(errorMessage);
     const asset = assets && assets[0];

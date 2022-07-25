@@ -305,9 +305,13 @@ const cmd = ({
                 }
                 // check if we meet dependencies
                 if (dependencies?.length) {
+                  const completesInDashboard = isDashboardName(appName);
                   return streamAppInstall({
                     transport,
-                    appNames: [appName, ...dependencies],
+                    appNames: [
+                      ...(completesInDashboard?[]:[appName]),
+                      ...dependencies
+                    ],
                     onSuccessObs: () => {
                       o.next({
                         type: "dependencies-resolved",
@@ -317,6 +321,15 @@ const cmd = ({
                       }); // NB without deps
                     },
                   });
+                }
+
+                // maybe we want to be in the dashboard
+                if (appName === appAndVersion.name) {
+                  const e: ConnectAppEvent = {
+                    type: "opened",
+                    app: appAndVersion,
+                  };
+                  return of(e);
                 }
 
                 // we're in dashboard

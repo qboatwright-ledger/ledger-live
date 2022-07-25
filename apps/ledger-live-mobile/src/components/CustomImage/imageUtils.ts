@@ -1,6 +1,7 @@
 import { Alert, Image } from "react-native";
 import RNFetchBlob, { FetchBlobResponse, StatefulPromise } from "rn-fetch-blob";
 import { launchImageLibrary } from "react-native-image-picker";
+import * as ImagePicker from "expo-image-picker";
 import { ImageDimensions, ImageFileUri, ImageUrl } from "./types";
 import {
   ImageDownloadError,
@@ -8,6 +9,37 @@ import {
   ImageMetadataLoadingError,
   ImageTooLargeError,
 } from "./errors";
+
+export async function importImageFromPhoneGalleryExpo(): Promise<
+  (ImageFileUri & Partial<ImageDimensions>) | null
+> {
+  try {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: false,
+      quality: 1,
+      base64: false,
+    });
+    Alert.alert("result", JSON.stringify(result, null, 2));
+    if (result.cancelled) {
+      Alert.alert("cancelled");
+      return null;
+    }
+    const { uri, width, height } = result;
+    if (uri) {
+      return {
+        width,
+        height,
+        imageFileUri: uri,
+      };
+    }
+    throw new Error("uri is falsy");
+  } catch (e) {
+    console.error(e);
+    Alert.alert("error", (e as Error).toString());
+    throw new ImageLoadFromGalleryError();
+  }
+}
 
 export async function importImageFromPhoneGallery(): Promise<
   (ImageFileUri & Partial<ImageDimensions>) | null

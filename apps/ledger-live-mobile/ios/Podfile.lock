@@ -21,6 +21,8 @@ PODS:
   - EXImageManipulator (10.2.1):
     - EXImageLoader
     - ExpoModulesCore
+  - EXImagePicker (12.0.2):
+    - ExpoModulesCore
   - Expo (43.0.5):
     - ExpoModulesCore
   - ExpoModulesCore (0.6.5):
@@ -611,6 +613,7 @@ DEPENDENCIES:
   - "EXFileSystem (from `../../../node_modules/.pnpm/expo-file-system@13.1.4_expo@43.0.5/node_modules/expo-file-system/ios`)"
   - "EXImageLoader (from `../../../node_modules/.pnpm/expo-image-loader@3.1.1_expo@43.0.5/node_modules/expo-image-loader/ios`)"
   - "EXImageManipulator (from `../../../node_modules/.pnpm/expo-image-manipulator@10.2.1_expo@43.0.5/node_modules/expo-image-manipulator/ios`)"
+  - "EXImagePicker (from `../../../node_modules/.pnpm/expo-image-picker@12.0.2_expo@43.0.5/node_modules/expo-image-picker/ios`)"
   - "Expo (from `../../../node_modules/.pnpm/expo@43.0.5_@babel+core@7.17.10/node_modules/expo/ios`)"
   - "ExpoModulesCore (from `../../../node_modules/.pnpm/expo-modules-core@0.6.5/node_modules/expo-modules-core/ios`)"
   - "EXRandom (from `../../../node_modules/.pnpm/expo-random@12.1.2_expo@43.0.5/node_modules/expo-random/ios`)"
@@ -768,6 +771,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/.pnpm/expo-image-loader@3.1.1_expo@43.0.5/node_modules/expo-image-loader/ios"
   EXImageManipulator:
     :path: "../../../node_modules/.pnpm/expo-image-manipulator@10.2.1_expo@43.0.5/node_modules/expo-image-manipulator/ios"
+  EXImagePicker:
+    :path: "../../../node_modules/.pnpm/expo-image-picker@12.0.2_expo@43.0.5/node_modules/expo-image-picker/ios"
   Expo:
     :path: "../../../node_modules/.pnpm/expo@43.0.5_@babel+core@7.17.10/node_modules/expo/ios"
   ExpoModulesCore:
@@ -930,6 +935,7 @@ SPEC CHECKSUMS:
   EXFileSystem: 08a3033ac372b6346becf07839e1ccef26fb1058
   EXImageLoader: 347b72c2ec2df65120ccec40ea65a4c4f24317ff
   EXImageManipulator: 60d1bf3f1d7709453b1feb38adf8594b7f58710f
+  EXImagePicker: bf4d62532cc2bf217edbe4abbb0014e73e079eac
   Expo: d9588796cd19999da4d440d87bf7eb7ae4dbd608
   ExpoModulesCore: 32c0ccb47f477d330ee93db72505380adf0de09a
   EXRandom: 1d00fd04d7d874c0c9d1ff87cee59ffe0b638a3d

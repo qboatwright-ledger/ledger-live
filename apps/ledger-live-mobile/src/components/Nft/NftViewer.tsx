@@ -314,21 +314,6 @@ const NftViewer = ({ route }: Props) => {
                 <Trans i18nKey="account.send" />
               </Button>
             </View>
-            {nftMetadata?.media ? (
-              <Button
-                mr="16px"
-                type="main"
-                Icon={Icons.BracketsMedium}
-                onPress={() =>
-                  navigation.navigate(NavigatorName.CustomImage, {
-                    screen: ScreenName.CustomImageStep1Crop,
-                    params: {
-                      imageUrl: nftMetadata.media,
-                    },
-                  })
-                }
-              />
-            ) : null}
             {nftMetadata?.links && (
               <View style={styles.ellipsisButtonContainer}>
                 <Button

@@ -1,11 +1,11 @@
-// @flow
-
 import React, { useCallback, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { useFeature } from "@ledgerhq/live-common/lib/featureFlags";
 import connectApp from "@ledgerhq/live-common/hw/connectApp";
 import { createAction } from "@ledgerhq/live-common/hw/actions/app";
+import { useSelector } from "react-redux";
+import { lastSeenDeviceSelector } from "../../reducers/settings";
 
 import NavigationScrollView from "../components/NavigationScrollView";
 import DeviceActionModal from "../../components/DeviceActionModal";
@@ -24,8 +24,10 @@ function capitalize(str) {
 export default function DebugMultiAppInstall() {
   const { colors } = useTheme();
   const feature = useFeature("deviceInitialApps");
+  const lastSeenDevice = useSelector(lastSeenDeviceSelector);
 
   const [isRunning, setIsRunning] = useState(false);
+  const [list, setList] = useState([]);
   const [isCompleted, setOnCompleted] = useState(false);
   const [device, setDevice] = useState(null);
 
@@ -33,16 +35,33 @@ export default function DebugMultiAppInstall() {
   // which should be capitalize and match the app name from the manager.
   // ie Bitcoin, not bitcoin.
 
-  const list = feature?.params?.apps?.map(appName => ({
-    appName: capitalize(appName),
-  }));
-
-  const isFeatureDisabled =
-    isFeatureDisabled || !feature?.enabled || !list || !list.length;
+  const isListValid = !isRunning && list?.length;
 
   const onStart = useCallback(() => {
     setIsRunning(true);
   }, []);
+
+  const onUseFirebase = useCallback(() => {
+    if (!feature || !feature?.params?.apps?.length) {
+      setList([]);
+      return;
+    }
+
+    setList(
+      feature?.params?.apps?.map(appName => ({
+        appName: capitalize(appName),
+      })),
+    );
+  }, [feature]);
+
+  const onUseLastSeenDevice = useCallback(() => {
+    if (!lastSeenDevice || !lastSeenDevice?.apps) {
+      setList([]);
+      return;
+    }
+
+    setList(lastSeenDevice.apps.map(({ name: appName }) => ({ appName })));
+  }, [lastSeenDevice]);
 
   return (
     <NavigationScrollView>
@@ -57,21 +76,33 @@ export default function DebugMultiAppInstall() {
             />
           ) : (
             <View>
-              <LText tertiary style={styles.box}>
-                {
-                  "This screen will trigger the installation of the apps defined in the 'feature_device_initial_apps' feature flag and complete when done so."
-                }
-              </LText>
+              <LText
+                tertiary
+                style={styles.box}
+              >{`Chosen list: ${JSON.stringify(list)}`}</LText>
 
               <Button
                 mt={2}
                 type={"primary"}
-                event={
-                  "Debug, triggered app install of list defined on firebase"
-                }
-                disabled={isFeatureDisabled}
+                event={"Debug, use firebase app list"}
+                onPress={onUseFirebase}
+                title={"Use list from Firebase"}
+              />
+              <Button
+                mt={2}
+                type={"primary"}
+                event={"Debug, use last seen device app list"}
+                onPress={onUseLastSeenDevice}
+                title={"Use list from LastSeenDevice"}
+              />
+
+              <Button
+                mt={2}
+                type={"primary"}
+                event={"Debug, triggered app install of list"}
+                disabled={!isListValid}
                 onPress={onStart}
-                title={"Launch"}
+                title={"Install"}
               />
 
               {isRunning ? (

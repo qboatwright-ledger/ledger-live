@@ -5,12 +5,16 @@ declare global {
   }
 }
 
-/* This function is meant to be stringified and its body injected in the webview */
+/**
+ * This function is meant to be stringified and its body injected in the webview
+ * It allows us to have access to APIs that are available in browsers and not
+ * in React Native (here Canvas & Image).
+ * */
 function codeToInject() {
   /**
    * The following line is a hermes directive that allows
    * Function.prototype.toString() to return clear stringified code that can
-   * thus be injected.
+   * thus be injected in a webview.
    *
    * ⚠️ IN DEBUG this doesn't work until you hot reload this file (just save the file and it will work)
    * see https://github.com/facebook/hermes/issues/612

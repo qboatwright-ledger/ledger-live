@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { Button, Flex } from "@ledgerhq/native-ui";
 import styled from "styled-components/native";
-import { ImageDimensions, ImageDimensionsMaybe, ImageFileUri } from "./types";
+import { ImageDimensions, ImageFileUri } from "./types";
 import { importImageFromPhoneGallery } from "./imageUtils";
 
 type Props = {

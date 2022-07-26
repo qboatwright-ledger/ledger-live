@@ -8,9 +8,8 @@ import React, {
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Flex, Icons, InfiniteLoader } from "@ledgerhq/native-ui";
 import { CropView } from "react-native-image-crop-tools";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
-import { Dimensions, Platform, View } from "react-native";
+import { Dimensions, Platform } from "react-native";
 import ImageCropper, {
   Props as ImageCropperProps,
   CropResult,

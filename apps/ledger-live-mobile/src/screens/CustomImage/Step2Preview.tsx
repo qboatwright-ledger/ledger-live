@@ -1,13 +1,11 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
-import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 import { Button, Flex, InfiniteLoader, Text } from "@ledgerhq/native-ui";
 import {
   Dimensions,
   ImageErrorEventData,
-  LayoutChangeEvent,
   NativeSyntheticEvent,
   Pressable,
 } from "react-native";

@@ -37,20 +37,6 @@ export async function importImageFromPhoneGallery(): Promise<
   }
 }
 
-export async function fetchImageBase64(imageUrl: string) {
-  return fetch(imageUrl)
-    .then(response => response.blob())
-    .then(
-      data =>
-        new Promise<string | undefined>((resolve, reject) => {
-          const reader = new FileReader(); // eslint-disable-line no-undef
-          reader.onloadend = () => resolve(reader.result?.toString());
-          reader.onerror = reject;
-          reader.readAsDataURL(data);
-        }),
-    );
-}
-
 export function downloadImageToFileWithCancellable({
   imageUrl,
 }: ImageUrl): [Promise<ImageFileUri>, StatefulPromise<FetchBlobResponse>] {

@@ -6,7 +6,6 @@ import { ImageProcessingError } from "./errors";
 import { ProcessorPreviewResult, ProcessorRawResult } from "./ImageProcessor";
 import { injectedCode } from "./injectedCode/resultDataTesting";
 import { InjectedCodeDebugger } from "./InjectedCodeDebugger";
-import { ImageBase64Data, ImageDimensions } from "./types";
 
 export type Props = ProcessorRawResult & {
   onError: (error: Error) => void;

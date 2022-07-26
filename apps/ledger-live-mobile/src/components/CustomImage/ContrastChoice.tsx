@@ -1,6 +1,5 @@
-import { Box, Flex, Icons } from "@ledgerhq/native-ui";
+import { Box, Icons } from "@ledgerhq/native-ui";
 import React from "react";
-import { View } from "react-native";
 import styled from "styled-components/native";
 
 type Props = {

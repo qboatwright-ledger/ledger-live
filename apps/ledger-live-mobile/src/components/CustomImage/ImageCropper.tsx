@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from "react";
 import { Button, Flex } from "@ledgerhq/native-ui";
 import { CropView } from "react-native-image-crop-tools";
 import { StyleProp, View } from "react-native";
-import { ImageBase64Data, ImageDimensions, ImageFileUri } from "./types";
+import { ImageDimensions, ImageFileUri } from "./types";
 import { ImageCropError } from "./errors";
 
 export type CropResult = ImageDimensions & ImageFileUri;

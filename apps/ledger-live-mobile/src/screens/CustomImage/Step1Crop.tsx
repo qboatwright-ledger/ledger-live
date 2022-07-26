@@ -88,6 +88,14 @@ const Step1Cropping: React.FC<{}> = () => {
     }
   }, [cropperRef, rotated, setRotated]);
 
+  const [
+    containerDimensions,
+    setContainerDimensions,
+  ] = useState<ImageDimensions | null>(null);
+  const onContainerLayout = useCallback(({ nativeEvent: { layout } }) => {
+    setContainerDimensions({ height: layout.height, width: layout.width });
+  }, []);
+
   const sourceDimensions = useMemo(
     () =>
       fitImageContain(
@@ -106,6 +114,13 @@ const Step1Cropping: React.FC<{}> = () => {
     [imageToCrop?.height, imageToCrop?.width, rotated],
   );
 
+  const sourceAspectRatio =
+    sourceDimensions.height / (sourceDimensions.width || 1);
+  const imageCropperStyle =
+    Math.max(sourceAspectRatio, 1 / (sourceAspectRatio || 1)) > 2
+      ? containerDimensions
+      : sourceDimensions;
+
   return (
     <Flex flex={1}>
       <Flex
@@ -114,13 +129,19 @@ const Step1Cropping: React.FC<{}> = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Flex flex={1} justifyContent="center" alignItems="center">
-          {imageToCrop ? (
+        <Flex
+          flex={1}
+          onLayout={onContainerLayout}
+          width="100%"
+          justifyContent="center"
+          alignItems="center"
+        >
+          {(true || false) && imageToCrop ? (
             <ImageCropper
               ref={cropperRef}
               imageFileUri={imageToCrop.imageFileUri}
               aspectRatio={cropAspectRatio}
-              style={sourceDimensions}
+              style={imageCropperStyle}
               onError={handleError}
               onResult={handleCropResult}
             />

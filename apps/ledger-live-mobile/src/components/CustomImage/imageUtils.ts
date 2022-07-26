@@ -1,6 +1,5 @@
 import { Image } from "react-native";
 import RNFetchBlob, { FetchBlobResponse, StatefulPromise } from "rn-fetch-blob";
-import { launchImageLibrary } from "react-native-image-picker";
 import * as ImagePicker from "expo-image-picker";
 import { ImageDimensions, ImageFileUri, ImageUrl } from "./types";
 import {
@@ -10,7 +9,7 @@ import {
   ImageTooLargeError,
 } from "./errors";
 
-export async function importImageFromPhoneGalleryExpo(): Promise<
+export async function importImageFromPhoneGallery(): Promise<
   (ImageFileUri & Partial<ImageDimensions>) | null
 > {
   try {
@@ -24,37 +23,6 @@ export async function importImageFromPhoneGalleryExpo(): Promise<
       return null;
     }
     const { uri, width, height } = result;
-    if (uri) {
-      return {
-        width,
-        height,
-        imageFileUri: uri,
-      };
-    }
-    throw new Error("uri is falsy");
-  } catch (e) {
-    console.error(e);
-    throw new ImageLoadFromGalleryError();
-  }
-}
-
-export async function importImageFromPhoneGallery(): Promise<
-  (ImageFileUri & Partial<ImageDimensions>) | null
-> {
-  try {
-    const result = await launchImageLibrary({
-      mediaType: "photo",
-      quality: 1,
-      includeBase64: false,
-    });
-    const { assets, didCancel, errorCode, errorMessage } = result;
-    if (didCancel) {
-      return null;
-    }
-    if (errorCode) throw new Error(errorMessage);
-    const asset = assets && assets[0];
-    if (!asset) throw new Error("asset is falsy");
-    const { uri, width, height } = asset;
     if (uri) {
       return {
         width,

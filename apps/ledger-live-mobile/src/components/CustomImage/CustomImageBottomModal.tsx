@@ -5,11 +5,7 @@ import { Flex, InfiniteLoader, Text } from "@ledgerhq/native-ui";
 import { NavigatorName, ScreenName } from "../../const";
 import BottomModal, { Props as BottomModalProps } from "../BottomModal";
 import ModalChoice from "./ModalChoice";
-import {
-  importImageFromPhoneGallery,
-  importImageFromPhoneGalleryExpo,
-} from "./imageUtils";
-import { ImageDimensions, ImageFileUri } from "./types";
+import { importImageFromPhoneGallery } from "./imageUtils";
 
 type Props = {
   isOpened?: boolean;
@@ -36,7 +32,7 @@ const CustomImageBottomModal: React.FC<Props> = props => {
   const handleUploadFromPhone = useCallback(async () => {
     try {
       setIsLoading(true);
-      const importResult = await importImageFromPhoneGalleryExpo();
+      const importResult = await importImageFromPhoneGallery();
       if (importResult !== null) {
         navigation.navigate(NavigatorName.CustomImage, {
           screen: ScreenName.CustomImageStep1Crop,

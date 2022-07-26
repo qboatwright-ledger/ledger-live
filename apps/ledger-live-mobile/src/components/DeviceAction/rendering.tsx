@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { View } from "react-native";
 import { useDispatch } from "react-redux";
 import styled from "styled-components/native";
 import { WrongDeviceForAccount, UnexpectedBootloader } from "@ledgerhq/errors";
@@ -558,6 +559,65 @@ export function LoadingAppInstall({
     track(...trackingArgs);
   }, [appName, analyticsPropertyFlow]);
   return renderLoading(props);
+}
+
+type InlineInstallProgressProps = RawProps & {
+  installQueue?: string[];
+  currentAppOp?: any;
+  itemProgress?: number;
+  progress?: number;
+};
+
+export function renderInlineInstallProgress({
+  installQueue,
+  currentAppOp,
+  itemProgress,
+  progress,
+  colors,
+  request,
+}: InlineInstallProgressProps) {
+  // We can pass more status properties to use other renderings
+  // For instance, for apps in the request but not in the install
+  // queue we _know_ they are installed.
+  const formatProgress = raw => Math.round((raw || 0) * 100);
+
+  return (
+    <Wrapper>
+      <Text>{`Installing apps ${formatProgress(progress)}%`}</Text>
+      {request.dependencies.map(({ appName }, index) => {
+        const installed = !installQueue.includes(appName);
+        const isCurrent = currentAppOp?.name === appName;
+        const progress = isCurrent ? formatProgress(itemProgress) : 0;
+
+        const text = installed
+          ? "✓"
+          : progress
+          ? `${progress}%`
+          : isCurrent
+          ? "߷"
+          : index + 1;
+
+        return (
+          <View
+            key={appName}
+            style={{
+              flexDirection: "row",
+              marginBottom: 10,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Circle size={40} bg={lighten(colors.primary, 0.4)}>
+              <Text>{text}</Text>
+            </Circle>
+            <View style={{ marginLeft: 10 }}>
+              <Text>{appName}</Text>
+            </View>
+          </View>
+        );
+      })}
+    </Wrapper>
+  );
 }
 
 type WarningOutdatedProps = RawProps & {

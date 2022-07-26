@@ -12,6 +12,7 @@ import {
 } from "@ledgerhq/errors";
 import type Transport from "@ledgerhq/hw-transport";
 import type { DeviceModelId } from "@ledgerhq/devices";
+import type { AppOp } from "../apps/types";
 import type { DerivationMode } from "../types";
 import type { DeviceInfo, FirmwareUpdateContext } from "../types/manager";
 import { getCryptoCurrencyById } from "../currencies";
@@ -75,6 +76,9 @@ export type ConnectAppEvent =
   | {
       type: "stream-install";
       progress: number;
+      itemProgress: number;
+      currentAppOp: AppOp;
+      installQueue: string[];
     }
   | {
       type: "listing-apps";

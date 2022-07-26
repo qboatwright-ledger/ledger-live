@@ -17,6 +17,7 @@ import {
   renderRequestQuitApp,
   renderRequiresAppInstallation,
   renderAllowManager,
+  renderInlineInstallProgress,
   renderInWrongAppForAccount,
   renderError,
   renderBootloaderStep,
@@ -92,6 +93,10 @@ export default function DeviceAction<R, H, P>({
     installingApp,
     progress,
     listingApps,
+
+    currentAppOp,
+    itemProgress,
+    installQueue,
   } = status;
 
   useEffect(() => {
@@ -104,6 +109,20 @@ export default function DeviceAction<R, H, P>({
       );
     }
   }, [dispatch, device, deviceInfo]);
+
+  if (request && request?.withInlineInstallProgress && installingApp) {
+    // If we need custom UI for other things such as error handling or 
+    // loading status, tweak the conditional above :shrug:
+    return renderInlineInstallProgress({
+      t,
+      colors,
+      installQueue,
+      currentAppOp,
+      itemProgress,
+      progress,
+      request,
+    });
+  }
 
   if (displayUpgradeWarning && appAndVersion) {
     return renderWarningOutdated({

@@ -6,9 +6,9 @@ import connectApp from "@ledgerhq/live-common/hw/connectApp";
 import { createAction } from "@ledgerhq/live-common/hw/actions/app";
 import { useSelector } from "react-redux";
 import { lastSeenDeviceSelector } from "../../reducers/settings";
-
 import NavigationScrollView from "../components/NavigationScrollView";
 import DeviceActionModal from "../../components/DeviceActionModal";
+import DeviceAction from "../../components/DeviceAction";
 import Alert from "../../components/Alert";
 import SelectDevice from "../../components/SelectDevice";
 import LText from "../components/LText";
@@ -27,6 +27,7 @@ export default function DebugMultiAppInstall() {
   const lastSeenDevice = useSelector(lastSeenDeviceSelector);
 
   const [isRunning, setIsRunning] = useState(false);
+  const [useCustomUI, setUseCustomUI] = useState(false);
   const [list, setList] = useState([]);
   const [isCompleted, setOnCompleted] = useState(false);
   const [device, setDevice] = useState(null);
@@ -38,6 +39,12 @@ export default function DebugMultiAppInstall() {
   const isListValid = !isRunning && list?.length;
 
   const onStart = useCallback(() => {
+    setIsRunning(true);
+    setUseCustomUI(false);
+  }, []);
+
+  const onStartInline = useCallback(() => {
+    setUseCustomUI(true);
     setIsRunning(true);
   }, []);
 
@@ -63,6 +70,7 @@ export default function DebugMultiAppInstall() {
     setList(lastSeenDevice.apps.map(({ name: appName }) => ({ appName })));
   }, [lastSeenDevice]);
 
+  const DeviceActionOrModal = useCustomUI ? DeviceAction : DeviceActionModal;
   return (
     <NavigationScrollView>
       <View style={[styles.root, { backgroundColor: colors.background }]}>
@@ -76,37 +84,8 @@ export default function DebugMultiAppInstall() {
             />
           ) : (
             <View>
-              <LText
-                tertiary
-                style={styles.box}
-              >{`Chosen list: ${JSON.stringify(list)}`}</LText>
-
-              <Button
-                mt={2}
-                type={"primary"}
-                event={"Debug, use firebase app list"}
-                onPress={onUseFirebase}
-                title={"Use list from Firebase"}
-              />
-              <Button
-                mt={2}
-                type={"primary"}
-                event={"Debug, use last seen device app list"}
-                onPress={onUseLastSeenDevice}
-                title={"Use list from LastSeenDevice"}
-              />
-
-              <Button
-                mt={2}
-                type={"primary"}
-                event={"Debug, triggered app install of list"}
-                disabled={!isListValid}
-                onPress={onStart}
-                title={"Install"}
-              />
-
               {isRunning ? (
-                <DeviceActionModal
+                <DeviceActionOrModal
                   onClose={setIsRunning}
                   device={device}
                   onModalHide={setIsRunning}
@@ -120,9 +99,50 @@ export default function DebugMultiAppInstall() {
                   request={{
                     appName: "BOLOS",
                     dependencies: list,
+                    withInlineInstallProgress: useCustomUI,
                   }}
                 />
-              ) : null}
+              ) : (
+                <View>
+                  <LText
+                    tertiary
+                    style={styles.box}
+                  >{`Chosen list: ${JSON.stringify(list)}`}</LText>
+
+                  <Button
+                    mt={2}
+                    type={"primary"}
+                    event={"Debug, use firebase app list"}
+                    onPress={onUseFirebase}
+                    title={"Use list from Firebase"}
+                  />
+                  <Button
+                    mt={2}
+                    type={"primary"}
+                    event={"Debug, use last seen device app list"}
+                    onPress={onUseLastSeenDevice}
+                    title={"Use list from LastSeenDevice"}
+                  />
+
+                  <Button
+                    mt={2}
+                    type={"primary"}
+                    event={"Debug, triggered app install of list"}
+                    disabled={!isListValid}
+                    onPress={onStart}
+                    title={"Install with device action"}
+                  />
+
+                  <Button
+                    mt={2}
+                    type={"primary"}
+                    event={"Debug, triggered app inline install of list"}
+                    disabled={!isListValid}
+                    onPress={onStartInline}
+                    title={"Install with custom UI"}
+                  />
+                </View>
+              )}
             </View>
           )
         ) : (

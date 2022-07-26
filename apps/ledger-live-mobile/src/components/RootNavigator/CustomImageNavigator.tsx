@@ -40,11 +40,6 @@ export default function CustomImageNavigator() {
         component={ErrorScreen}
         options={{ title: "", headerLeft: Empty }}
       />
-      <Stack.Screen
-        name={ScreenName.ImagePicker}
-        component={DebugScreen}
-        options={{ title: "Custom Img Debug" }}
-      />
     </Stack.Navigator>
   );
 }

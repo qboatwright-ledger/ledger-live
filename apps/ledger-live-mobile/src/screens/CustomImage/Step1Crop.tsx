@@ -69,7 +69,6 @@ const Step1Cropping: React.FC<{}> = () => {
   }, [params, setImageToCrop, handleError]);
 
   /** CROP IMAGE HANDLING */
-
   const handleCropResult: ImageCropperProps["onResult"] = useCallback(
     (res: CropResult) => {
       navigation.navigate(ScreenName.CustomImageStep2Preview, res);

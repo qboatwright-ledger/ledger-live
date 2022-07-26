@@ -364,9 +364,6 @@ export const ScreenName = {
   // cardano
   CardanoEditMemo: "CardanoEditMemo",
 
-  // Image picker
-  ImagePicker: "ImagePicker",
-
   CustomImageStep1Crop: "CustomImageStep1Crop",
   CustomImageStep2Preview: "CustomImageStep2Preview",
   CustomImageStep3Transfer: "CustomImageStep3Transfer",

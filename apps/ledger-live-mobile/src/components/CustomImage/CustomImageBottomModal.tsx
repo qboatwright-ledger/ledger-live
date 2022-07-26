@@ -60,23 +60,6 @@ const CustomImageBottomModal: React.FC<Props> = props => {
     onClose && onClose();
   }, [navigation, onClose]);
 
-  // const handleDebug = useCallback(() => {
-  //   navigation.navigate(NavigatorName.CustomImage, {
-  //     screen: ScreenName.ImagePicker,
-  //   });
-  //   onClose && onClose();
-  // }, [navigation, onClose]);
-
-  // const handleDebugUrl = useCallback(() => {
-  //   navigation.navigate(NavigatorName.CustomImage, {
-  //     screen: ScreenName.ImagePicker,
-  //     params: {
-  //       imageUrl: testUrls.boredApe,
-  //     },
-  //   });
-  //   onClose && onClose();
-  // }, [navigation, onClose]);
-
   return (
     <BottomModal isOpened={props.isOpened} onClose={props.onClose}>
       <Text variant="h4" fontWeight="semiBold" pb={5}>
@@ -92,7 +75,7 @@ const CustomImageBottomModal: React.FC<Props> = props => {
             onPress={handleUploadFromPhone}
             title={t("customImage.drawer.options.uploadFromPhone")}
             iconName={"ArrowFromBottom"}
-            event="" // TODO: get proper event
+            event=""
           />
           <ModalChoice
             onPress={handleFromUrl}
@@ -100,18 +83,6 @@ const CustomImageBottomModal: React.FC<Props> = props => {
             iconName={"ArrowFromBottom"}
             event=""
           />
-          {/* <ModalChoice
-            title="(debug screen) custom"
-            onPress={handleDebug}
-            iconName="Brackets"
-            event=""
-          />
-          <ModalChoice
-            title="(debug screen) url"
-            onPress={handleDebugUrl}
-            iconName="Brackets"
-            event=""
-          /> */}
         </>
       )}
     </BottomModal>

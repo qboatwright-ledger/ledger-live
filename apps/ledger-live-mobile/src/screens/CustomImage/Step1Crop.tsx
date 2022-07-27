@@ -38,6 +38,12 @@ export const boxToFitDimensions = {
   height: Dimensions.get("screen").height,
 };
 
+/**
+ * UI component that loads the input image (from the route params) &
+ * displays it in a cropping UI with a confirm button at the bottom.
+ * Then on confirmation it navigates to the preview step with the cropped image
+ * file URI as a param.
+ */
 const Step1Cropping: React.FC<{}> = () => {
   const cropperRef = useRef<CropView>(null);
   const [imageToCrop, setImageToCrop] = useState<

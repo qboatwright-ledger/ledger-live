@@ -26,10 +26,29 @@ export type Props = ImageBase64Data & {
 };
 
 /**
- * using a class component here because we need to access some methods from
- * the parent using a ref
- *  */
+ * Component to do some processing on an image (apply grayscale with 16 gray
+ * levels, apply some contrast, output a preview and a hex reprensentation of
+ * the result)
+ *
+ * It:
+ *  - takes as an input an image base64 data & a contrast value as an input
+ *  - displays nothing (except for a warning in __DEV__ if the injected code is
+ *  not correctly injected)
+ *  - outputs a preview of the result in base64 data uri
+ *  - on user confirmation (call `ref.requestRawResult()`) it outputs the raw
+ *  result which is a hex representation of the 16 levels of gray image.
+ *
+ *
+ * Under the hood, this is implemented with a webview and some code injected in
+ * it as it gives access to some web APIs (Canvas & Image) to do the processing.
+ *
+ * */
 export default class ImageProcessor extends React.Component<Props> {
+  /**
+   * NB: We are a class component here because we need to access some methods from
+   * the parent using a ref.
+   */
+
   webViewRef: WebView<{}> | null = null;
 
   componentDidUpdate(prevProps: Props) {

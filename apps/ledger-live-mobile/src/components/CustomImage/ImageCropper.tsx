@@ -15,6 +15,19 @@ export type Props = ImageFileUri & {
   withButton?: boolean;
 };
 
+/**
+ * UI Component to crop an image.
+ *
+ * It
+ *  - takes as "input" an image file URI,
+ *  - displays a UI to crop that image
+ *  - and on user action (crop confirmation)
+ *  - outputs the result of the cropping as a file URI (which will be a new file)
+ *
+ * To trigger the crop confirmation, either leave the prop `withButton` to true
+ * in which case a button will be rendered an handle it,
+ * or pass a ref to this component and call `ref.current.saveImage(true, 100)`
+ */
 const ImageCropper: React.FC<Props> = React.forwardRef((props: Props, ref) => {
   const {
     style,

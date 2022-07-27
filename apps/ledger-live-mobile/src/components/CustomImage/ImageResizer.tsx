@@ -11,6 +11,15 @@ export type Props = ImageFileUri & {
   onResult: (res: ResizeResult) => void;
 };
 
+/**
+ * Component to resize an image.
+ *
+ * It:
+ *  - takes as an input an image file URI & target dimensions as an input
+ *  - renders nothing
+ *  - outputs the resulting image as a base64 data URI.
+ *
+ * */
 const ImageResizer: React.FC<Props> = props => {
   const { imageFileUri, targetDimensions, onError, onResult } = props;
 

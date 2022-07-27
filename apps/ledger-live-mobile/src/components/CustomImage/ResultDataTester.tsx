@@ -13,6 +13,20 @@ export type Props = ProcessorRawResult & {
   debug?: boolean;
 };
 
+/**
+ * Component to do reconstruct a 16 levels of gray image from an hexadecimal
+ * representation of it.
+ *
+ * It:
+ *  - takes as an input an image hex representation.
+ *  - displays nothing (except for a warning in __DEV__ if the injected code is
+ *  not correctly injected)
+ *  - outputs a preview of the result in base64 data uri
+ *
+ * Under the hood, this is implemented with a webview and some code injected in
+ * it as it gives access to some web APIs (Canvas & Image) to do the processing.
+ *
+ * */
 export default class ResultDataTester extends React.Component<Props> {
   webViewRef: WebView<{}> | null = null;
 

@@ -41,6 +41,19 @@ displayed on the preview screen.
 
 This should NOT happen, it means that some data has been lost.`;
 
+/**
+ * UI component that reconstructs an image from the raw hex data received as a
+ * route param, and compares it to the preview base64 URI data received as a
+ * route param.
+ *
+ * This is meant as a data validation. We want to validate that the raw data
+ * (that is eventually what will be transfered) allows to reconstruct exactly
+ * the image previewed on the previous screen.
+ *
+ * We take this raw data and use it to rebuild the image from scratch, then
+ * we try to match the binary value of the "previewed" image and the "reconstructed"
+ * image.
+ */
 const Step3Transfer: React.FC<{}> = () => {
   const { params }: { params?: RouteParams } = useRoute();
 
@@ -92,11 +105,13 @@ const Step3Transfer: React.FC<{}> = () => {
             </Flex>
           </>
         )}
-        <ResultDataTester
-          {...rawData}
-          onPreviewResult={handlePreviewResult}
-          onError={handleError}
-        />
+        {rawData && (
+          <ResultDataTester
+            {...rawData}
+            onPreviewResult={handlePreviewResult}
+            onError={handleError}
+          />
+        )}
         <Flex
           flex={1}
           pt={6}

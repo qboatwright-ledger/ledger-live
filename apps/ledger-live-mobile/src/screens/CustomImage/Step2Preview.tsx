@@ -49,6 +49,13 @@ const contrasts = [
   { val: 3, color: "neutral.c30" },
 ];
 
+/**
+ * UI component that loads the input image (from the route params) &
+ * displays it in a preview UI with some contrast options & a confirm button at
+ * the bottom.
+ * Then on confirmation it navigates to the transfer step with the raw hex data
+ * of the image & the preview base 64 data URI of the image as params.
+ */
 const Step2Preview: React.FC<{}> = () => {
   const imageProcessorRef = useRef<ImageProcessor>(null);
   const [resizedImage, setResizedImage] = useState<ResizeResult | null>(null);

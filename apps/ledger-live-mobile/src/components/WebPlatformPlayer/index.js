@@ -16,8 +16,7 @@ import {
 } from "react-native";
 
 import { WebView } from "react-native-webview";
-import { useNavigation, useTheme } from "@react-navigation/native";
-import Color from "color";
+import { useNavigation } from "@react-navigation/native";
 
 import { JSONRPCRequest } from "json-rpc-2.0";
 
@@ -47,6 +46,7 @@ import {
   serializePlatformSignedTransaction,
   deserializePlatformSignedTransaction,
 } from "@ledgerhq/live-common/platform/serializers";
+import { useTheme } from "styled-components/native";
 import { NavigatorName, ScreenName } from "../../const";
 import { broadcastSignedTx } from "../../logic/screenTransactionHooks";
 import { accountsSelector } from "../../reducers/accounts";
@@ -55,6 +55,7 @@ import InfoIcon from "../../icons/Info";
 import InfoPanel from "./InfoPanel";
 
 import * as tracking from "./tracking";
+import { useLocale } from "../../context/Locale";
 
 type Props = {
   manifest: AppManifest,
@@ -76,7 +77,7 @@ const ReloadButton = ({
       disabled={loading}
       onPress={() => !loading && onReload()}
     >
-      <UpdateIcon size={18} color={colors.grey} />
+      <UpdateIcon size={18} color={colors.neutral.c70} />
     </TouchableOpacity>
   );
 };
@@ -100,7 +101,7 @@ const InfoPanelButton = ({
       disabled={loading}
       onPress={onPress}
     >
-      <InfoIcon size={18} color={colors.grey} />
+      <InfoIcon size={18} color={colors.neutral.c70} />
     </TouchableOpacity>
   );
 };
@@ -110,6 +111,7 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
   const accounts = useSelector(accountsSelector);
   const currencies = useMemo(() => listCryptoCurrencies(), []);
   const theme = useTheme();
+  const { locale } = useLocale();
 
   const [loadDate, setLoadDate] = useState(Date.now());
   const [widgetLoaded, setWidgetLoaded] = useState(false);
@@ -122,20 +124,23 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
 
     if (inputs) {
       for (const key in inputs) {
-        if (Object.prototype.hasOwnProperty.call(inputs, key)) {
+        if (
+          Object.prototype.hasOwnProperty.call(inputs, key) &&
+          inputs[key] !== undefined
+        ) {
           url.searchParams.set(key, inputs[key]);
         }
       }
     }
 
-    url.searchParams.set("backgroundColor", new Color(theme.colors.card).hex());
-    url.searchParams.set("textColor", new Color(theme.colors.text).hex());
+    url.searchParams.set("lang", locale);
+    url.searchParams.set("theme", theme.theme);
     url.searchParams.set("loadDate", loadDate.valueOf().toString());
     if (manifest.params) {
       url.searchParams.set("params", JSON.stringify(manifest.params));
     }
     return url;
-  }, [manifest.url, manifest.params, loadDate, theme, inputs]);
+  }, [manifest.url, manifest.params, inputs, locale, theme.theme, loadDate]);
 
   const navigation = useNavigation();
 
@@ -633,6 +638,7 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
         name={manifest.name}
         icon={manifest.icon}
         url={manifest.homepageUrl}
+        uri={uri.toString()}
         description={manifest.content.description}
         isOpened={isInfoPanelOpened}
         setIsOpened={setIsInfoPanelOpened}

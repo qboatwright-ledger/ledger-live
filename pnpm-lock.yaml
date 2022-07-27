@@ -622,7 +622,6 @@ importers:
       react-native-flipper-performance-plugin: ^0.2.1
       react-native-gesture-handler: ^2.5.0
       react-native-image-crop-tools: ^1.6.2
-      react-native-image-picker: ^4.8.4
       react-native-keychain: ^7.0.0
       react-native-level-fs: ^3.0.0
       react-native-localize: ^2.2.1
@@ -783,7 +782,6 @@ importers:
       react-native-fingerprint-scanner: github.com/hieuvp/react-native-fingerprint-scanner/f1d136f605412d58e4de9e7e155d6f818ba24731_react-native@0.68.2
       react-native-gesture-handler: 2.5.0_mk7ksnag22facomrynqrp7v6gy
       react-native-image-crop-tools: 1.6.2_zqxy7fpkavjkgz5xll7ed4r6rq
-      react-native-image-picker: 4.8.4_zqxy7fpkavjkgz5xll7ed4r6rq
       react-native-keychain: 7.0.0
       react-native-level-fs: 3.0.1_asyncstorage-down@4.2.0
       react-native-localize: 2.2.1_zqxy7fpkavjkgz5xll7ed4r6rq
@@ -41203,16 +41201,6 @@ packages:
     peerDependencies:
       react: ^16.8.1
       react-native: '>=0.59.0-rc.0 <1.0.x'
-    dependencies:
-      react: 17.0.2
-      react-native: 0.68.2_shn3lkepuadv4od4dudas6ijbq
-    dev: false
-
-  /react-native-image-picker/4.8.4_zqxy7fpkavjkgz5xll7ed4r6rq:
-    resolution: {integrity: sha512-Mjh2j/sddyolb16EpmprWzbtyeFvW8Xgzr/8WNi9d6bR2FC/kL78cY/a+7Yzujg5ZDtT1MWys+eWw/qtfwgGiw==}
-    peerDependencies:
-      react: '*'
-      react-native: '*'
     dependencies:
       react: 17.0.2
       react-native: 0.68.2_shn3lkepuadv4od4dudas6ijbq

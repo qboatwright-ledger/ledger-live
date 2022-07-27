@@ -411,8 +411,6 @@ PODS:
   - react-native-image-crop-tools (1.6.2):
     - React
     - TOCropViewController (= 2.5.3)
-  - react-native-image-picker (4.8.4):
-    - React-Core
   - react-native-netinfo (6.2.1):
     - React-Core
   - react-native-performance (2.1.0):
@@ -670,7 +668,6 @@ DEPENDENCIES:
   - "react-native-fingerprint-scanner (from `../../../node_modules/.pnpm/github.com+hieuvp+react-native-fingerprint-scanner@f1d136f605412d58e4de9e7e155d6f818ba24731_react-native@0.68.2/node_modules/react-native-fingerprint-scanner`)"
   - "react-native-flipper-performance-plugin (from `../../../node_modules/.pnpm/react-native-flipper-performance-plugin@0.2.1/node_modules/react-native-flipper-performance-plugin`)"
   - "react-native-image-crop-tools (from `../../../node_modules/.pnpm/react-native-image-crop-tools@1.6.2_zqxy7fpkavjkgz5xll7ed4r6rq/node_modules/react-native-image-crop-tools`)"
-  - "react-native-image-picker (from `../../../node_modules/.pnpm/react-native-image-picker@4.8.4_zqxy7fpkavjkgz5xll7ed4r6rq/node_modules/react-native-image-picker`)"
   - "react-native-netinfo (from `../../../node_modules/.pnpm/@react-native-community+netinfo@6.2.1_react-native@0.68.2/node_modules/@react-native-community/netinfo`)"
   - "react-native-performance (from `../../../node_modules/.pnpm/react-native-performance@2.1.0_react-native@0.68.2/node_modules/react-native-performance/ios`)"
   - "react-native-randombytes (from `../../../node_modules/.pnpm/react-native-randombytes@3.6.1/node_modules/react-native-randombytes`)"
@@ -833,8 +830,6 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/.pnpm/react-native-flipper-performance-plugin@0.2.1/node_modules/react-native-flipper-performance-plugin"
   react-native-image-crop-tools:
     :path: "../../../node_modules/.pnpm/react-native-image-crop-tools@1.6.2_zqxy7fpkavjkgz5xll7ed4r6rq/node_modules/react-native-image-crop-tools"
-  react-native-image-picker:
-    :path: "../../../node_modules/.pnpm/react-native-image-picker@4.8.4_zqxy7fpkavjkgz5xll7ed4r6rq/node_modules/react-native-image-picker"
   react-native-netinfo:
     :path: "../../../node_modules/.pnpm/@react-native-community+netinfo@6.2.1_react-native@0.68.2/node_modules/@react-native-community/netinfo"
   react-native-performance:
@@ -992,7 +987,6 @@ SPEC CHECKSUMS:
   react-native-fingerprint-scanner: ac6656f18c8e45a7459302b84da41a44ad96dbbe
   react-native-flipper-performance-plugin: ab280430bbdd17deffb7a30d94b604738cd04150
   react-native-image-crop-tools: 06b171ac13f1cd520e633a0d190c00f664b4cb79
-  react-native-image-picker: cffb727cf2f59bd5c0408e30b3dbe0b935f88835
   react-native-netinfo: 3d3769f0d65de15c83a9bf1346f8be71de5a24bf
   react-native-performance: f4b6604a9d5a8a7407e34a82fab6c641d9a3ec12
   react-native-randombytes: 421f1c7d48c0af8dbcd471b0324393ebf8fe7846

@@ -1860,7 +1860,7 @@
     "steps" : {
       "chooseAccount" : {
         "title" : "アカウント",
-        "label" : "引き落としアカウント",
+        "label" : "受取アカウント",
         "parentAccount" : "1. {{currencyName}}アカウントを選択",
         "token" : "2. トークンを選択する",
         "verifyTokenType" : "<0>{{token}}</0>が<0>{{tokenType}}</0>トークンであることを確認してください。{{currency}}アカウント他の暗号資産を送信すると失われる可能性があります。",
@@ -1993,6 +1993,13 @@
         "description2" : "Elrond eGold（EGLD）トークンは、Elrond Networkのネイティブトークンであり、トランザクション、ステーキング、スマートコントラクト、ガバナンス、バリデータの報酬など、さまざまな用途に使用されます。",
         "description3" : "LedgerはElrondチームと積極的に協力し、ステーキングやESDT（Elrond Standard Digital Token）のネイティブサポートなどの機能を追加していく予定です。",
         "website" : "The Internet Scale Blockchain"
+      }
+    }
+  },
+  "cardano" : {
+    "account" : {
+      "subHeader" : {
+        "cardTitle" : "合計残高にはステーキング報酬は含まれません"
       }
     }
   },
@@ -4368,6 +4375,12 @@
     },
     "NotEnoughNftOwned" : {
       "title" : "利用可能なトークン数を超えています"
+    },
+    "CardanoMinAmountError" : {
+      "title" : "送付可能な最低金額は、{{amount}} ADAです"
+    },
+    "CardanoNotEnoughFunds" : {
+      "title" : "お支払いに十分な資金があることをご確認ください"
     }
   },
   "cryptoOrg" : {

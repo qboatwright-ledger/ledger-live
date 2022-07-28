@@ -1996,6 +1996,13 @@
       }
     }
   },
+  "cardano" : {
+    "account" : {
+      "subHeader" : {
+        "cardTitle" : "总余额不包括权益质押奖励"
+      }
+    }
+  },
   "tron" : {
     "voting" : {
       "emptyState" : {
@@ -4368,6 +4375,12 @@
     },
     "NotEnoughNftOwned" : {
       "title" : "您已超过可用代币的数量"
+    },
+    "CardanoMinAmountError" : {
+      "title" : "最小可发送数额为 {{amount}} ADA"
+    },
+    "CardanoNotEnoughFunds" : {
+      "title" : "请确保您的资金足够支付费用"
     }
   },
   "cryptoOrg" : {

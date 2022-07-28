@@ -1996,6 +1996,13 @@
       }
     }
   },
+  "cardano" : {
+    "account" : {
+      "subHeader" : {
+        "cardTitle" : "스테이킹 보상은 총 잔액에 포함되지 않습니다."
+      }
+    }
+  },
   "tron" : {
     "voting" : {
       "emptyState" : {
@@ -4368,6 +4375,12 @@
     },
     "NotEnoughNftOwned" : {
       "title" : "사용 가능한 토큰 수를 초과했습니다"
+    },
+    "CardanoMinAmountError" : {
+      "title" : "전송할 수 있는 최소 금액은 {{amount}} ADA입니다"
+    },
+    "CardanoNotEnoughFunds" : {
+      "title" : "수수료 지불에 필요한 충분한 자금이 있는지 반드시 확인해 주세요"
     }
   },
   "cryptoOrg" : {

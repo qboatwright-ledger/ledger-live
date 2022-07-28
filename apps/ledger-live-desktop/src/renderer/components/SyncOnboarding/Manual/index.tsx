@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Button, Flex, Text, VerticalTimeline } from "@ledgerhq/react-ui";
 import { CloseMedium, HelpMedium } from "@ledgerhq/react-ui/assets/icons";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import LangSwitcher from "~/renderer/components/Onboarding/LangSwitcher";
+import { getCurrentDevice } from "~/renderer/reducers/devices";
 
 import nanoX from "~/renderer/images/nanoX.v3.svg";
 import nanoXDark from "~/renderer/images/nanoXDark.v3.svg";
@@ -57,6 +59,8 @@ const SyncOnboardingManual = () => {
   ];
 
   const { t } = useTranslation();
+  const device = useSelector(getCurrentDevice);
+  console.log(`Manual device ${device.modelId}`);
   const [isHelpDrawerOpen, setHelpDrawerOpen] = useState<boolean>(false);
 
   return (

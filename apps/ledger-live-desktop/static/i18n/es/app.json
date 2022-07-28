@@ -1996,6 +1996,13 @@
       }
     }
   },
+  "cardano" : {
+    "account" : {
+      "subHeader" : {
+        "cardTitle" : "El saldo total no incluye las recompensas de participación"
+      }
+    }
+  },
   "tron" : {
     "voting" : {
       "emptyState" : {
@@ -4368,6 +4375,12 @@
     },
     "NotEnoughNftOwned" : {
       "title" : "Has superado la cantidad de tokens disponibles"
+    },
+    "CardanoMinAmountError" : {
+      "title" : "Tienes que enviar un mínimo de {{amount}} ADA"
+    },
+    "CardanoNotEnoughFunds" : {
+      "title" : "Asegúrate de tener fondos suficientes para pagar las tarifas"
     }
   },
   "cryptoOrg" : {

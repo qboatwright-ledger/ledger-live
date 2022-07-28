@@ -644,7 +644,10 @@
       "title" : "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
     },
     "CardanoMinAmountError" : {
-      "title" : "最低{{amount}} ADA以上必要"
+      "title" : "送付可能な最低金額は、{{amount}} ADAです"
+    },
+    "CardanoNotEnoughFunds" : {
+      "title" : "お支払いに十分な資金があることをご確認ください"
     }
   },
   "bluetooth" : {
@@ -930,9 +933,9 @@
         "title" : "報酬獲得",
         "desc" : "不労所得を獲得して暗号資産を運用する"
       },
-      "mint": {
-        "title": "ミント”,",
-        "desc": "[ L ] MarketでコラボNFTをミントしましょう"
+      "mint" : {
+        "title" : "ミント",
+        "desc" : "[ L ] Marketにおける専用コラボレーションからNFTをミント"
       }
     },
     "comingSoon" : "近日公開",

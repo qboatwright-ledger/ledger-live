@@ -644,7 +644,10 @@
       "title" : "您的交易可能失败了。请稍等片刻后检查交易记录，然后重试。"
     },
     "CardanoMinAmountError" : {
-      "title" : "至少需要 {{amount}} 个 ADA"
+      "title" : "最小可发送数额为 {{amount}} ADA"
+    },
+    "CardanoNotEnoughFunds" : {
+      "title" : "请确保您的资金足够支付费用"
     }
   },
   "bluetooth" : {
@@ -930,9 +933,9 @@
         "title" : "赚取",
         "desc" : "赚取被动收入并增长加密资产"
       },
-      "mint": {
-        "title": "铸造",
-        "desc": "通过 [ L ] Market 市场上的独家合作来铸造 NFT"
+      "mint" : {
+        "title" : "铸造",
+        "desc" : "通过 [ L ] 市场上的独家合作来铸造 NFT"
       }
     },
     "comingSoon" : "敬请期待",

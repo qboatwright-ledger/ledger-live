@@ -1864,7 +1864,7 @@
         "parentAccount" : "1. {{currencyName}} hesabı seçin",
         "token" : "2. Token seçin",
         "verifyTokenType" : "Lütfen <0>{{token}}</0> token'ının <0>{{tokenType}}</0> türü bir token olduğunu doğrulayın. {{currency}} hesabına gönderilen diğer tüm kripto varlıklar kaybolabilir.",
-        "warningTokenType" : "Lütfen {{currency}} hesaplarına sadece <0>{{ticker}}/0> veya <0>{{tokenType}}</0> türü token'lar gönderin. Diğer kripto varlıklarının gönderilmesi, fonların kalıcı olarak kaybedilmesine yol açabilir."
+        "warningTokenType" : "Lütfen {{currency}} hesaplarına sadece <0>{{ticker}}</0> veya <0>{{tokenType}}</0> türü token'lar gönderin. Diğer kripto varlıklarının gönderilmesi, fonların kalıcı olarak kaybedilmesine yol açabilir."
       },
       "connectDevice" : {
         "title" : "Cihaz",
@@ -1993,6 +1993,13 @@
         "description2" : "Elrond Network'e özgü olan Elrond eGold (EGLD) Token, bu ağ üzerindeki her türlü işlem, staking, akıllı sözleşme, yönetişim ve doğrulayıcı ödülleri için kullanılır.",
         "description3" : "Elrond ekibiyle aktif bir işbirliği gerçekleştirerek staking işlemleri, dahili ESDT (Elrond Standart Dijital Token) desteği ve daha birçok işlevi eklemek için çalışıyoruz.",
         "website" : "İnternet Ölçeğinde Blok Zinciri"
+      }
+    }
+  },
+  "cardano" : {
+    "account" : {
+      "subHeader" : {
+        "cardTitle" : "Staking ödülleri toplam bakiyeye dahil edilmez"
       }
     }
   },
@@ -3165,7 +3172,7 @@
       "welcome" : {
         "title" : "Ledger'a Hoş Geldiniz",
         "description" : "Kriptonuzu bilgisayarınızdan güvenli bir şekilde yönetin.",
-        "cta" : "Başlangıç",
+        "cta" : "Hemen başla",
         "noDevice" : "Cihazınız yok mu? <0>Bir Ledger Nano X satın alın</0>",
         "languageWarning" : {
           "title" : "{{language}} dilinde başlayın",
@@ -3202,7 +3209,7 @@
       },
       "tutorial" : {
         "steps" : {
-          "getStarted" : "Başlangıç",
+          "getStarted" : "Hemen başla",
           "pinCode" : "PIN kodu",
           "recoveryPhrase" : "Kurtarma ifadesi",
           "hideRecoveryPhrase" : "Kurtarma ifadenizi saklayın",
@@ -3714,7 +3721,7 @@
     "termsLabel" : "Hizmet Şartları",
     "privacyLabel" : "Gizlilik Politikası",
     "switchLabel" : "Hizmet Şartları ve Gizlilik Politikasını okudum ve kabul ediyorum",
-    "cta" : "Ledger uygulamasına girin"
+    "cta" : "Ledger uygulamasına gir"
   },
   "updatedTerms" : {
     "title" : "Kullanım Koşulları Güncellemesi",
@@ -4368,6 +4375,12 @@
     },
     "NotEnoughNftOwned" : {
       "title" : "Mevcut token sayısını aştınız"
+    },
+    "CardanoMinAmountError" : {
+      "title" : "En az {{amount}} ADA gönderilebilir"
+    },
+    "CardanoNotEnoughFunds" : {
+      "title" : "Lütfen ücretleri ödemeye yetecek kadar fonunuz olduğundan emin olun"
     }
   },
   "cryptoOrg" : {

@@ -3,6 +3,8 @@ import { Button, Flex, Text, VerticalTimeline } from "@ledgerhq/react-ui";
 import { CloseMedium, HelpMedium } from "@ledgerhq/react-ui/assets/icons";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { useOnboardingStatePolling } from "@ledgerhq/live-common/onboarding/hooks/useOnboardingStatePolling";
+import { command } from "~/renderer/commands";
 import LangSwitcher from "~/renderer/components/Onboarding/LangSwitcher";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 
@@ -60,7 +62,19 @@ const SyncOnboardingManual = () => {
 
   const { t } = useTranslation();
   const device = useSelector(getCurrentDevice);
-  console.log(`Manual device ${device.modelId}`);
+  console.log(`🏝 Manual device ${device.modelId}`);
+
+  const {
+    onboardingState: deviceOnboardingState,
+    allowedError,
+    // fatalErrorItem,
+  } = useOnboardingStatePolling({
+    getOnboardingStatePolling: command("getOnboardingStatePolling"),
+    device,
+    pollingPeriodMs: 2000,
+  });
+  console.log(`🦄 Manual onboarding polling = ${JSON.stringify(deviceOnboardingState)}`);
+
   const [isHelpDrawerOpen, setHelpDrawerOpen] = useState<boolean>(false);
 
   return (

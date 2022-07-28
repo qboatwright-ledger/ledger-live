@@ -644,7 +644,10 @@
       "title" : "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."
     },
     "CardanoMinAmountError" : {
-      "title" : "En az {{amount}} ADA gerekli"
+      "title" : "En az {{amount}} ADA gönderilebilir"
+    },
+    "CardanoNotEnoughFunds" : {
+      "title" : "Lütfen ücretleri ödemeye yetecek kadar fonunuz olduğundan emin olun"
     }
   },
   "bluetooth" : {
@@ -930,9 +933,9 @@
         "title" : "Kazanın",
         "desc" : "Pasif gelir elde edin ve kripto varlıklarınızı artırın"
       },
-      "mint": {
-        "title": "Mintleyin",
-        "desc": "[ L ] Market’teki özel iş birlikleri kapsamında NFT’ler mintleyin"
+      "mint" : {
+        "title" : "Mintleyin",
+        "desc" : "[ L ] Market'teki özel iş birliklerini kullanarak NFT'ler mintleyin"
       }
     },
     "comingSoon" : "Çok yakında",

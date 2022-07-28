@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button, Flex, Text, VerticalTimeline } from "@ledgerhq/react-ui";
 import { CloseMedium, HelpMedium } from "@ledgerhq/react-ui/assets/icons";
 import { useTranslation } from "react-i18next";
@@ -64,12 +64,13 @@ const SyncOnboardingManual = () => {
   const device = useSelector(getCurrentDevice);
   console.log(`🏝 Manual device ${device.modelId}`);
 
+  const getOnboardingStatePollingRef = useRef(command("getOnboardingStatePolling"));
   const {
     onboardingState: deviceOnboardingState,
     allowedError,
     // fatalErrorItem,
   } = useOnboardingStatePolling({
-    getOnboardingStatePolling: command("getOnboardingStatePolling"),
+    getOnboardingStatePolling: getOnboardingStatePollingRef.current,
     device,
     pollingPeriodMs: 2000,
   });

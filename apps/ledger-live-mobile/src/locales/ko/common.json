@@ -644,7 +644,10 @@
       "title" : "트랜잭션이 실패한 것 같습니다. 잠시 기다려 트랜잭션 내역을 확인한 후 다시 시도하세요."
     },
     "CardanoMinAmountError" : {
-      "title" : "최소 {{amount}} ADA 필요"
+      "title" : "전송할 수 있는 최소 금액은 {{amount}} ADA입니다"
+    },
+    "CardanoNotEnoughFunds" : {
+      "title" : "수수료 지불에 필요한 충분한 자금이 있는지 반드시 확인해 주세요"
     }
   },
   "bluetooth" : {
@@ -930,9 +933,9 @@
         "title" : "소득 창출",
         "desc" : "불로소득을 얻고 암호화폐를 성장시키세요"
       },
-      "mint": {
-        "title": "민팅",
-        "desc": "[ L ] Market 독점 콜라보레이션 NFT 민팅"
+      "mint" : {
+        "title" : "민팅",
+        "desc" : "[ L ] 마켓 독점 콜라보 NFT 민팅"
       }
     },
     "comingSoon" : "곧 출시 예정",

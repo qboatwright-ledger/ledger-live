@@ -237,7 +237,7 @@
       "details" : {
         "label" : {
           "provider" : "Prestataire",
-          "rate" : "Prix",
+          "rate" : "Taux",
           "fees" : "Frais de réseau",
           "target" : "Compte bénéficiaire"
         },
@@ -265,7 +265,7 @@
       "providers" : {
         "kyc" : {
           "required" : "Vous devez passer la vérification d’identité.",
-          "complete" : "Vérification",
+          "complete" : "Vérifier",
           "update" : "Actualiser",
           "rejected" : "Vérification d’identité rejetée, merci de recommencer.",
           "rejectedContactProviderSupport" : "Vérification rejetée, contactez l’assistance de {{providerName}}",
@@ -274,19 +274,19 @@
             "pending" : "En attente",
             "approved" : "Approuvé",
             "closed" : "Rejeté",
-            "upgradeRequired" : "Vérification d’identité incomplète"
+            "upgradeRequired" : "Incomplet"
           }
         },
         "login" : {
           "required" : "Connectez-vous pour utiliser ce prestataire.",
-          "complete" : "Se connecter"
+          "complete" : "Me connecter"
         },
         "mfa" : {
           "required" : "Configurez une authentification multifactorielle pour utiliser ce prestataire.",
           "complete" : "Configurer une MFA"
         },
         "withdrawalsBlockedError" : {
-          "message" : "Votre retrait a été bloqué par {{providerName}}.\n\n Pour plus d’informations, contactez leur service d’assistance."
+          "message" : "Votre retrait a été bloqué par {{providerName}}.\n\n Pour en savoir plus, contactez leur service d’assistance."
         }
       }
     },
@@ -1996,6 +1996,13 @@
       }
     }
   },
+  "cardano" : {
+    "account" : {
+      "subHeader" : {
+        "cardTitle" : "Le solde total ne comprend pas les récompenses de staking"
+      }
+    }
+  },
   "tron" : {
     "voting" : {
       "emptyState" : {
@@ -3166,7 +3173,7 @@
         "title" : "Bienvenue sur Ledger",
         "description" : "Gérez vos cryptos en toute sécurité depuis votre ordinateur.",
         "cta" : "Commencer",
-        "noDevice" : "Pas encore de wallet Ledger ? <0>Achetez un Ledger Nano X</0>.",
+        "noDevice" : "Pas encore d’appareil ? <0>Achetez un Ledger Nano X</0>.",
         "languageWarning" : {
           "title" : "Commencez en {{language}}.",
           "desc" : "Nous ajoutons des langues supplémentaires afin de faciliter vos premiers pas avec Ledger. L’expérience Ledger sera bientôt entièrement disponible dans plusieurs langues.",
@@ -3452,7 +3459,7 @@
         },
         "validateTransactions" : {
           "title" : "Validez vos transactions",
-          "description" : "Achetez, vendez, gérez, échangez et gagnez des cryptos en toute sécurité sur Ledger Live. Vous devez valider chaque transaction de vos cryptos avec votre Nano."
+          "description" : "Achetez, vendez, gérez, échangez et gagnez des cryptos en toute sécurité sur Ledger Live. Vous devez valider chaque transaction en cryptos avec votre Nano."
         },
         "setUpNanoWallet" : {
           "title" : "Configurez votre Nano",
@@ -4368,6 +4375,12 @@
     },
     "NotEnoughNftOwned" : {
       "title" : "Nombre de tokens disponibles insuffisant"
+    },
+    "CardanoMinAmountError" : {
+      "title" : "Montant minimal pouvant être envoyé : {{amount}} ADA"
+    },
+    "CardanoNotEnoughFunds" : {
+      "title" : "Vérifiez que votre solde est suffisant pour couvrir les frais"
     }
   },
   "cryptoOrg" : {

@@ -11,8 +11,8 @@ import Button from "~/renderer/components/Button";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import RetryButton from "~/renderer/components/RetryButton";
 import SuccessDisplay from "~/renderer/components/SuccessDisplay";
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { StepProps } from "../types";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import type { StepProps } from "../types";
 import { denominate } from "~/renderer/families/elrond/helpers";
 import { constants } from "~/renderer/families/elrond/constants";
 

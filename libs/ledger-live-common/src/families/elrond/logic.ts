@@ -1,5 +1,5 @@
-import type { Account, SubAccount } from "../../types";
-import type { Transaction } from "./types";
+import type { SubAccount } from "@ledgerhq/types-live";
+import type { ElrondAccount, Transaction } from "./types";
 import * as bech32 from "bech32";
 import BigNumber from "bignumber.js";
 import { buildTransaction } from "./js-buildTransaction";
@@ -50,16 +50,16 @@ export const isValidAddress = (address: string): boolean => {
     return false;
   }
 };
-export const isSelfTransaction = (a: Account, t: Transaction): boolean => {
+export const isSelfTransaction = (a: ElrondAccount, t: Transaction): boolean => {
   return t.recipient === a.freshAddress;
 };
 
 /**
  * Returns nonce for an account
  *
- * @param {Account} a
+ * @param {ElrondAccount} a
  */
-export const getNonce = (a: Account): number => {
+export const getNonce = (a: ElrondAccount): number => {
   const lastPendingOp = a.pendingOperations[0];
   const nonce = Math.max(
     a.elrondResources?.nonce || 0,
@@ -72,7 +72,7 @@ export const getNonce = (a: Account): number => {
 
 export const computeTransactionValue = async (
   t: Transaction,
-  a: Account,
+  a: ElrondAccount,
   ta: SubAccount | null
 ): Promise<{
   amount: BigNumber;

@@ -6,8 +6,7 @@ import {
   InvalidAddressBecauseDestinationIsAlsoSource,
   FeeTooHigh,
 } from "@ledgerhq/errors";
-import type { Account, TransactionStatus } from "../../types";
-import type { Transaction } from "./types";
+import type { ElrondAccount, Transaction, TransactionStatus } from "./types";
 import {
   isValidAddress,
   isSelfTransaction,
@@ -16,7 +15,7 @@ import {
 import { DECIMALS_LIMIT } from "./constants";
 
 const getTransactionStatus = async (
-  a: Account,
+  a: ElrondAccount,
   t: Transaction
 ): Promise<TransactionStatus> => {
   const errors: Record<string, Error> = {};

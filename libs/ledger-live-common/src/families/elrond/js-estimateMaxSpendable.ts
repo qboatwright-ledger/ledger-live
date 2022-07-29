@@ -1,7 +1,7 @@
 import { BigNumber } from "bignumber.js";
-import type { AccountLike, Account } from "../../types";
+import type { AccountLike, Account } from "@ledgerhq/types-live";
 import { getMainAccount } from "../../account";
-import type { Transaction } from "./types";
+import type { ElrondAccount, Transaction } from "./types";
 import { createTransaction } from "./js-transaction";
 import getEstimatedFees from "./js-getFeesForTransaction";
 import { GAS } from "./constants";
@@ -21,7 +21,7 @@ const estimateMaxSpendable = async ({
   parentAccount: Account | null | undefined;
   transaction: Transaction | null | undefined;
 }): Promise<BigNumber> => {
-  const mainAccount = getMainAccount(account, parentAccount);
+  const mainAccount = getMainAccount(account, parentAccount) as ElrondAccount;
   const tx = {
     ...createTransaction(),
     subAccountId: account.type === "Account" ? null : account.id,

@@ -22,6 +22,7 @@ import invariant from "invariant";
 import { JSONRPCRequest } from "json-rpc-2.0";
 
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
+import { Account, AccountLike, Operation } from "@ledgerhq/types-live";
 import type {
   RawPlatformTransaction,
   RawPlatformSignedTransaction,
@@ -41,6 +42,12 @@ import {
 } from "@ledgerhq/live-common/currencies/index";
 import type { AppManifest } from "@ledgerhq/live-common/platform/types";
 import type { MessageData } from "@ledgerhq/live-common/hw/types";
+import {
+  receiveOnAccountCommonLogic,
+  signTransactionCommonLogic,
+  completeExchangeCommonLogic,
+  CompleteExchangeUiRequest,
+} from "@ledgerhq/live-common/platform/logic";
 
 import { useJSONRPCServer } from "@ledgerhq/live-common/platform/JSONRPCServer";
 import {
@@ -249,39 +256,33 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
   );
 
   const receiveOnAccount = useCallback(
-    ({ accountId }: { accountId: string }) => {
-      tracking.platformReceiveRequested(manifest);
-      const account = accounts.find(account => account.id === accountId);
-
-      if (!account) {
-        tracking.platformReceiveFail(manifest);
-        return Promise.reject(new Error("Account required"));
-      }
-
-      const parentAccount = isTokenAccount(account)
-        ? accounts.find(a => a.id === account.parentId)
-        : null;
-
-      return new Promise((resolve, reject) => {
-        navigation.navigate(ScreenName.VerifyAccount, {
-          account,
-          parentId: parentAccount ? parentAccount.id : undefined,
-          onSuccess: account => {
-            tracking.platformReceiveSuccess(manifest);
-            resolve(accountToPlatformAccount(account, parentAccount).address);
-          },
-          onClose: () => {
-            tracking.platformReceiveFail(manifest);
-            reject(new Error("User cancelled"));
-          },
-          onError: e => {
-            tracking.platformReceiveFail(manifest);
-            // @TODO put in correct error text maybe
-            reject(e);
-          },
-        });
-      });
-    },
+    ({ accountId }: { accountId: string }) =>
+      receiveOnAccountCommonLogic(
+        { manifest, accounts, tracking },
+        accountId,
+        (account: AccountLike, parentAccount: Account | null) =>
+          new Promise((resolve, reject) => {
+            navigation.navigate(ScreenName.VerifyAccount, {
+              account,
+              parentId: parentAccount ? parentAccount.id : undefined,
+              onSuccess: account => {
+                tracking.platformReceiveSuccess(manifest);
+                resolve(
+                  accountToPlatformAccount(account, parentAccount).address,
+                );
+              },
+              onClose: () => {
+                tracking.platformReceiveFail(manifest);
+                reject(new Error("User cancelled"));
+              },
+              onError: e => {
+                tracking.platformReceiveFail(manifest);
+                // @TODO put in correct error text maybe
+                reject(e);
+              },
+            });
+          }),
+      ),
     [manifest, accounts, navigation],
   );
 
@@ -296,85 +297,59 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
       accountId: string,
       transaction: RawPlatformTransaction,
       params: any,
-    }) => {
-      const platformTransaction = deserializePlatformTransaction(transaction);
-      const account = accounts.find(account => account.id === accountId);
+    }) =>
+      signTransactionCommonLogic(
+        { manifest, accounts, tracking },
+        accountId,
+        transaction,
+        params,
+        (account: AccountLike, parentAccount: Account | null, { liveTx }) => {
+          const { recipient, ...txData } = liveTx;
 
-      tracking.platformSignTransactionRequested(manifest);
+          const bridge = getAccountBridge(account, parentAccount);
+          const t = bridge.createTransaction(account);
+          const t2 = bridge.updateTransaction(t, {
+            recipient,
+            subAccountId: isTokenAccount(account) ? account.id : undefined,
+          });
 
-      if (!account) {
-        tracking.platformSignTransactionFail(manifest);
-        return Promise.reject(new Error("Account required"));
-      }
+          const tx = bridge.updateTransaction(t2, {
+            userGasLimit: txData.gasLimit,
+            ...txData,
+          });
 
-      const parentAccount = isTokenAccount(account)
-        ? accounts.find(a => a.id === account.parentId)
-        : undefined;
-
-      if (
-        (isTokenAccount(account)
-          ? parentAccount?.currency.family
-          : account.currency.family) !== platformTransaction.family
-      ) {
-        return Promise.reject(
-          new Error("Transaction family not matching account currency family"),
-        );
-      }
-
-      return new Promise((resolve, reject) => {
-        // @TODO replace with correct error
-        if (!transaction) {
-          tracking.platformSignTransactionFail(manifest);
-          reject(new Error("Transaction required"));
-          return;
-        }
-
-        const bridge = getAccountBridge(account, parentAccount);
-
-        const { liveTx } = getPlatformTransactionSignFlowInfos(
-          platformTransaction,
-        );
-
-        const t = bridge.createTransaction(account);
-        const { recipient, ...txData } = liveTx;
-        const t2 = bridge.updateTransaction(t, {
-          recipient,
-          subAccountId: isTokenAccount(account) ? account.id : undefined,
-        });
-
-        const tx = bridge.updateTransaction(t2, {
-          userGasLimit: txData.gasLimit,
-          ...txData,
-        });
-
-        navigation.navigate(NavigatorName.SignTransaction, {
-          screen: ScreenName.SignTransactionSummary,
-          params: {
-            currentNavigation: ScreenName.SignTransactionSummary,
-            nextNavigation: ScreenName.SignTransactionSelectDevice,
-            transaction: tx,
-            accountId,
-            parentId: parentAccount ? parentAccount.id : undefined,
-            appName: params.useApp,
-            onSuccess: ({ signedOperation, transactionSignError }) => {
-              if (transactionSignError) {
-                tracking.platformSignTransactionFail(manifest);
-                reject(transactionSignError);
-              } else {
-                tracking.platformSignTransactionSuccess(manifest);
-                resolve(serializePlatformSignedTransaction(signedOperation));
-                const n = navigation.getParent() || navigation;
-                n.pop();
-              }
-            },
-            onError: error => {
-              tracking.platformSignTransactionFail(manifest);
-              reject(error);
-            },
-          },
-        });
-      });
-    },
+          return new Promise((resolve, reject) => {
+            navigation.navigate(NavigatorName.SignTransaction, {
+              screen: ScreenName.SignTransactionSummary,
+              params: {
+                currentNavigation: ScreenName.SignTransactionSummary,
+                nextNavigation: ScreenName.SignTransactionSelectDevice,
+                transaction: tx,
+                accountId,
+                parentId: parentAccount ? parentAccount.id : undefined,
+                appName: params.useApp,
+                onSuccess: ({ signedOperation, transactionSignError }) => {
+                  if (transactionSignError) {
+                    tracking.platformSignTransactionFail(manifest);
+                    reject(transactionSignError);
+                  } else {
+                    tracking.platformSignTransactionSuccess(manifest);
+                    resolve(
+                      serializePlatformSignedTransaction(signedOperation),
+                    );
+                    const n = navigation.getParent() || navigation;
+                    n.pop();
+                  }
+                },
+                onError: error => {
+                  tracking.platformSignTransactionFail(manifest);
+                  reject(error);
+                },
+              },
+            });
+          });
+        },
+      ),
     [manifest, accounts, navigation],
   );
 
@@ -465,16 +440,7 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
   );
 
   const completeExchange = useCallback(
-    ({
-      provider,
-      fromAccountId,
-      toAccountId,
-      transaction,
-      binaryPayload,
-      signature,
-      feesStrategy,
-      exchangeType,
-    }: {
+    (request: {
       provider: string,
       fromAccountId: string,
       toAccountId: string,
@@ -483,87 +449,58 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
       signature: string,
       feesStrategy: string,
       exchangeType: number,
-    }) => {
-      // Nb get a hold of the actual accounts, and parent accounts
-      const fromAccount = accounts.find(a => a.id === fromAccountId);
-      let fromParentAccount;
-
-      const toAccount = accounts.find(a => a.id === toAccountId);
-      let toParentAccount;
-
-      if (!fromAccount) {
-        return null;
-      }
-
-      if (exchangeType === 0x00 && !toAccount) {
-        // if we do a swap, a destination account must be provided
-        return null;
-      }
-
-      if (fromAccount.type === "TokenAccount") {
-        fromParentAccount = accounts.find(a => a.id === fromAccount.parentId);
-      }
-      if (toAccount && toAccount.type === "TokenAccount") {
-        toParentAccount = accounts.find(a => a.id === toAccount.parentId);
-      }
-
-      const accountBridge = getAccountBridge(fromAccount, fromParentAccount);
-      const mainFromAccount = getMainAccount(fromAccount, fromParentAccount);
-
-      // eslint-disable-next-line no-param-reassign
-      transaction.family = mainFromAccount.currency.family;
-
-      const platformTransaction = deserializePlatformTransaction(transaction);
-
-      platformTransaction.feesStrategy = feesStrategy;
-
-      let processedTransaction = accountBridge.createTransaction(
-        mainFromAccount,
-      );
-      processedTransaction = accountBridge.updateTransaction(
-        processedTransaction,
-        platformTransaction,
-      );
-
-      tracking.platformCompleteExchangeRequested(manifest);
-      return new Promise((resolve, reject) => {
-        navigation.navigate(NavigatorName.PlatformExchange, {
-          screen: ScreenName.PlatformCompleteExchange,
-          params: {
-            request: {
-              exchangeType,
-              provider,
-              exchange: {
-                fromAccount,
-                fromParentAccount,
-                toAccount,
-                toParentAccount,
+    }) =>
+      completeExchangeCommonLogic(
+        { manifest, accounts, tracking },
+        request,
+        ({
+          provider,
+          fromAccount,
+          fromParentAccount,
+          toAccount,
+          toParentAccount,
+          transaction,
+          binaryPayload,
+          signature,
+          feesStrategy,
+          exchangeType,
+        }: CompleteExchangeUiRequest): Promise<Operation> =>
+          new Promise((resolve, reject) => {
+            navigation.navigate(NavigatorName.PlatformExchange, {
+              screen: ScreenName.PlatformCompleteExchange,
+              params: {
+                request: {
+                  exchangeType,
+                  provider,
+                  exchange: {
+                    fromAccount,
+                    fromParentAccount,
+                    toAccount,
+                    toParentAccount,
+                  },
+                  transaction,
+                  binaryPayload,
+                  signature,
+                  feesStrategy,
+                },
+                device,
+                onResult: (result: { operation?: any, error?: Error }) => {
+                  if (result.error) {
+                    tracking.platformStartExchangeFail(manifest);
+                    reject(result.error);
+                  }
+                  if (result.operation) {
+                    tracking.platformStartExchangeSuccess(manifest);
+                    resolve(result.operation);
+                  }
+                  setDevice();
+                  const n = navigation.getParent() || navigation;
+                  n.pop();
+                },
               },
-              transaction: processedTransaction,
-              binaryPayload,
-              signature,
-              feesStrategy,
-            },
-            device,
-            onResult: (result: { operation?: any, error?: Error }) => {
-              if (result.error) {
-                tracking.platformStartExchangeFail(manifest);
-                reject(result.error);
-              }
-
-              if (result.operation) {
-                tracking.platformStartExchangeSuccess(manifest);
-                resolve(result.operation);
-              }
-
-              setDevice();
-              const n = navigation.getParent() || navigation;
-              n.pop();
-            },
-          },
-        });
-      });
-    },
+            });
+          }),
+      ),
     [accounts, manifest, navigation, device],
   );
 

@@ -1,8 +1,8 @@
-import type { Transaction } from "./types";
-import type { Account } from "../../types";
-import { CeloTx } from "@celo/connect";
-import { celoKit } from "./api/sdk";
 import { BigNumber } from "bignumber.js";
+import { CeloTx } from "@celo/connect";
+import type { Account } from "@ledgerhq/types-live";
+import type { Transaction } from "./types";
+import { celoKit } from "./api/sdk";
 import { getVote } from "./logic";
 
 const buildTransaction = async (account: Account, transaction: Transaction) => {

@@ -1,5 +1,3 @@
-import { Account, TransactionStatus } from "../../types";
-import { Transaction } from "./types";
 import {
   AmountRequired,
   FeeNotLoaded,
@@ -10,6 +8,8 @@ import {
 } from "@ledgerhq/errors";
 import { BigNumber } from "bignumber.js";
 import { isValidAddress } from "@celo/utils/lib/address";
+import { Account } from "@ledgerhq/types-live";
+import { Transaction, TransactionStatus } from "./types";
 import { CeloAllFundsWarning } from "./errors";
 import { getVote } from "./logic";
 

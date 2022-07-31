@@ -1,8 +1,8 @@
-import { Account } from "../../types";
+import BigNumber from "bignumber.js";
+import { isValidAddress } from "@celo/utils/lib/address";
+import type { Account } from "@ledgerhq/types-live";
 import { Transaction } from "./types";
 import getFeesForTransaction from "./js-getFeesForTransaction";
-import { isValidAddress } from "@celo/utils/lib/address";
-import BigNumber from "bignumber.js";
 
 const sameFees = (a, b) => (!a || !b ? a === b : a.eq(b));
 

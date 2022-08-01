@@ -19,7 +19,7 @@ import {
   fromTronResourcesRaw,
   fromCosmosResourcesRaw,
   fromBitcoinResourcesRaw,
-  fromAlgorandResourcesRaw,
+  fromResourcesRaw,
   fromPolkadotResourcesRaw,
   fromTezosResourcesRaw,
   fromElrondResourcesRaw,
@@ -331,7 +331,7 @@ export function patchAccount(
           algorandUpdatedRaw.algorandResources
         )
       ) {
-        (next as AlgorandAccount).algorandResources = fromAlgorandResourcesRaw(
+        (next as AlgorandAccount).algorandResources = fromResourcesRaw(
           algorandUpdatedRaw.algorandResources
         );
         changed = true;

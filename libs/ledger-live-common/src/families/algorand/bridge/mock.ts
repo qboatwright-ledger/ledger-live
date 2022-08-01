@@ -20,8 +20,8 @@ import {
 } from "../../../bridge/mockHelpers";
 import { getMainAccount } from "../../../account";
 import { makeAccountBridgeReceive } from "../../../bridge/mockHelpers";
-import { toAlgorandResourcesRaw as toResourcesRaw } from "../serialization";
-import { fromAlgorandResourcesRaw as fromResourcesRaw } from "../serialization";
+import { toResourcesRaw } from "../serialization";
+import { fromResourcesRaw } from "../serialization";
 
 const receive = makeAccountBridgeReceive();
 

@@ -1,6 +1,6 @@
 import { BigNumber } from "bignumber.js";
 import type { AlgorandResourcesRaw, AlgorandResources } from "./types";
-export function toAlgorandResourcesRaw(
+export function toResourcesRaw(
   r: AlgorandResources
 ): AlgorandResourcesRaw {
   const { rewards, nbAssets } = r;
@@ -9,7 +9,7 @@ export function toAlgorandResourcesRaw(
     nbAssets,
   };
 }
-export function fromAlgorandResourcesRaw(
+export function fromResourcesRaw(
   r: AlgorandResourcesRaw
 ): AlgorandResources {
   const { rewards, nbAssets } = r;

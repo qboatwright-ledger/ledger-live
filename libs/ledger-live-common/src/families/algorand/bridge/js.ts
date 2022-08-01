@@ -10,8 +10,8 @@ import { getTransactionStatus } from "../js-getTransactionStatus";
 import { signOperation } from "../js-signOperation";
 import { broadcast } from "../js-broadcast";
 import type { AccountBridge, CurrencyBridge } from "@ledgerhq/types-live";
-import { toAlgorandResourcesRaw as toResourcesRaw } from "../serialization";
-import { fromAlgorandResourcesRaw as fromResourcesRaw } from "../serialization";
+import { toResourcesRaw } from "../serialization";
+import { fromResourcesRaw } from "../serialization";
 
 const receive = makeAccountBridgeReceive();
 
@@ -37,7 +37,7 @@ const accountBridge: AccountBridge<AlgorandTransaction> = {
   sync,
   receive,
   toResourcesRaw,
-  fromResourcesRaw,  
+  fromResourcesRaw,
   signOperation,
   broadcast,
   estimateMaxSpendable,

@@ -14,8 +14,8 @@ import {
   fromCosmosResourcesRaw,
 } from "../families/cosmos/serialization";
 import {
-  toAlgorandResourcesRaw,
-  fromAlgorandResourcesRaw,
+  toResourcesRaw,
+  fromResourcesRaw,
 } from "../families/algorand/serialization";
 import {
   toPolkadotResourcesRaw,
@@ -94,7 +94,7 @@ import { SolanaAccount, SolanaAccountRaw } from "../families/solana/types";
 import { TezosAccount, TezosAccountRaw } from "../families/tezos/types";
 
 export { toCosmosResourcesRaw, fromCosmosResourcesRaw };
-export { toAlgorandResourcesRaw, fromAlgorandResourcesRaw };
+export { toResourcesRaw, fromResourcesRaw };
 export { toBitcoinResourcesRaw, fromBitcoinResourcesRaw };
 export { toPolkadotResourcesRaw, fromPolkadotResourcesRaw };
 export { toTezosResourcesRaw, fromTezosResourcesRaw };
@@ -798,7 +798,7 @@ export function fromAccountRaw(rawAccount: AccountRaw): Account {
       );
       break;
     case "algorand":
-      (res as AlgorandAccount).algorandResources = fromAlgorandResourcesRaw(
+      (res as AlgorandAccount).algorandResources = fromResourcesRaw(
         (rawAccount as AlgorandAccountRaw).algorandResources
       );
       break;
@@ -929,7 +929,7 @@ export function toAccountRaw(account: Account): AccountRaw {
       );
       break;
     case "algorand":
-      (res as AlgorandAccountRaw).algorandResources = toAlgorandResourcesRaw(
+      (res as AlgorandAccountRaw).algorandResources = toResourcesRaw(
         (account as AlgorandAccount).algorandResources
       );
       break;

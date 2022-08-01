@@ -456,7 +456,7 @@ export function genAccount(
   }
 
   if (currency.family === "algorand") {
-    (account as AlgorandAccount).algorandResources = {
+    account.accountResources = {
       rewards: new BigNumber(0),
       nbAssets: account.subAccounts?.length ?? 0,
     };

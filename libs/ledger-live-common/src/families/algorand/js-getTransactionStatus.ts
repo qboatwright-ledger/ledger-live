@@ -13,12 +13,12 @@ import {
   NotEnoughBalanceInParentAccount,
   InvalidAddress,
 } from "@ledgerhq/errors";
-
+import type { Account } from "@ledgerhq/types-live";
 import {
   ClaimRewardsFeesWarning,
   AlgorandASANotOptInInRecipient,
 } from "../../errors";
-import type { AlgorandAccount, AlgorandResources, Transaction } from "./types";
+import type { AlgorandResources, Transaction } from "./types";
 import { extractTokenId } from "./tokens";
 import {
   ALGORAND_MAX_MEMO_SIZE,
@@ -38,7 +38,7 @@ import {
  * - Check if memo is too long
  */
 export const getTransactionStatus = async (
-  a: AlgorandAccount,
+  a: Account,
   t: Transaction
 ) => {
   const errors: any = {};
@@ -61,8 +61,8 @@ export const getTransactionStatus = async (
   let amount = t.amount;
   let totalSpent = estimatedFees;
 
-  invariant(a.algorandResources, "Algorand family expected");
-  const algorandResources = a.algorandResources as AlgorandResources;
+  invariant(a.accountResources, "Algorand family expected");
+  const algorandResources = a.accountResources as AlgorandResources;
 
   const algoSpendableBalance = computeAlgoMaxSpendable({
     accountBalance: a.balance,

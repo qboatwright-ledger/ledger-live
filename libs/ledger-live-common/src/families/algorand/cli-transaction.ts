@@ -3,7 +3,7 @@ import flatMap from "lodash/flatMap";
 import type { Transaction } from "../../generated/types";
 import { getAccountCurrency } from "../../account";
 import { extractTokenId } from "./tokens";
-import { AlgorandAccount } from "./types";
+//import { AlgorandAccount } from "./types";
 import type { AccountLike, AccountLikeArray } from "@ledgerhq/types-live";
 const options = [
   {
@@ -85,7 +85,7 @@ function inferTransactions(
 
     if (account.type === "Account") {
       invariant(
-        (account as AlgorandAccount).algorandResources,
+        account.accountResources,
         "unactivated account"
       );
     }

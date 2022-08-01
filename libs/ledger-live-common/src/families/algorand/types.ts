@@ -58,9 +58,11 @@ export type AlgorandExtraTxInfo = {
   memo?: string;
   assetId?: string;
 };
+/*
 export type AlgorandAccount = Account & {
   algorandResources: AlgorandResources;
 };
 export type AlgorandAccountRaw = AccountRaw & {
   algorandResources: AlgorandResourcesRaw;
 };
+*/

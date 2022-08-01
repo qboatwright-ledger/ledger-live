@@ -297,7 +297,7 @@ const getAccountShape: GetAccountShape = async (
     operations,
     operationsCount: operations.length,
     subAccounts,
-    algorandResources: {
+    accountResources: {
       rewards: pendingRewards,
       nbAssets,
     },

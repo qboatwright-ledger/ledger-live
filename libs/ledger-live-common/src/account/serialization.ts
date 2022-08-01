@@ -77,10 +77,6 @@ import type {
 import { CosmosAccount, CosmosAccountRaw } from "../families/cosmos/types";
 import { BitcoinAccount, BitcoinAccountRaw } from "../families/bitcoin/types";
 import {
-  AlgorandAccount,
-  AlgorandAccountRaw,
-} from "../families/algorand/types";
-import {
   PolkadotAccount,
   PolkadotAccountRaw,
 } from "../families/polkadot/types";
@@ -798,9 +794,11 @@ export function fromAccountRaw(rawAccount: AccountRaw): Account {
       );
       break;
     case "algorand":
+      /*
       (res as AlgorandAccount).algorandResources = fromResourcesRaw(
         (rawAccount as AlgorandAccountRaw).algorandResources
-      );
+      );*/
+      res.accountResources = fromResourcesRaw(rawAccount.accountResourcesRaw);
       break;
     case "polkadot":
       (res as PolkadotAccount).polkadotResources = fromPolkadotResourcesRaw(
@@ -928,10 +926,11 @@ export function toAccountRaw(account: Account): AccountRaw {
         (account as BitcoinAccount).bitcoinResources
       );
       break;
-    case "algorand":
+    case "algorand":/*
       (res as AlgorandAccountRaw).algorandResources = toResourcesRaw(
         (account as AlgorandAccount).algorandResources
-      );
+      );*/
+      res.accountResourcesRaw = toResourcesRaw(account.accountResources);
       break;
     case "polkadot":
       (res as PolkadotAccountRaw).polkadotResources = toPolkadotResourcesRaw(

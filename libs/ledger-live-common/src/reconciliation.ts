@@ -33,7 +33,7 @@ import {
   toTronResourcesRaw,
 } from "./account";
 import consoleWarnExpectToEqual from "./consoleWarnExpectToEqual";
-import { AlgorandAccount, AlgorandAccountRaw } from "./families/algorand/types";
+//import { AlgorandAccount, AlgorandAccountRaw } from "./families/algorand/types";
 import { BitcoinAccount, BitcoinAccountRaw } from "./families/bitcoin/types";
 import { CardanoAccount, CardanoAccountRaw } from "./families/cardano/types";
 import { CosmosAccount, CosmosAccountRaw } from "./families/cosmos/types";
@@ -323,16 +323,16 @@ export function patchAccount(
       break;
     }
     case "algorand": {
-      const algorandAcc = account as AlgorandAccount;
-      const algorandUpdatedRaw = updatedRaw as AlgorandAccountRaw;
+      //const algorandAcc = account as AlgorandAccount;
+      //const algorandUpdatedRaw = updatedRaw as AlgorandAccountRaw;
       if (
         !areSameResources(
-          algorandAcc.algorandResources,
-          algorandUpdatedRaw.algorandResources
+          account.accountResources,
+          updatedRaw.accountResourcesRaw
         )
       ) {
-        (next as AlgorandAccount).algorandResources = fromResourcesRaw(
-          algorandUpdatedRaw.algorandResources
+        next.accountResources = fromResourcesRaw(
+          updatedRaw.accountResourcesRaw
         );
         changed = true;
       }

@@ -50,7 +50,10 @@ export const isValidAddress = (address: string): boolean => {
     return false;
   }
 };
-export const isSelfTransaction = (a: ElrondAccount, t: Transaction): boolean => {
+export const isSelfTransaction = (
+  a: ElrondAccount,
+  t: Transaction
+): boolean => {
   return t.recipient === a.freshAddress;
 };
 

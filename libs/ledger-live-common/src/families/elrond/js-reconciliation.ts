@@ -1,10 +1,10 @@
-import type { Account, SubAccount, TokenAccount } from "@ledgerhq/types-live";
 import { log } from "@ledgerhq/logs";
+import { Account, SubAccount, TokenAccount } from "@ledgerhq/types-live";
 
 export function reconciliateSubAccounts(
   tokenAccounts: TokenAccount[],
   initialAccount: Account | undefined
-) {
+): TokenAccount[] {
   let subAccounts;
 
   if (initialAccount) {
@@ -53,11 +53,12 @@ export function reconciliateSubAccounts(
     });
 
     if (!anySubAccountHaveChanged && initialSubAccounts) {
+      // eslint-disable-next-line prettier/prettier
       log(
         "elrond",
-        "incremental sync: " +
-          String(initialSubAccounts.length) +
-          " sub accounts have not changed"
+        `incremental sync: ${String(
+          initialSubAccounts.length
+        )} sub accounts have not changed`
       );
       subAccounts = initialSubAccounts;
     } else {

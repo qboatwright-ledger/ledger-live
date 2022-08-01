@@ -1,5 +1,9 @@
 import type { SubAccount } from "@ledgerhq/types-live";
-import type { ElrondAccount, ElrondProtocolTransaction, Transaction } from "./types";
+import type {
+  ElrondAccount,
+  ElrondProtocolTransaction,
+  Transaction,
+} from "./types";
 import { getNonce } from "./logic";
 import { getNetworkConfig } from "./api";
 import {
@@ -11,6 +15,7 @@ import {
 import BigNumber from "bignumber.js";
 import { ElrondEncodeTransaction } from "./encode";
 import { NetworkConfig } from "@elrondnetwork/erdjs/out";
+
 /**
  *
  * @param {ElrondAccount} a

@@ -3,7 +3,6 @@ import { Observable } from "rxjs";
 import { FeeNotLoaded } from "@ledgerhq/errors";
 import type { ElrondAccount, Transaction } from "./types";
 import type {
-  Account,
   Operation,
   SignedOperation,
   SignOperationEvent,
@@ -64,7 +63,7 @@ const signOperation = ({
   deviceId,
   transaction,
 }: {
-  account: Account;
+  account: ElrondAccount;
   deviceId: any;
   transaction: Transaction;
 }): Observable<SignOperationEvent> =>

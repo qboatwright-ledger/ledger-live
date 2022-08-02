@@ -1,7 +1,5 @@
 import type { BigNumber } from "bignumber.js";
 import type {
-  Account,
-  AccountRaw,
   Operation,
   OperationRaw,
   TransactionCommon,
@@ -58,11 +56,3 @@ export type AlgorandExtraTxInfo = {
   memo?: string;
   assetId?: string;
 };
-/*
-export type AlgorandAccount = Account & {
-  algorandResources: AlgorandResources;
-};
-export type AlgorandAccountRaw = AccountRaw & {
-  algorandResources: AlgorandResourcesRaw;
-};
-*/

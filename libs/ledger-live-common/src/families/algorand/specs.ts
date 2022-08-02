@@ -99,9 +99,7 @@ const algorand: AppSpec<AlgorandTransaction> = {
         };
       },
       test: ({ account, accountBeforeTransaction, operation }) => {
-        const rewards =
-          accountBeforeTransaction.accountResources
-            ?.rewards || 0;
+        const rewards = accountBeforeTransaction.accountResources?.rewards || 0;
         expect(account.balance.plus(rewards).toString()).toBe(
           accountBeforeTransaction.balance.minus(operation.value).toString()
         );
@@ -251,8 +249,7 @@ const algorand: AppSpec<AlgorandTransaction> = {
       },
       test: ({ account }) => {
         expect(
-          account.accountResources &&
-            account.accountResources.rewards.eq(0)
+          account.accountResources && account.accountResources.rewards.eq(0)
         ).toBe(true);
       },
     },

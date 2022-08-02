@@ -14,10 +14,6 @@ import {
   fromCosmosResourcesRaw,
 } from "../families/cosmos/serialization";
 import {
-  toResourcesRaw,
-  fromResourcesRaw,
-} from "../families/algorand/serialization";
-import {
   toPolkadotResourcesRaw,
   fromPolkadotResourcesRaw,
 } from "../families/polkadot/serialization";
@@ -88,9 +84,9 @@ import {
 } from "../families/crypto_org/types";
 import { SolanaAccount, SolanaAccountRaw } from "../families/solana/types";
 import { TezosAccount, TezosAccountRaw } from "../families/tezos/types";
+import { getAccountBridge } from "../bridge";
 
 export { toCosmosResourcesRaw, fromCosmosResourcesRaw };
-export { toResourcesRaw, fromResourcesRaw };
 export { toBitcoinResourcesRaw, fromBitcoinResourcesRaw };
 export { toPolkadotResourcesRaw, fromPolkadotResourcesRaw };
 export { toTezosResourcesRaw, fromTezosResourcesRaw };
@@ -696,6 +692,7 @@ export function fromAccountRaw(rawAccount: AccountRaw): Account {
     syncHash,
     nfts,
   } = rawAccount;
+
   const subAccounts =
     subAccountsRaw &&
     subAccountsRaw
@@ -793,13 +790,6 @@ export function fromAccountRaw(rawAccount: AccountRaw): Account {
         (rawAccount as BitcoinAccountRaw).bitcoinResources
       );
       break;
-    case "algorand":
-      /*
-      (res as AlgorandAccount).algorandResources = fromResourcesRaw(
-        (rawAccount as AlgorandAccountRaw).algorandResources
-      );*/
-      res.accountResources = fromResourcesRaw(rawAccount.accountResourcesRaw);
-      break;
     case "polkadot":
       (res as PolkadotAccount).polkadotResources = fromPolkadotResourcesRaw(
         (rawAccount as PolkadotAccountRaw).polkadotResources
@@ -825,6 +815,17 @@ export function fromAccountRaw(rawAccount: AccountRaw): Account {
         (rawAccount as CryptoOrgAccountRaw).cryptoOrgResources
       );
       break;
+    default: {
+      const bridge = getAccountBridge(res);
+      console.log("=================XXXX==============");
+      console.log(bridge);
+      console.log("=================XXXXX==============");
+      const fromResourcesRaw = bridge.fromResourcesRaw;
+      if (!fromResourcesRaw) {
+        throw new Error(`${res.currency.id} doesn't have fromResourcesRaw`);
+      }
+      res.accountResources = fromResourcesRaw(rawAccount.accountResourcesRaw);
+    }
   }
 
   if (swapHistory) {
@@ -926,12 +927,6 @@ export function toAccountRaw(account: Account): AccountRaw {
         (account as BitcoinAccount).bitcoinResources
       );
       break;
-    case "algorand":/*
-      (res as AlgorandAccountRaw).algorandResources = toResourcesRaw(
-        (account as AlgorandAccount).algorandResources
-      );*/
-      res.accountResourcesRaw = toResourcesRaw(account.accountResources);
-      break;
     case "polkadot":
       (res as PolkadotAccountRaw).polkadotResources = toPolkadotResourcesRaw(
         (account as PolkadotAccount).polkadotResources
@@ -957,6 +952,17 @@ export function toAccountRaw(account: Account): AccountRaw {
         (account as CryptoOrgAccount).cryptoOrgResources
       );
       break;
+    default: {
+      const bridge = getAccountBridge(account);
+      const toResourcesRaw = bridge.toResourcesRaw;
+      console.log("=================YYYYYYY==============");
+      console.log(bridge);
+      console.log("=================XXXXX==============");
+      if (!toResourcesRaw) {
+        throw new Error(`${account.currency.id} doesn't have toResourcesRaw`);
+      }
+      res.accountResourcesRaw = toResourcesRaw(account.accountResources);
+    }
   }
 
   if (swapHistory) {

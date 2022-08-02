@@ -76,10 +76,7 @@ function addOptOut(account: Account, rng: Prando): Account {
  * @param {Account} account
  * @param {Prando} rng
  */
-function genAccountEnhanceOperations(
-  account: Account,
-  rng: Prando
-): Account {
+function genAccountEnhanceOperations(account: Account, rng: Prando): Account {
   addOptIn(account, rng);
   addOptOut(account, rng);
   setAlgorandResources(account);

@@ -37,10 +37,7 @@ import {
  * - Check if Token is already optin at the recipient
  * - Check if memo is too long
  */
-export const getTransactionStatus = async (
-  a: Account,
-  t: Transaction
-) => {
+export const getTransactionStatus = async (a: Account, t: Transaction) => {
   const errors: any = {};
   const warnings: any = {};
   const tokenAccount = !t.subAccountId

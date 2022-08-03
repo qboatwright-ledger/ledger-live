@@ -428,10 +428,8 @@ export function patchAccount(
     default: {
       const bridge = getAccountBridge(account);
       const fromResourcesRaw = bridge.fromResourcesRaw;
-      if (!fromResourcesRaw) {
-        throw new Error(`${account.currency.id} doesn't have fromResourcesRaw`);
-      }
       if (
+        fromResourcesRaw &&
         !areSameResources(
           account.accountResources,
           updatedRaw.accountResourcesRaw

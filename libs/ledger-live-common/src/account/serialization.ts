@@ -52,6 +52,7 @@ import {
   fromCardanoResourceRaw,
   toCardanoResourceRaw,
 } from "../families/cardano/serialization";
+
 import type {
   Account,
   AccountLike,
@@ -817,14 +818,13 @@ export function fromAccountRaw(rawAccount: AccountRaw): Account {
       break;
     default: {
       const bridge = getAccountBridge(res);
-      console.log("=================XXXX==============");
-      console.log(bridge);
-      console.log("=================XXXXX==============");
       const fromResourcesRaw = bridge.fromResourcesRaw;
       if (!fromResourcesRaw) {
         throw new Error(`${res.currency.id} doesn't have fromResourcesRaw`);
       }
-      res.accountResources = fromResourcesRaw(rawAccount.accountResourcesRaw);
+      if (rawAccount.accountResourcesRaw) {
+        res.accountResources = fromResourcesRaw(rawAccount.accountResourcesRaw);
+      }
     }
   }
 
@@ -864,7 +864,6 @@ export function toAccountRaw(account: Account): AccountRaw {
     syncHash,
     nfts,
   } = account;
-
   const res: AccountRaw = {
     id,
     seedIdentifier,
@@ -955,13 +954,12 @@ export function toAccountRaw(account: Account): AccountRaw {
     default: {
       const bridge = getAccountBridge(account);
       const toResourcesRaw = bridge.toResourcesRaw;
-      console.log("=================YYYYYYY==============");
-      console.log(bridge);
-      console.log("=================XXXXX==============");
       if (!toResourcesRaw) {
         throw new Error(`${account.currency.id} doesn't have toResourcesRaw`);
       }
-      res.accountResourcesRaw = toResourcesRaw(account.accountResources);
+      if (account.accountResources) {
+        res.accountResourcesRaw = toResourcesRaw(account.accountResources);
+      }
     }
   }
 
